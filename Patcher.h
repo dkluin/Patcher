@@ -271,6 +271,9 @@ public:
 		}
 	};
 
+	// Make RET
+	static void WriteRET(uintptr_t addr);
+
 	// Read memory of any type - but ONLY if the patcher is allowed to
 	template<class T>
 	static T ReadMemory(uintptr_t addr)
@@ -294,6 +297,11 @@ public:
 	// Inject function - asm patches
 	static void InjectFunctionPatch(uintptr_t addr, void* function_name, x86_func_type type);	// Patch a function - inject JMP/CALL
 	static void InjectFunctionPatch(uintptr_t addr, uintptr_t redirect_addr, x86_func_type type);
+
+	// Inject JMP function - was missing for whatever reason, maybe bad organizing? idfk...
+	// Do note: doesn't handle JMP/CALL, for that, use InjectFunctionPatch! Only handles all other JMP functions.
+	static void InjectJMPpatch(uintptr_t src, void* dest, x86_jmp_type type);
+	static void InjectJMPpatch(uintptr_t src, uintptr_t dest, x86_jmp_type type);
 
 	template <class T>
 	static void SetMemoryToValue(void* addr, T value, size_t size)
@@ -422,6 +430,12 @@ public:
 		static PatcherLevelInfo Info;
 	};
 
+	////////// End of patcher level code
+	////////// Start of game version manager
+	//////////
+	////////// Unfortunately, not fully implemented.
+	////////// I'll add it soon!!!!!!
+
 	class GameVersionMgr
 	{
 	public:
@@ -438,8 +452,21 @@ public:
 		static uintptr_t ConvertAddressFromUStoEU(uintptr_t us_1_0_addr);
 	};
 
+	////////// End of game version manager code
 
-	////////// End of patcher level
+	////////// Start of plugin patcher code
+	//////////
+	////////// Contains a few useful functions for getting an address of a function in an ASI/DLL. 
+	////////// Return value is an uintptr_t address which can then be used to patch whatever is necessary in said dll/asi.
+	class PluginPatcher
+	{
+	public:
+		// Returns the base address
+		static uintptr_t GetPluginBaseAddress(const char* pluginName);
+
+		// Fetches plugin versions by size (FLA way, but somehow works every time), and check for incompability 
+		static void FetchPluginVersions();
+	};
 
 	// general
 	static void PatchMemData(uintptr_t addr, const void* data, int size);

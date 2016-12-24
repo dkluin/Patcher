@@ -25,6 +25,12 @@ bool Patcher::Initialize()
 	return true;
 }
 
+// Write RET
+void Patcher::WriteRET(uintptr_t addr)
+{
+	PatchOnAddress<BYTE>(addr, 0xC3);
+}
+
 // NOPs addresses - works
 void Patcher::NOPData(uintptr_t addr, int size)
 {
@@ -109,6 +115,27 @@ void Patcher::InjectFunctionPatchOnMultipleAddresses(uintptr_t dest_addr, x86_fu
 			ms_PatcherData.ms_TotalNumberOfMemoryChanges++;
 		}
 	}
+}
+
+// INTO THEJMPPATCH!!!
+void Patcher::InjectJMPpatch(uintptr_t src, void* dest, x86_jmp_type type)
+{
+	if (MemorySection::GetMemorySectionForThisAddress(src) == MEMORY_SEGMENT_STANDARD ||
+		MemorySection::GetMemorySectionForThisAddress(src) == MEMORY_SEGMENT_WRITEONLY)
+	{
+		unsigned __int8 jmp_data[6];
+		uintptr_t movement = (uintptr_t)dest - src - 6;
+		jmp_data[0] = type;
+
+		*(DWORD*)(jmp_data + 2) = movement;
+		PatchMemData(src, jmp_data, sizeof(jmp_data));
+		ms_PatcherData.ms_NumberOfInjectedFunctions++;
+	}
+}
+
+void Patcher::InjectJMPpatch(uintptr_t src, uintptr_t dest, x86_jmp_type type)
+{
+	InjectJMPpatch(src, (void*)dest, type);
 }
 
 // Inject any type of function patch - jmp and call only - works
@@ -473,3 +500,17 @@ uintptr_t Patcher::GameVersionMgr::ConvertAddressFromUStoEU(uintptr_t us_1_0_add
 }
 
 //////////////////////////// END OF GAME VERSION MANAGER
+
+//////////////////////////// START OF PLUGIN PATCHER
+
+// Returns NULL if error!
+uintptr_t Patcher::PluginPatcher::GetPluginBaseAddress(const char* pluginName)
+{
+	uintptr_t result = (uintptr_t)GetModuleHandleA(pluginName);
+	if (result == NULL)
+	{
+		MessageBoxA(NULL, "GetModuleHandleA returned NULL", "Patcher", MB_OK);
+		ExitProcess(0);
+	}
+	return result;
+}
