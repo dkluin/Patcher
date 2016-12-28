@@ -5,6 +5,8 @@ struct PatcherInfo
 	uint32_t ms_NumberOfInjectedFunctions;
 	uint32_t ms_NumberOfMemoryPatches;
 	uint32_t ms_TimesDataWasNOPped;
+	uint32_t ms_MemoryCopied;
+	uint32_t ms_MemorySet;
 
 	// Raw functions
 	uint32_t ms_NumberOfRawMemorySections;
@@ -19,6 +21,9 @@ struct PatcherInfo
 	uint32_t ms_HighestPatcherLevel;
 	uint32_t ms_NumberOfLevelsWithStepByStepPatcherEnabled;
 	uint32_t ms_NumberOfLevelsWithWithDebugMode;
+
+	// Function calling
+	uint32_t ms_CalledFunctions;
 
 	// Total
 	uint32_t ms_TotalNumberOfMemoryChanges;

@@ -16,7 +16,26 @@ bool Patcher::Initialize()
 	// Set standard patcher level 
 	PatcherLevel::CurrentPatcherLevel = 64;
 
-	// Set patcher data value to true
+	// Clear PatcherData
+	ms_PatcherData.bEnablePatcherStack = false;
+
+	ms_PatcherData.ms_HighestPatcherLevel = 0;
+	ms_PatcherData.ms_NumberOfInjectedFunctions = 0;
+	ms_PatcherData.ms_NumberOfLevelsWithStepByStepPatcherEnabled = 0;
+	ms_PatcherData.ms_NumberOfLevelsWithWithDebugMode = 0;
+	ms_PatcherData.ms_NumberOfMemoryPatches = 0;
+	ms_PatcherData.ms_NumberOfPatcherLists = 0;
+	ms_PatcherData.ms_NumberOfPatchesAppliedFromPatcherLists = 0;
+	ms_PatcherData.ms_NumberOfRawMemorySectionJMPs = 0;
+	ms_PatcherData.ms_NumberOfRawMemorySections = 0;
+	ms_PatcherData.ms_NumberOfRawMemorySubSections = 0;
+	ms_PatcherData.ms_PatcherGameVersion = GAME_VERSION_GTASA_US_1_0_HOODLUM;
+	ms_PatcherData.ms_TimesDataWasNOPped = 0;
+	ms_PatcherData.ms_CalledFunctions = 0;
+	ms_PatcherData.ms_MemoryCopied = 0;
+	ms_PatcherData.ms_MemorySet = 0;
+	ms_PatcherData.ms_TotalNumberOfMemoryChanges = 0;
+
 	ms_PatcherData.bPatcherInitialized = true;
 
 	// Apply all patcher lists
@@ -82,6 +101,12 @@ void Patcher::InjectFunctionPatchOnMultipleAddresses(void* dest_addr, x86_func_t
 	}
 }
 
+uintptr_t Patcher::CalculateJMPaddress(uintptr_t addr)
+{
+	uintptr_t offset = ReadMemory<uintptr_t>(addr + 1);
+	return offset + addr + 5;
+}
+
 void Patcher::InjectFunctionPatchOnMultipleAddresses(uintptr_t dest_addr, x86_func_type type, std::initializer_list<uintptr_t> addr2)
 {
 	for (auto addr : addr2)
@@ -115,6 +140,27 @@ void Patcher::InjectFunctionPatchOnMultipleAddresses(uintptr_t dest_addr, x86_fu
 			ms_PatcherData.ms_TotalNumberOfMemoryChanges++;
 		}
 	}
+}
+
+///////// Inherited from hax library by iFarbod
+// MemCpy with unprotection of address
+void Patcher::MemCpy(uintptr_t addr, const void* dest, size_t size)
+{
+	DWORD dwProtect[2];
+	VirtualProtect((PVOID)addr, size, PAGE_EXECUTE_READWRITE, &dwProtect[0]);
+	memcpy((PVOID)addr, dest, size);
+	VirtualProtect((PVOID)addr, size, dwProtect[0], &dwProtect[1]);
+	ms_PatcherData.ms_MemoryCopied++;
+}
+
+// MemSet with unprotection of address
+void Patcher::MemSet(uintptr_t addr, int32_t value, size_t size)
+{
+	DWORD dwProtect[2];
+	VirtualProtect((PVOID)addr, size, PAGE_EXECUTE_READWRITE, &dwProtect[0]);
+	memset((PVOID)addr, value, size);
+	VirtualProtect((PVOID)addr, size, dwProtect[0], &dwProtect[1]);
+	ms_PatcherData.ms_MemorySet++;
 }
 
 // INTO THEJMPPATCH!!!
@@ -385,6 +431,8 @@ uint8_t Patcher::MemorySection::GetMemorySectionForThisAddress(uintptr_t addr)
 			return section->segment_type;
 		}
 	}
+
+	// This memory address doesn't have a section! Return default.
 	return MEMORY_SEGMENT_STANDARD;
 }
 

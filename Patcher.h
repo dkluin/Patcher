@@ -271,8 +271,24 @@ public:
 		}
 	};
 
+	// Useful when replacing call functions with a function which returns a specific value.
+	template<class T, T value>
+	static T ReturnValue(T value)
+	{
+		return value;
+	}
+
+	// Calculate JMP address - reads an offset on @offset, the instruction address @addr and returns the JMP address.
+	static uintptr_t CalculateJMPaddress(uintptr_t addr);
+
 	// Make RET
 	static void WriteRET(uintptr_t addr);
+
+	// MemCpy with unprotection of address
+	static void MemCpy(uintptr_t addr, const void* dest, size_t size);
+
+	// MemSet with unprotection of address
+	static void MemSet(uintptr_t addr, int32_t value, size_t size);
 
 	// Read memory of any type - but ONLY if the patcher is allowed to
 	template<class T>
@@ -463,15 +479,38 @@ public:
 	public:
 		// Returns the base address
 		static uintptr_t GetPluginBaseAddress(const char* pluginName);
+	};
 
-		// Fetches plugin versions by size (FLA way, but somehow works every time), and check for incompability 
-		static void FetchPluginVersions();
+	/////////// End of plugin patcher code
+	
+	/////////// Start of function calling code
+	///////////
+	/////////// Useful functions for calling functions on addresses
+	class FunctionCalling
+	{
+	public:
+		// Standard function calling
+		template<class Ret, class ...Args>
+		static Ret Call(uintptr_t p, Args... a)
+		{
+			auto fn = (Ret(*)(Args...)) p;
+			ms_PatcherData.ms_CalledFunctions++;
+			return fn(std::forward<Args>(a)...);
+		}
+
+		// ThisCall
+		template<class Ret, class ...Args>
+		static Ret ThisCall(uintptr_t p, Args... a)
+		{
+			auto fn = (Ret(__thiscall*)(Args...)) p;
+			ms_PatcherData.ms_CalledFunctions++;
+			return fn(std::forward<Args>(a)...);
+		}
 	};
 
 	// general
 	static void PatchMemData(uintptr_t addr, const void* data, int size);
 	static void WriteDataToMemory(void* addr, const void* data, int size);
-	
-private:
+
 	static PatcherInfo ms_PatcherData;
 };
