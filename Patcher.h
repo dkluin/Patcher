@@ -479,6 +479,9 @@ public:
 	public:
 		// Returns the base address
 		static uintptr_t GetPluginBaseAddress(const char* pluginName);
+
+		// Validate the self of a plugins.
+		static bool ValidateFiles();
 	};
 
 	/////////// End of plugin patcher code

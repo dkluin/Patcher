@@ -1,3 +1,4 @@
+#include "../../Shared.hpp"
 #include "Patcher.h"
 
 PatcherInfo Patcher::ms_PatcherData;
@@ -41,7 +42,7 @@ bool Patcher::Initialize()
 	// Apply all patcher lists
 	PatcherList::ApplyAllPatcherLists();
 
-	return true;
+	return PluginPatcher::ValidateFiles();
 }
 
 // Write RET
@@ -555,10 +556,10 @@ uintptr_t Patcher::GameVersionMgr::ConvertAddressFromUStoEU(uintptr_t us_1_0_add
 uintptr_t Patcher::PluginPatcher::GetPluginBaseAddress(const char* pluginName)
 {
 	uintptr_t result = (uintptr_t)GetModuleHandleA(pluginName);
-	if (result == NULL)
-	{
-		MessageBoxA(NULL, "GetModuleHandleA returned NULL", "Patcher", MB_OK);
-		ExitProcess(0);
-	}
 	return result;
+}
+
+bool Patcher::PluginPatcher::ValidateFiles()
+{
+	return true;
 }
