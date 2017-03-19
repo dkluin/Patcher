@@ -14,7 +14,8 @@ namespace Memory
 		static bool ShutdownVersionMgr();
 
 		// Is HOODLUM?
-		static bool IsHoodlum();
+		static bool IsHoodlumUS();
+		static bool IsHoodlumEU();
 
 	private:
 		// Game version
