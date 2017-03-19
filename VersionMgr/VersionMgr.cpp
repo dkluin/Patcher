@@ -1,4 +1,5 @@
 #include "VersionMgr.hpp"
+#include "../Main.hpp"
 #include <Psapi.h>
 
 
@@ -33,5 +34,10 @@ namespace Memory
 		GetModuleInformation(GetCurrentProcess(), GetModuleHandle(NULL), &info, sizeof(MODULEINFO));
 
 		return (uint32_t)info.EntryPoint;
+	}
+
+	bool VersionMgr::IsHoodlum()
+	{
+		return Memory::Memory(0x406A20).Get<BYTE>(true) == 0xE9;
 	}
 }
