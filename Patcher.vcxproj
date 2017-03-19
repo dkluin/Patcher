@@ -112,10 +112,12 @@
   <ItemGroup>
     <ClCompile Include="Legacy\Legacy.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="VersionMgr\VersionMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Legacy\Legacy.hpp" />
     <ClInclude Include="Main.hpp" />
+    <ClInclude Include="VersionMgr\VersionMgr.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

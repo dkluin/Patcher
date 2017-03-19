@@ -12,6 +12,7 @@ namespace Memory
 		// memcpy with memory protection
 		static void MemCpyWithMemoryProtect(void* dest, const void* src, size_t size)
 		{
+			DWORD pProtection[2];
 			memcpy(dest, src, size);
 		}
 		static void MemCpyWithMemoryProtect(uint32_t dest, const void* src, size_t size)
@@ -19,6 +20,48 @@ namespace Memory
 			MemCpyWithMemoryProtect((void*)dest, src, size);
 		}
 	};
+
+	/////////////// New code which uses operators for comparing, setting, and even adding, multiplying, and much more 
+	class Memory
+	{
+	private:
+		uint32_t Address;
+
+	public:
+		Memory(uint32_t addr) { Address = addr; }
+
+		// Operators
+		template <class T>
+		inline void operator=(const T& value)
+		{
+			*(uint32_t*)this->Address = value;
+		}
+
+		template <class T>
+		inline void operator+(const T& value)
+		{
+			*(uint32_t*)this->Address = *(uint32_t*)this->Address + value;
+		}
+
+		template <class T>
+		inline void operator-(const T& value)
+		{
+			*(uint32_t*)this->Address = *(uint32_t*)this->Address - value;
+		}
+
+		template <class T>
+		inline void operator*(const T& value)
+		{
+			*(uint32_t*)this->Address = *(uint32_t*)this->Address * value;
+		}
+
+		template <class T>
+		inline void operator/(const T& value)
+		{
+			*(uint32_t*)this->Address = *(uint32_t*)this->Address / value;
+		}
+	};
+
 
 	/////////////// Global functions - global stuff
 	class Global

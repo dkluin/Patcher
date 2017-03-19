@@ -5,16 +5,25 @@
     <ClCompile Include="Legacy\Legacy.cpp">
       <Filter>Legacy</Filter>
     </ClCompile>
+    <ClCompile Include="VersionMgr\VersionMgr.cpp">
+      <Filter>VersionMgr</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.hpp" />
     <ClInclude Include="Legacy\Legacy.hpp">
       <Filter>Legacy</Filter>
     </ClInclude>
+    <ClInclude Include="VersionMgr\VersionMgr.hpp">
+      <Filter>VersionMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Legacy">
       <UniqueIdentifier>{c807c35f-2e31-4939-a4e8-aca729d8ff4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VersionMgr">
+      <UniqueIdentifier>{96dad8ba-c609-486f-b774-9da70b426f59}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
