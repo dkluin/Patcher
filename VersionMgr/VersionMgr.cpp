@@ -7,14 +7,18 @@ namespace Memory
 	// Initializes version manager
 	bool VersionMgr::InitializeVersionMgr()
 	{
-		switch (GetEntryPoint())
+		if (GetEntryPoint())
 		{
-		case 0x82457C:
-		case 0x824570:
+			switch (GetEntryPoint())
+			{
+			case 0x82457C:
+			case 0x824570:
+				return true;
+			}
+
 			return true;
 		}
-
-		return true;
+		return false;
 	}
 
 	// Shutdown version manager
