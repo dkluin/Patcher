@@ -41,9 +41,9 @@ namespace Memory
 		Memory();
 		Memory(uint32_t addr) { Address = addr; }
 
-		// Alternative for getting a value of an address but memory protection is a problem
+		// Alternative for setting a value of an address but memory protection is a problem
 		template <class T>
-		inline void Get(T& value)
+		inline void Set(T& value)
 		{
 			DWORD dwProtect[2];
 			VirtualProtect(this->Address, sizeof(T), PAGE_EXECUTE_READWRITE, &dwProtect[0]);

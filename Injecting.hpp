@@ -31,7 +31,6 @@ namespace Memory
 
 	private:
 		// Gets a relative address
-		static Memory* GetRelativeAddress(Memory* src, Memory* dest);
 		static uint32_t GetRelativeAddress(uint32_t src, uint32_t dest);
 
 		// Error

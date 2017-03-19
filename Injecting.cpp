@@ -11,20 +11,6 @@ namespace Memory
 	}
 
 	// Gets a relative addresss
-	Memory* MemoryInjector::GetRelativeAddress(Memory* src, Memory* dest)
-	{
-		if (src == nullptr)
-		{
-			InjectorError = INJECTOR_ERROR_INVALID_MEMORY_PTR;
-			return nullptr;
-		}
-		if (dest == nullptr)
-		{
-			InjectorError = INJECTOR_ERROR_INVALID_MEMORY_PTR;
-			return nullptr;
-		}
-	}
-
 	uint32_t MemoryInjector::GetRelativeAddress(uint32_t src, uint32_t dest)
 	{
 
@@ -69,7 +55,7 @@ namespace Memory
 		}
 	}
 
-	uint32_t MemoryInjector::MakeCALL(Memory* mem, uint32_t dest, bool bProtect)
+	uint32_t MemoryInjector::MakeCALL(Memory* mem, void* dest, bool bProtect)
 	{
 		if (mem == nullptr)
 		{

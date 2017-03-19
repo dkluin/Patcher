@@ -8,6 +8,7 @@
     <ClCompile Include="VersionMgr\VersionMgr.cpp">
       <Filter>VersionMgr</Filter>
     </ClCompile>
+    <ClCompile Include="Injecting.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.hpp" />
@@ -17,6 +18,7 @@
     <ClInclude Include="VersionMgr\VersionMgr.hpp">
       <Filter>VersionMgr</Filter>
     </ClInclude>
+    <ClInclude Include="Injecting.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Legacy">
