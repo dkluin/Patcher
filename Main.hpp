@@ -67,6 +67,22 @@ namespace Memory
 		template <class T>
 		inline void operator/(const T& value) { *(T*)this->Address = *(T*)this->Address / value; }
 		inline void operator%(const int& value) { *(int*)this->Address = *(int*)this->Address % value; }
+
+		template <class T>
+		inline void operator==(const T& rvalue) { *(T*)this->Address == rvalue; }
+
+		template <class T>
+		inline void operator+=(const T& value) { *(T*)this->Address += value; }
+
+		template <class T>
+		inline void operator-=(const T& value) { *(T*) this->Address -= value; }
+
+		template <class T>
+		inline void operator*=(const T& value) { *(T*) this->Address *= value; }
+
+		template <class T>
+		inline void operator/=(const T& value) { *(T*) this->Address /= value; }
+		inline void operator%=(const int& value) { *(int*) this->Address %= value; }
 	};
 
 
