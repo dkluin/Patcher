@@ -12,5 +12,12 @@ namespace Memory
 
 		// Shutdown version manager
 		static bool ShutdownVersionMgr();
+
+	private:
+		// Game version
+		static int GameVersion;
+
+		// Gets entry point
+		static uint32_t GetEntryPoint();
 	};
 }
