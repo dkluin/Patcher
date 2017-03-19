@@ -1,11 +1,13 @@
 #include "Main.hpp"
 #include "Injecting.hpp"
+#include "HookingList/HookingList.hpp"
 
 namespace Memory
 {
 	// Initialize the memory patching library
 	bool Global::InitializePatcher()
 	{
+		HookingList::RunAll();
 		return true;
 	}
 
