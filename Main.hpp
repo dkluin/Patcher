@@ -51,6 +51,26 @@ namespace Memory
 			VirtualProtect(this->Address, sizeof(T), dwProtect[0], &dwProtect[1]);
 		}
 
+		// Same as above, but this is used for getting a value with/without memory protection
+		template <class T>
+		inline T Get(bool bProtect)
+		{
+			T result;
+			DWORD dwProtect[2];
+
+			if (bProtect)
+			{
+				VirtualProtect(this->Address, sizeof(T), PAGE_EXECUTE_READWRITE, &dwProtect[0]);
+				result = *(T*)this->Address;
+				VirtualProtect(this->Address, sizeof(T), dwProtect[0], &dwProtect[1]);
+			}
+			else
+			{
+				result = *(T*)this->Address;
+			}
+			return result;
+		}
+
 		// Operators
 		template <class T>
 		inline void operator=(const T& value) { *(T*)this->Address = value; }
