@@ -38,8 +38,14 @@ namespace Memory
 		uint32_t Address;
 
 	public:
-		Memory();
+		Memory() { Address = 0; };
 		Memory(uint32_t addr) { Address = addr; }
+
+		// Change address
+		void ChangeAddress(uint32_t newAddr)
+		{
+			Address = newAddr;
+		}
 
 		// Alternative for setting a value of an address but memory protection is a problem
 		template <class T>
