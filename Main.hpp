@@ -38,6 +38,7 @@ namespace Memory
 		uint32_t Address;
 
 	public:
+		Memory();
 		Memory(uint32_t addr) { Address = addr; }
 
 		// Alternative for getting a value of an address but memory protection is a problem
@@ -46,25 +47,26 @@ namespace Memory
 		{
 			DWORD dwProtect[2];
 			VirtualProtect(this->Address, sizeof(T), PAGE_EXECUTE_READWRITE, &dwProtect[0]);
-			*(uint32_t*)this->Address = value;
+			*(T*)this->Address = value;
 			VirtualProtect(this->Address, sizeof(T), dwProtect[0], &dwProtect[1]);
 		}
 
 		// Operators
 		template <class T>
-		inline void operator=(const T& value) { *(uint32_t*)this->Address = value; }
+		inline void operator=(const T& value) { *(T*)this->Address = value; }
 
 		template <class T>
-		inline void operator+(const T& value) { *(uint32_t*)this->Address = *(uint32_t*)this->Address + value; }
+		inline void operator+(const T& value) { *(T*)this->Address = *(T*)this->Address + value; }
 
 		template <class T>
-		inline void operator-(const T& value) { *(uint32_t*)this->Address = *(uint32_t*)this->Address - value; }
+		inline void operator-(const T& value) { *(T*)this->Address = *(T*)this->Address - value; }
 
 		template <class T>
-		inline void operator*(const T& value) { *(uint32_t*)this->Address = *(uint32_t*)this->Address * value; }
+		inline void operator*(const T& value) { *(T*)this->Address = *(T*)this->Address * value; }
 
 		template <class T>
-		inline void operator/(const T& value) { *(uint32_t*)this->Address = *(uint32_t*)this->Address / value; }
+		inline void operator/(const T& value) { *(T*)this->Address = *(T*)this->Address / value; }
+		inline void operator%(const int& value) { *(int*)this->Address = *(int*)this->Address % value; }
 	};
 
 

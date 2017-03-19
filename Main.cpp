@@ -19,6 +19,10 @@ void main()
 {
 	if (Memory::Global::InitializePatcher())
 	{
+		Memory::Memory wow(0x2345);
+
+		wow % 1;
+
 		Memory::Global::ShutdownPatcher();
 	}
 }
