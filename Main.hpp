@@ -1,3 +1,9 @@
+/*
+	Main.hpp
+
+	Contains the main memory patching stuff
+*/
+
 #pragma once
 
 #include <cstdint>
