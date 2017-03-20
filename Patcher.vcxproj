@@ -110,18 +110,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="General.cpp" />
     <ClCompile Include="HookingList\HookingList.cpp" />
     <ClCompile Include="Injecting.cpp" />
     <ClCompile Include="Legacy\Legacy.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Memory.cpp" />
     <ClCompile Include="VersionMgr\VersionMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="HookingList\HookingList.hpp" />
-    <ClInclude Include="Injecting.hpp" />
-    <ClInclude Include="Legacy\Legacy.hpp" />
-    <ClInclude Include="Main.hpp" />
-    <ClInclude Include="VersionMgr\VersionMgr.hpp" />
+    <ClInclude Include="General.h" />
+    <ClInclude Include="HookingList\HookingList.h" />
+    <ClInclude Include="Injecting.h" />
+    <ClInclude Include="Legacy\Legacy.h" />
+    <ClInclude Include="Main.h" />
+    <ClInclude Include="Memory.h" />
+    <ClInclude Include="VersionMgr\VersionMgr.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

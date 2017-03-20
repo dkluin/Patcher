@@ -1,76 +1,73 @@
-#include "Injecting.hpp"
+#include "Injecting.h"
 
-namespace Memory
+eInjectorError MemoryInjector::InjectorError = INJECTOR_ERROR_NONE;
+
+// Gets injector error
+eInjectorError MemoryInjector::GetLastError()
 {
-	eInjectorError MemoryInjector::InjectorError = INJECTOR_ERROR_NONE;
+	return InjectorError;
+}
 
-	// Gets injector error
-	eInjectorError MemoryInjector::GetLastError()
+// Gets a relative addresss
+uint32_t MemoryInjector::GetRelativeAddress(uint32_t src, uint32_t dest)
+{
+
+}
+
+// Makes a JMP to a relative address or function
+uint32_t MemoryInjector::MakeJMP(Memory* mem, uint32_t dest, bool bProtect)
+{
+	if (mem == nullptr)
 	{
-		return InjectorError;
+		InjectorError = INJECTOR_ERROR_INVALID_MEMORY_PTR;
+		return 0 ;
 	}
+}
 
-	// Gets a relative addresss
-	uint32_t MemoryInjector::GetRelativeAddress(uint32_t src, uint32_t dest)
+uint32_t MemoryInjector::MakeJMP(Memory* mem, void* dest, bool bProtect)
+{
+	if (mem == nullptr)
 	{
-
+		InjectorError = INJECTOR_ERROR_INVALID_MEMORY_PTR;
+		return 0;
 	}
+}
 
-	// Makes a JMP to a relative address or function
-	uint32_t MemoryInjector::MakeJMP(Memory* mem, uint32_t dest, bool bProtect)
+uint32_t MemoryInjector::MakeJMP(uint32_t mem, uint32_t dest, bool bProtect)
+{
+
+}
+
+uint32_t MemoryInjector::MakeJMP(uint32_t mem, void* dest, bool bProtect)
+{
+
+}
+
+// Makes a CALL to a relative address or function
+uint32_t MemoryInjector::MakeCALL(Memory* mem, uint32_t dest, bool bProtect)
+{
+	if (mem == nullptr)
 	{
-		if (mem == nullptr)
-		{
-			InjectorError = INJECTOR_ERROR_INVALID_MEMORY_PTR;
-			return 0 ;
-		}
+		InjectorError = INJECTOR_ERROR_INVALID_MEMORY_PTR;
+		return 0;
 	}
+}
 
-	uint32_t MemoryInjector::MakeJMP(Memory* mem, void* dest, bool bProtect)
+uint32_t MemoryInjector::MakeCALL(Memory* mem, void* dest, bool bProtect)
+{
+	if (mem == nullptr)
 	{
-		if (mem == nullptr)
-		{
-			InjectorError = INJECTOR_ERROR_INVALID_MEMORY_PTR;
-			return 0;
-		}
+		InjectorError = INJECTOR_ERROR_INVALID_MEMORY_PTR;
+		return 0;
 	}
+}
 
-	uint32_t MemoryInjector::MakeJMP(uint32_t mem, uint32_t dest, bool bProtect)
-	{
+uint32_t MemoryInjector::MakeCALL(uint32_t mem, uint32_t dest, bool bProtect)
+{
 
-	}
+}
 
-	uint32_t MemoryInjector::MakeJMP(uint32_t mem, void* dest, bool bProtect)
-	{
+uint32_t MemoryInjector::MakeCALL(uint32_t mem, void* dest, bool bProtect)
+{
 
-	}
-
-	// Makes a CALL to a relative address or function
-	uint32_t MemoryInjector::MakeCALL(Memory* mem, uint32_t dest, bool bProtect)
-	{
-		if (mem == nullptr)
-		{
-			InjectorError = INJECTOR_ERROR_INVALID_MEMORY_PTR;
-			return 0;
-		}
-	}
-
-	uint32_t MemoryInjector::MakeCALL(Memory* mem, void* dest, bool bProtect)
-	{
-		if (mem == nullptr)
-		{
-			InjectorError = INJECTOR_ERROR_INVALID_MEMORY_PTR;
-			return 0;
-		}
-	}
-
-	uint32_t MemoryInjector::MakeCALL(uint32_t mem, uint32_t dest, bool bProtect)
-	{
-
-	}
-
-	uint32_t MemoryInjector::MakeCALL(uint32_t mem, void* dest, bool bProtect)
-	{
-
-	}
 }

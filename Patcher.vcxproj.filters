@@ -12,19 +12,23 @@
     <ClCompile Include="HookingList\HookingList.cpp">
       <Filter>HookingList</Filter>
     </ClCompile>
+    <ClCompile Include="General.cpp" />
+    <ClCompile Include="Memory.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Main.hpp" />
-    <ClInclude Include="Legacy\Legacy.hpp">
-      <Filter>Legacy</Filter>
-    </ClInclude>
-    <ClInclude Include="VersionMgr\VersionMgr.hpp">
+    <ClInclude Include="Main.h" />
+    <ClInclude Include="Injecting.h" />
+    <ClInclude Include="General.h" />
+    <ClInclude Include="VersionMgr\VersionMgr.h">
       <Filter>VersionMgr</Filter>
     </ClInclude>
-    <ClInclude Include="Injecting.hpp" />
-    <ClInclude Include="HookingList\HookingList.hpp">
+    <ClInclude Include="Legacy\Legacy.h">
+      <Filter>Legacy</Filter>
+    </ClInclude>
+    <ClInclude Include="HookingList\HookingList.h">
       <Filter>HookingList</Filter>
     </ClInclude>
+    <ClInclude Include="Memory.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Legacy">
