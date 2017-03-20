@@ -28,5 +28,25 @@ namespace Memory
 				memcpy(address, (const void*), sizeof(T));
 			}
 		}
+
+		// ReadMemory
+		template <class T>
+		static T ReadMemory(uint32_t address, bool bProtect)
+		{
+			T result;
+			DWORD dwProtect[2];
+
+			if (bProtect)
+			{
+				VirtualProtect((LPVOID)address sizeof(T), PAGE_EXECUTE_READWRITE, &dwProtect[0]);
+				result = *(T*)address;
+				VirtualProtect((LPVOID)address, sizeof(T), dwProtect[0], &dwProtect[1]);
+			}
+			else
+			{
+				result = *(T*)address;
+			}
+			return result;
+		}
 	};
 }
