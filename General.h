@@ -10,18 +10,11 @@ namespace Patcher
 	{
 	public:
 		// memcpy with memory protection
-		static void MemCpyWithMemoryProtect(void* dest, const void* src, size_t size)
-		{
-			DWORD dwProtect[2];
-			VirtualProtect(dest, size, PAGE_EXECUTE_READWRITE, &dwProtect[0]);
-			memcpy(dest, src, size);
-			VirtualProtect(dest, size, dwProtect[0], &dwProtect[1]);
-		}
-		static void MemCpyWithMemoryProtect(uint32_t dest, const void* src, size_t size)
-		{
-			MemCpyWithMemoryProtect((void*)dest, src, size);
-		}
+		static void MemCpyWithMemoryProtect(void* dest, const void* src, size_t size);
+		static void MemCpyWithMemoryProtect(uint32_t dest, const void* src, size_t size);
 
-		// Protect
+		// strncpy with memory protection
+		static void StrNCpyWithMemoryProtect(void* dest, char* src, size_t size);
+		static void StrNCpyWithMemoryProtect(uint32_t dest, char* src, size_t size);
 	};
 }
