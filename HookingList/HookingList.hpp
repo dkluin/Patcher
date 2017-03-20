@@ -1,8 +1,11 @@
 #pragma once
 
-class HookingList
+namespace Memory
 {
-public:
-	// Run it all!
-	static void RunAll();
-};
+	class HookingList
+	{
+	public:
+		// Run it all!
+		static void RunAll();
+	};
+}

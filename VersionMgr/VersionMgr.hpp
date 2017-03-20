@@ -4,6 +4,21 @@
 
 namespace Memory
 {
+	enum eVersions
+	{
+		VERSION_GAME_UNKNOWN = 0,
+		VERSION_GTA_SA_1_0_US_CRACKED,
+		VERSION_GTA_SA_1_0_US_COMPACT,
+		VERSION_GTA_SA_1_0_EU_CRACKED_1,
+		VERSION_GTA_SA_1_0_EU_CRACKED_2,
+		VERSION_GTA_SA_1_0_US_HOODLUM,
+		VERSION_GTA_SA_1_0_EU_HOODLUM,
+		VERSION_GTA_SA_1_1_US_CRACKED,
+		VERSION_GTA_SA_1_1_EU_CRACKED,
+		VERSION_GTA_SA_3_0_CRACKED_STEAM,
+		VERSION_GTA_SA_3_0_ENCRYPTED_STEAM
+	};
+
 	class VersionMgr
 	{
 	public:
@@ -16,6 +31,9 @@ namespace Memory
 		// Is HOODLUM?
 		static bool IsHoodlumUS();
 		static bool IsHoodlumEU();
+
+		// Returns game version 
+		static int GetGameVersion();
 
 	private:
 		// Game version

@@ -66,9 +66,9 @@ namespace Memory
 
 			if (bProtect)
 			{
-				VirtualProtect(this->Address, sizeof(T), PAGE_EXECUTE_READWRITE, &dwProtect[0]);
+				VirtualProtect((LPVOID)this->Address, sizeof(T), PAGE_EXECUTE_READWRITE, &dwProtect[0]);
 				result = *(T*)this->Address;
-				VirtualProtect(this->Address, sizeof(T), dwProtect[0], &dwProtect[1]);
+				VirtualProtect((LPVOID)this->Address, sizeof(T), dwProtect[0], &dwProtect[1]);
 			}
 			else
 			{

@@ -9,6 +9,9 @@
       <Filter>VersionMgr</Filter>
     </ClCompile>
     <ClCompile Include="Injecting.cpp" />
+    <ClCompile Include="HookingList\HookingList.cpp">
+      <Filter>HookingList</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.hpp" />
@@ -19,6 +22,9 @@
       <Filter>VersionMgr</Filter>
     </ClInclude>
     <ClInclude Include="Injecting.hpp" />
+    <ClInclude Include="HookingList\HookingList.hpp">
+      <Filter>HookingList</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Legacy">
@@ -26,6 +32,9 @@
     </Filter>
     <Filter Include="VersionMgr">
       <UniqueIdentifier>{96dad8ba-c609-486f-b774-9da70b426f59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HookingList">
+      <UniqueIdentifier>{b552b79e-ed50-40f3-91d5-c10867b39f04}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

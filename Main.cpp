@@ -1,14 +1,22 @@
 #include "Main.hpp"
 #include "Injecting.hpp"
 #include "HookingList/HookingList.hpp"
+#include "VersionMgr/VersionMgr.hpp"
 
 namespace Memory
 {
 	// Initialize the memory patching library
 	bool Global::InitializePatcher()
 	{
-		HookingList::RunAll();
-		return true;
+		if (VersionMgr::InitializeVersionMgr())
+		{
+			HookingList::RunAll();
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	// Shutdown the memory patching library
