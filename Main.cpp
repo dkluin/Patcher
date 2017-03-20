@@ -2,15 +2,18 @@
 #include "VersionMgr/VersionMgr.h"
 #include "HookingList/HookingList.h"
 
-bool Main::Initialize()
+namespace Patcher
 {
-	if (VersionMgr::InitializeVersionMgr())
+	bool Main::Initialize()
 	{
-		HookingList::RunAll();
-		return true;
-	}
-	else
-	{
-		return false;
+		if (VersionMgr::InitializeVersionMgr())
+		{
+			HookingList::RunAll();
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }
