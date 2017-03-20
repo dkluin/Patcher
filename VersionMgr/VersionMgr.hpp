@@ -35,6 +35,10 @@ namespace Memory
 		// Returns game version 
 		static int GetGameVersion();
 
+		// Convert address from EU to US
+		static uint32_t ConvertAddressFromEUtoUS(uint32_t addr);
+		static Memory* ConvertAddressFromEUtoUS(Memory* addr);
+
 	private:
 		// Game version
 		static int GameVersion;

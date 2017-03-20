@@ -105,4 +105,14 @@ namespace Memory
 	{
 		return GameVersion;
 	}
+
+	uint32_t VersionMgr::ConvertAddressFromEUtoUS(uint32_t addr)
+	{
+
+	}
+
+	Memory* VersionMgr::ConvertAddressFromEUtoUS(Memory* addr)
+	{
+
+	}
 }
