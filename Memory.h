@@ -21,17 +21,25 @@ namespace Patcher
 			Address = newAddr;
 		}
 
-		// Alternative for setting a value of an address but memory protection is a problem
+		// Sets memory value with protect parameter
 		template <class T>
-		inline void Set(T& value)
+		inline void Set(T& value, bool bProtect)
 		{
 			DWORD dwProtect[2];
-			VirtualProtect(this->Address, sizeof(T), PAGE_EXECUTE_READWRITE, &dwProtect[0]);
-			*(T*)this->Address = value;
-			VirtualProtect(this->Address, sizeof(T), dwProtect[0], &dwProtect[1]);
+
+			if (bProtect)
+			{
+				VirtualProtect(this->Address, sizeof(T), PAGE_EXECUTE_READWRITE, &dwProtect[0]);
+				*(T*)this->Address = value;
+				VirtualProtect(this->Address, sizeof(T), dwProtect[0], &dwProtect[1]);
+			}
+			else
+			{
+				*(T*)this->Address = value;
+			}
 		}
 
-		// Same as above, but this is used for getting a value with/without memory protection
+		// Gets memory value with virtual protect parameter
 		template <class T>
 		inline T Get(bool bProtect)
 		{
