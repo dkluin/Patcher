@@ -39,6 +39,10 @@ namespace Patcher
 		static uint32_t ConvertAddressFromEUtoUS(uint32_t addr);
 		static Memory* ConvertAddressFromEUtoUS(Memory* addr);
 
+		// Convert address from US to EU
+		static uint32_t ConvertAddressFromUStoEU(uint32_t addr);
+		static Memory* ConvertAddressFromUStoEU(Memory* addr);
+
 	private:
 		// Game version
 		static int GameVersion;

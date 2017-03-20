@@ -110,9 +110,42 @@ namespace Patcher
 
 	}
 
+
 	Memory* VersionMgr::ConvertAddressFromEUtoUS(Memory* addr)
 	{
 
+	}
+
+	uint32_t VersionMgr::ConvertAddressFromUStoEU(uint32_t addr)
+	{
+		if (addr > 0x7466D0)
+		{
+			if (addr < 0x7BA940)
+			{
+				addr += 0x50;
+			}
+			else
+			{
+				addr += 0x40;
+			}
+		}
+		return addr;
+	}
+
+	static Memory* ConvertAddressFromUStoEU(Memory* addr)
+	{
+		if (addr->GetAddress() > 0x7466D0)
+		{
+			if (addr->GetAddress() < 0x7BA940)
+			{
+				addr += 0x50;
+			}
+			else
+			{
+				addr += 0x40;
+			}
+		}
+		return addr;
 	}
 
 }
