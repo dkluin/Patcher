@@ -111,7 +111,7 @@ namespace Patcher
 	}
 
 
-	Memory* VersionMgr::ConvertAddressFromEUtoUS(Memory* addr)
+	void VersionMgr::ConvertAddressFromEUtoUS(Memory* addr)
 	{
 
 	}
@@ -132,7 +132,7 @@ namespace Patcher
 		return addr;
 	}
 
-	static Memory* ConvertAddressFromUStoEU(Memory* addr)
+	void VersionMgr::ConvertAddressFromUStoEU(Memory* addr)
 	{
 		if (addr->GetAddress() > 0x7466D0)
 		{
@@ -145,7 +145,6 @@ namespace Patcher
 				addr->ChangeAddress(addr->GetAddress() + 0x40);
 			}
 		}
-		return addr;
 	}
 
 }

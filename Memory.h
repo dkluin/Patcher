@@ -16,10 +16,7 @@ namespace Patcher
 		Memory(uint32_t addr) { Address = addr; }
 
 		// Change address
-		void ChangeAddress(uint32_t newAddr)
-		{
-			Address = newAddr;
-		}
+		void ChangeAddress(uint32_t newAddr) { Address = newAddr; }
 
 		// Sets memory value with protect parameter
 		template <class T>
@@ -60,42 +57,56 @@ namespace Patcher
 		}
 
 		// Returns the current address
-		inline uint32_t GetAddress()
-		{
-			return this->Address;
-		}
+		inline uint32_t GetAddress() { return this->Address; }
+
+		// Comparison
+
+		template <class T>
+		bool operator==(const T& rvalue) { return *(T*)this->Address == rvalue; }
+
+		template <class T>
+		bool operator>(const T& value) { return *(T*)this->Address > value; }
+		
+		template <class T>
+		bool operator<(const T& value) { return *(T*)this->Address < value; }
+
+		template <class T>
+		bool operator>=(const T& value) { return *(T*)this->Address >= value; }
+
+		template <class T>
+		bool operator<=(const T& value) { return *(T*)this->Address <= value; }
+
+		template <class T>
+		bool operator!=(const T& value) { return *(T*)this->Address != value; }
 
 		// Operators
 		template <class T>
-		inline void operator=(const T& value) { *(T*)this->Address = value; }
+		void operator=(const T& value) { *(T*)this->Address = value; }
 
 		template <class T>
-		inline void operator+(const T& value) { *(T*)this->Address = *(T*)this->Address + value; }
+		void operator+(const T& value) { *(T*)this->Address = *(T*)this->Address + value; }
 
 		template <class T>
-		inline void operator-(const T& value) { *(T*)this->Address = *(T*)this->Address - value; }
+		void operator-(const T& value) { *(T*)this->Address = *(T*)this->Address - value; }
 
 		template <class T>
-		inline void operator*(const T& value) { *(T*)this->Address = *(T*)this->Address * value; }
+		void operator*(const T& value) { *(T*)this->Address = *(T*)this->Address * value; }
 
 		template <class T>
-		inline void operator/(const T& value) { *(T*)this->Address = *(T*)this->Address / value; }
-		inline void operator%(const int& value) { *(int*)this->Address = *(int*)this->Address % value; }
+		void operator/(const T& value) { *(T*)this->Address = *(T*)this->Address / value; }
+		void operator%(const int& value) { *(int*)this->Address = *(int*)this->Address % value; }
 
 		template <class T>
-		inline void operator==(const T& rvalue) { *(T*)this->Address == rvalue; }
+		void operator+=(const T& value) { *(T*)this->Address += value; }
 
 		template <class T>
-		inline void operator+=(const T& value) { *(T*)this->Address += value; }
+		void operator-=(const T& value) { *(T*) this->Address -= value; }
 
 		template <class T>
-		inline void operator-=(const T& value) { *(T*) this->Address -= value; }
+		void operator*=(const T& value) { *(T*) this->Address *= value; }
 
 		template <class T>
-		inline void operator*=(const T& value) { *(T*) this->Address *= value; }
-
-		template <class T>
-		inline void operator/=(const T& value) { *(T*) this->Address /= value; }
-		inline void operator%=(const int& value) { *(int*) this->Address %= value; }
+		void operator/=(const T& value) { *(T*) this->Address /= value; }
+		void operator%=(const int& value) { *(int*) this->Address %= value; }
 	};
 }
