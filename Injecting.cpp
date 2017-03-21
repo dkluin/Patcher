@@ -1,4 +1,5 @@
 #include "Injecting.h"
+#include "General.h"
 
 namespace Patcher
 {
@@ -13,7 +14,7 @@ namespace Patcher
 	// Gets a relative addresss
 	uint32_t MemoryInjector::GetRelativeAddress(uint32_t src, uint32_t dest)
 	{
-
+		return static_cast<uint32_t>(src - dest);
 	}
 
 	// Makes a JMP to a relative address or function
@@ -37,7 +38,9 @@ namespace Patcher
 
 	uint32_t MemoryInjector::MakeJMP(uint32_t mem, uint32_t dest, bool bProtect)
 	{
-
+		General::MemCpyWithMemoryProtect(mem, (const void*)0xE9, sizeof(BYTE));
+		General::MemCpyWithMemoryProtect(mem + 1, (const void*)GetRelativeAddress(mem + 4, dest), sizeof(DWORD));
+		return GetRelativeAddress(mem + 4, dest);
 	}
 
 	uint32_t MemoryInjector::MakeJMP(uint32_t mem, void* dest, bool bProtect)

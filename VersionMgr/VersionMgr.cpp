@@ -138,11 +138,11 @@ namespace Patcher
 		{
 			if (addr->GetAddress() < 0x7BA940)
 			{
-				addr += 0x50;
+				addr->ChangeAddress(addr->GetAddress() + 0x50);
 			}
 			else
 			{
-				addr += 0x40;
+				addr->ChangeAddress(addr->GetAddress() + 0x40);
 			}
 		}
 		return addr;

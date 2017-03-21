@@ -10,7 +10,6 @@ namespace Patcher
 	{
 	public:
 		// memcpy with memory protection
-		static void MemCpyWithMemoryProtect(void* dest, const void* src, size_t size);
 		static void MemCpyWithMemoryProtect(uint32_t dest, const void* src, size_t size);
 
 		// strncpy with memory protection
