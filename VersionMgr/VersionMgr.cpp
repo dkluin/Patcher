@@ -37,6 +37,10 @@ namespace Patcher
 				break;
 			}
 
+		case 0x825890: // GTA SA 1.0 DE
+			GameVersion = VERSION_GTA_SA_1_0_DE;
+			break;
+
 		case 0x8245BC:  // GTA SA 1.0 EU Cracked (??????)
 			if (IsHoodlumEU())
 			{
@@ -66,7 +70,14 @@ namespace Patcher
 			break;
 
 		case 0x82533C:  // GTA SA 1.1 EU Cracked
-			GameVersion = VERSION_GTA_SA_1_1_EU_CRACKED;
+			if (IsDevianceEU())
+			{
+				GameVersion = VERSION_GTA_SA_1_1_EU_DEVIANCE;
+			}
+			else
+			{
+				GameVersion = VERSION_GTA_SA_1_1_EU_CRACKED;
+			}
 			break;
 
 		case 0x85EC4A:  // GTA SA 3.0 (Cracked Steam Version)
@@ -176,6 +187,11 @@ namespace Patcher
 				addr->ChangeAddress(addr->GetAddress() + 0x40);
 			}
 		}
+	}
+
+	bool VersionMgr::IsDevianceEU()
+	{
+		return Memory::Memory(0x464780).Get<BYTE>(true) == 0xFF;
 	}
 
 }

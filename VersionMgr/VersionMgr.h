@@ -15,12 +15,14 @@ namespace Patcher
 		VERSION_GTA_VC_1_1,
 		VERSION_GTA_SA_1_0_US_CRACKED,
 		VERSION_GTA_SA_1_0_US_COMPACT,
+		VERSION_GTA_SA_1_0_DE,
 		VERSION_GTA_SA_1_0_EU_CRACKED_1,
 		VERSION_GTA_SA_1_0_EU_CRACKED_2,
 		VERSION_GTA_SA_1_0_US_HOODLUM,
 		VERSION_GTA_SA_1_0_EU_HOODLUM,
 		VERSION_GTA_SA_1_1_US_CRACKED,
 		VERSION_GTA_SA_1_1_EU_CRACKED,
+		VERSION_GTA_SA_1_1_EU_DEVIANCE,
 		VERSION_GTA_SA_3_0_CRACKED_STEAM,
 		VERSION_GTA_SA_3_0_ENCRYPTED_STEAM
 	};
@@ -37,6 +39,9 @@ namespace Patcher
 		// Is HOODLUM?
 		static bool IsHoodlumUS();
 		static bool IsHoodlumEU();
+
+		// Is DEViANCE
+		static bool IsDevianceEU();
 
 		// Returns game version 
 		static int GetGameVersion();

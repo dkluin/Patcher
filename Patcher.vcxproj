@@ -117,6 +117,7 @@
     <ClCompile Include="Legacy\Legacy.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Memory.cpp" />
+    <ClCompile Include="PluginPatcher.cpp" />
     <ClCompile Include="VersionMgr\VersionMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -127,6 +128,7 @@
     <ClInclude Include="Legacy\Legacy.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="Memory.h" />
+    <ClInclude Include="PluginPatcher.h" />
     <ClInclude Include="VersionMgr\VersionMgr.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

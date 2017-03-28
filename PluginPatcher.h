@@ -2,7 +2,7 @@
 
 #include <Windows.h>
 
-namespace Memory
+namespace Patcher
 {
 #ifdef WIN32
 	class PluginPatcher

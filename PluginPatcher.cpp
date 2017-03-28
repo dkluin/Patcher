@@ -1,7 +1,7 @@
 #include "PluginPatcher.h"
 #include <Psapi.h>
 
-namespace Memory
+namespace Patcher
 {
 #ifdef WIN32
 	LPVOID PluginPatcher::GetPluginEntryPoint(LPCSTR m_szPluginName)

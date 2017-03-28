@@ -15,6 +15,7 @@
     <ClCompile Include="General.cpp" />
     <ClCompile Include="Memory.cpp" />
     <ClCompile Include="Calling.cpp" />
+    <ClCompile Include="PluginPatcher.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
@@ -31,6 +32,7 @@
     </ClInclude>
     <ClInclude Include="Memory.h" />
     <ClInclude Include="Calling.h" />
+    <ClInclude Include="PluginPatcher.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Legacy">
