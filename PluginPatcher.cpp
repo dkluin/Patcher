@@ -3,6 +3,7 @@
 
 namespace Memory
 {
+#ifdef WIN32
 	LPVOID PluginPatcher::GetPluginEntryPoint(LPCSTR m_szPluginName)
 	{
 		MODULEINFO info;
@@ -23,4 +24,5 @@ namespace Memory
 		GetModuleInformation(GetCurrentProcess(), GetModuleHandleW(m_szPluginName), &info, sizeof(MODULEINFO));
 		return info.EntryPoint;
 	}
+#endif
 }

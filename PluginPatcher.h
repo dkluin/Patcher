@@ -4,6 +4,7 @@
 
 namespace Memory
 {
+#ifdef WIN32
 	class PluginPatcher
 	{
 	public:
@@ -17,4 +18,5 @@ namespace Memory
 		static LPVOID GetPluginEntryPointA(LPCSTR m_szPluginName);
 		static LPVOID GetPluginEntryPointW(LPWSTR m_szPluginName);
 	};
+#endif
 }
