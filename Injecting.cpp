@@ -26,8 +26,8 @@ uint32_t MemoryInjector::MakeJMP(Memory* mem, uint32_t dest, bool bProtect)
 	}
 	mem->Set<BYTE>(0xE9, bProtect);
 	mem->ChangeAddress(mem->GetAddress() + 1);
-	mem->Set<uint32_t>(GetRelativeAddress(mem->GetAddress(), dest - 5), bProtect);
-	return GetRelativeAddress(mem->GetAddress(), dest - 5);
+	mem->Set<uint32_t>(GetRelativeAddress(mem->GetAddress(), dest - 4), bProtect);
+	return GetRelativeAddress(mem->GetAddress(), dest - 4);
 }
 
 uint32_t MemoryInjector::MakeJMP(Memory* mem, void* dest, bool bProtect)
@@ -39,8 +39,8 @@ uint32_t MemoryInjector::MakeJMP(Memory* mem, void* dest, bool bProtect)
 	}
 	mem->Set<BYTE>(0xE9, bProtect);
 	mem->ChangeAddress(mem->GetAddress() + 1);
-	mem->Set<uint32_t>(GetRelativeAddress(mem->GetAddress(), (uint32_t)dest - 5), bProtect);
-	return GetRelativeAddress(mem->GetAddress(), (uint32_t)dest - 5);
+	mem->Set<uint32_t>(GetRelativeAddress(mem->GetAddress(), (uint32_t)dest - 4), bProtect);
+	return GetRelativeAddress(mem->GetAddress(), (uint32_t)dest - 4);
 }
 
 uint32_t MemoryInjector::MakeJMP(uint32_t mem, uint32_t dest, bool bProtect)
@@ -83,6 +83,10 @@ uint32_t MemoryInjector::MakeCALL(Memory* mem, uint32_t dest, bool bProtect)
 		InjectorError = INJECTOR_ERROR_INVALID_MEMORY_PTR;
 		return 0;
 	}
+	mem->Set<BYTE>(0xE8, bProtect);
+	mem->ChangeAddress(mem->GetAddress() + 1);
+	mem->Set<uint32_t>(GetRelativeAddress(mem->GetAddress(), dest - 4), bProtect);
+	return GetRelativeAddress(mem->GetAddress(), dest - 4);
 }
 
 uint32_t MemoryInjector::MakeCALL(Memory* mem, void* dest, bool bProtect)
@@ -92,6 +96,10 @@ uint32_t MemoryInjector::MakeCALL(Memory* mem, void* dest, bool bProtect)
 		InjectorError = INJECTOR_ERROR_INVALID_MEMORY_PTR;
 		return 0;
 	}
+	mem->Set<BYTE>(0xE8, bProtect);
+	mem->ChangeAddress(mem->GetAddress() + 1);
+	mem->Set<uint32_t>(GetRelativeAddress(mem->GetAddress(), (uint32_t)dest - 4), bProtect);
+	return GetRelativeAddress(mem->GetAddress(), (uint32_t)dest - 4);
 }
 
 uint32_t MemoryInjector::MakeCALL(uint32_t mem, uint32_t dest, bool bProtect)
