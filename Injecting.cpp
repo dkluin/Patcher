@@ -96,10 +96,18 @@ uint32_t MemoryInjector::MakeCALL(Memory* mem, void* dest, bool bProtect)
 
 uint32_t MemoryInjector::MakeCALL(uint32_t mem, uint32_t dest, bool bProtect)
 {
-
+	Memory call(mem);
+	call.Set<BYTE>(0xE8, bProtect);
+	call.ChangeAddress(call.GetAddress() + 1);
+	call.Set<uint32_t>(GetRelativeAddress(mem, (uint32_t)dest - 5), bProtect);
+	return GetRelativeAddress(mem, (uint32_t)dest - 5);
 }
 
 uint32_t MemoryInjector::MakeCALL(uint32_t mem, void* dest, bool bProtect)
 {
-
+	Memory call(mem);
+	call.Set<BYTE>(0xE8, bProtect);
+	call.ChangeAddress(call.GetAddress() + 1);
+	call.Set<uint32_t>(GetRelativeAddress(mem, (uint32_t)dest - 5), bProtect);
+	return GetRelativeAddress(mem, (uint32_t)dest - 5);
 }
