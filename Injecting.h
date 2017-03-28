@@ -14,10 +14,10 @@ class MemoryInjector
 {
 public:
 	// Makes a JMP to a relative address or function
-	static uint32_t MakeJMP(Memory* mem, uint32_t dest, bool bProtect);
-	static uint32_t MakeJMP(Memory* mem, void* dest, bool bProtect);
-	static uint32_t MakeJMP(uint32_t mem, uint32_t dest, bool bProtect);
-	static uint32_t MakeJMP(uint32_t mem, void* dest, bool bProtect);
+	static uint32_t MakeJMP(Memory* mem, uint32_t dest, bool bProtect = true);
+	static uint32_t MakeJMP(Memory* mem, void* dest, bool bProtect = true);
+	static uint32_t MakeJMP(uint32_t mem, uint32_t dest, bool bProtect = true);
+	static uint32_t MakeJMP(uint32_t mem, void* dest, bool bProtect = true);
 
 	// Makes a CALL to a relative address or function
 	static uint32_t MakeCALL(Memory* mem, uint32_t dest, bool bProtect);
