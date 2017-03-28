@@ -1,8 +1,6 @@
 #include "PluginPatcher.h"
 #include <Psapi.h>
 
-namespace Patcher
-{
 #ifdef WIN32
 	LPVOID PluginPatcher::GetPluginEntryPoint(LPCSTR m_szPluginName)
 	{
@@ -25,4 +23,3 @@ namespace Patcher
 		return info.EntryPoint;
 	}
 #endif
-}

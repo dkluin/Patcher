@@ -1,79 +1,97 @@
 #include "Injecting.h"
 #include "General.h"
 
-namespace Patcher
+
+eInjectorError MemoryInjector::InjectorError = INJECTOR_ERROR_NONE;
+
+// Gets injector error
+eInjectorError MemoryInjector::GetLastError()
 {
-	eInjectorError MemoryInjector::InjectorError = INJECTOR_ERROR_NONE;
+	return InjectorError;
+}
 
-	// Gets injector error
-	eInjectorError MemoryInjector::GetLastError()
+// Gets a relative addresss
+uint32_t MemoryInjector::GetRelativeAddress(uint32_t src, uint32_t dest)
+{
+	return dest - src;
+}
+
+// Makes a JMP to a relative address or function
+uint32_t MemoryInjector::MakeJMP(Memory* mem, uint32_t dest, bool bProtect)
+{
+	if (mem == nullptr)
 	{
-		return InjectorError;
+		InjectorError = INJECTOR_ERROR_INVALID_MEMORY_PTR;
+		return 0;
 	}
+}
 
-	// Gets a relative addresss
-	uint32_t MemoryInjector::GetRelativeAddress(uint32_t src, uint32_t dest)
+uint32_t MemoryInjector::MakeJMP(Memory* mem, void* dest, bool bProtect)
+{
+	if (mem == nullptr)
 	{
-		return static_cast<uint32_t>(src - dest);
+		InjectorError = INJECTOR_ERROR_INVALID_MEMORY_PTR;
+		return 0;
 	}
+}
 
-	// Makes a JMP to a relative address or function
-	uint32_t MemoryInjector::MakeJMP(Memory* mem, uint32_t dest, bool bProtect)
+uint32_t MemoryInjector::MakeJMP(uint32_t mem, uint32_t dest, bool bProtect)
+{
+	Memory jmp(mem);
+	jmp.Set<BYTE>(0xE9, true);
+	jmp.ChangeAddress(jmp.GetAddress() + 1);
+	jmp.Set<uint32_t>(GetRelativeAddress(mem, (uint32_t)dest - 5), true);
+	return GetRelativeAddress(mem, (uint32_t)dest);
+}
+
+uint32_t MemoryInjector::MakeJMP(uint32_t mem, void* dest, bool bProtect)
+{
+	Memory jmp(mem);
+	jmp.Set<BYTE>(0xE9, true);
+	jmp.ChangeAddress(jmp.GetAddress() + 1);
+	jmp.Set<uint32_t>(GetRelativeAddress(mem, (uint32_t)dest - 5), true);
+	return GetRelativeAddress(mem, (uint32_t)dest);
+}
+
+template <class T>
+T MemoryInjector::ReadMemory(uint32_t address, bool bProtect)
+{
+	T result;
+	General::MemCpyWithMemoryProtect(result, address, sizeof(T));
+	return result;
+}
+
+template <class T>
+void MemoryInjector::WriteMemory(uint32_t address, T value, bool bProtect)
+{
+	General::MemCpyWithMemoryProtect(address, value, sizeof(T));
+}
+
+// Makes a CALL to a relative address or function
+uint32_t MemoryInjector::MakeCALL(Memory* mem, uint32_t dest, bool bProtect)
+{
+	if (mem == nullptr)
 	{
-		if (mem == nullptr)
-		{
-			InjectorError = INJECTOR_ERROR_INVALID_MEMORY_PTR;
-			return 0;
-		}
+		InjectorError = INJECTOR_ERROR_INVALID_MEMORY_PTR;
+		return 0;
 	}
+}
 
-	uint32_t MemoryInjector::MakeJMP(Memory* mem, void* dest, bool bProtect)
+uint32_t MemoryInjector::MakeCALL(Memory* mem, void* dest, bool bProtect)
+{
+	if (mem == nullptr)
 	{
-		if (mem == nullptr)
-		{
-			InjectorError = INJECTOR_ERROR_INVALID_MEMORY_PTR;
-			return 0;
-		}
+		InjectorError = INJECTOR_ERROR_INVALID_MEMORY_PTR;
+		return 0;
 	}
+}
 
-	uint32_t MemoryInjector::MakeJMP(uint32_t mem, uint32_t dest, bool bProtect)
-	{
-		General::MemCpyWithMemoryProtect(mem, (const void*)0xE9, sizeof(BYTE));
-		General::MemCpyWithMemoryProtect(mem + 1, (const void*)GetRelativeAddress(mem + 4, dest), sizeof(DWORD));
-		return GetRelativeAddress(mem + 4, dest);
-	}
+uint32_t MemoryInjector::MakeCALL(uint32_t mem, uint32_t dest, bool bProtect)
+{
 
-	uint32_t MemoryInjector::MakeJMP(uint32_t mem, void* dest, bool bProtect)
-	{
+}
 
-	}
+uint32_t MemoryInjector::MakeCALL(uint32_t mem, void* dest, bool bProtect)
+{
 
-	// Makes a CALL to a relative address or function
-	uint32_t MemoryInjector::MakeCALL(Memory* mem, uint32_t dest, bool bProtect)
-	{
-		if (mem == nullptr)
-		{
-			InjectorError = INJECTOR_ERROR_INVALID_MEMORY_PTR;
-			return 0;
-		}
-	}
-
-	uint32_t MemoryInjector::MakeCALL(Memory* mem, void* dest, bool bProtect)
-	{
-		if (mem == nullptr)
-		{
-			InjectorError = INJECTOR_ERROR_INVALID_MEMORY_PTR;
-			return 0;
-		}
-	}
-
-	uint32_t MemoryInjector::MakeCALL(uint32_t mem, uint32_t dest, bool bProtect)
-	{
-
-	}
-
-	uint32_t MemoryInjector::MakeCALL(uint32_t mem, void* dest, bool bProtect)
-	{
-
-	}
 }

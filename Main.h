@@ -6,11 +6,9 @@
 #pragma once
 #include "Memory.h"
 
-namespace Patcher
+
+class Main
 {
-	class Main
-	{
-	public:
-		static bool Initialize();
-	};
-}
+public:
+	static bool Initialize();
+};

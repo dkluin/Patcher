@@ -2,8 +2,6 @@
 
 #include <Windows.h>
 
-namespace Patcher
-{
 #ifdef WIN32
 	class PluginPatcher
 	{
@@ -19,4 +17,3 @@ namespace Patcher
 		static LPVOID GetPluginEntryPointW(LPWSTR m_szPluginName);
 	};
 #endif
-}

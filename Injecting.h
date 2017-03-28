@@ -1,39 +1,48 @@
 #pragma once
 
 #include "Main.h"
+#include "Memory.h"
 
-namespace Patcher
+enum eInjectorError
 {
-	enum eInjectorError
-	{
-		INJECTOR_ERROR_NONE = 0,
-		INJECTOR_ERROR_INVALID_MEMORY_PTR,
-		INJECTOR_ERROR_UNKNOWN
-	};
+	INJECTOR_ERROR_NONE = 0,
+	INJECTOR_ERROR_INVALID_MEMORY_PTR,
+	INJECTOR_ERROR_UNKNOWN
+};
 
-	class MemoryInjector
-	{
-	public:
-		// Makes a JMP to a relative address or function
-		static uint32_t MakeJMP(Memory* mem, uint32_t dest, bool bProtect);
-		static uint32_t MakeJMP(Memory* mem, void* dest, bool bProtect);
-		static uint32_t MakeJMP(uint32_t mem, uint32_t dest, bool bProtect);
-		static uint32_t MakeJMP(uint32_t mem, void* dest, bool bProtect);
+class MemoryInjector
+{
+public:
+	// Makes a JMP to a relative address or function
+	static uint32_t MakeJMP(Memory* mem, uint32_t dest, bool bProtect);
+	static uint32_t MakeJMP(Memory* mem, void* dest, bool bProtect);
+	static uint32_t MakeJMP(uint32_t mem, uint32_t dest, bool bProtect);
+	static uint32_t MakeJMP(uint32_t mem, void* dest, bool bProtect);
 
-		// Makes a CALL to a relative address or function
-		static uint32_t MakeCALL(Memory* mem, uint32_t dest, bool bProtect);
-		static uint32_t MakeCALL(Memory* mem, void* dest, bool bProtect);
-		static uint32_t MakeCALL(uint32_t mem, uint32_t dest, bool bProtect);
-		static uint32_t MakeCALL(uint32_t mem, void* dest, bool bProtect);
+	// Makes a CALL to a relative address or function
+	static uint32_t MakeCALL(Memory* mem, uint32_t dest, bool bProtect);
+	static uint32_t MakeCALL(Memory* mem, void* dest, bool bProtect);
+	static uint32_t MakeCALL(uint32_t mem, uint32_t dest, bool bProtect);
+	static uint32_t MakeCALL(uint32_t mem, void* dest, bool bProtect);
+		
+	// JMP functions
+	static uint32_t MakeJE(uint32_t mem, uint32_t dest, bool bProtect);
+	static uint32_t MakeJA(uint32_t mem, uint32_t dest, bool bProtect);
 
-		// Get last error
-		static eInjectorError GetLastError();
+	// Read/Write - replacement for Memory.Get
+	template <class T>
+	static T ReadMemory(uint32_t address, bool bProtect = true);
 
-	private:
-		// Gets a relative address
-		static uint32_t GetRelativeAddress(uint32_t src, uint32_t dest);
+	template <class T>
+	static void WriteMemory(uint32_t address, T value, bool bProtect = true);
 
-		// Error
-		static eInjectorError InjectorError;
-	};
-}
+	// Get last error
+	static eInjectorError GetLastError();
+
+private:
+	// Gets a relative address
+	static uint32_t GetRelativeAddress(uint32_t src, uint32_t dest);
+
+	// Error
+	static eInjectorError InjectorError;
+};
