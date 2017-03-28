@@ -24,6 +24,10 @@ uint32_t MemoryInjector::MakeJMP(Memory* mem, uint32_t dest, bool bProtect)
 		InjectorError = INJECTOR_ERROR_INVALID_MEMORY_PTR;
 		return 0;
 	}
+	mem->Set<BYTE>(0xE9, bProtect);
+	mem->ChangeAddress(mem->GetAddress() + 1);
+	mem->Set<uint32_t>(GetRelativeAddress(mem->GetAddress(), dest - 5), bProtect);
+	return GetRelativeAddress(mem->GetAddress(), dest - 5);
 }
 
 uint32_t MemoryInjector::MakeJMP(Memory* mem, void* dest, bool bProtect)
@@ -33,24 +37,28 @@ uint32_t MemoryInjector::MakeJMP(Memory* mem, void* dest, bool bProtect)
 		InjectorError = INJECTOR_ERROR_INVALID_MEMORY_PTR;
 		return 0;
 	}
+	mem->Set<BYTE>(0xE9, bProtect);
+	mem->ChangeAddress(mem->GetAddress() + 1);
+	mem->Set<uint32_t>(GetRelativeAddress(mem->GetAddress(), (uint32_t)dest - 5), bProtect);
+	return GetRelativeAddress(mem->GetAddress(), (uint32_t)dest - 5);
 }
 
 uint32_t MemoryInjector::MakeJMP(uint32_t mem, uint32_t dest, bool bProtect)
 {
 	Memory jmp(mem);
-	jmp.Set<BYTE>(0xE9, true);
+	jmp.Set<BYTE>(0xE9, bProtect);
 	jmp.ChangeAddress(jmp.GetAddress() + 1);
-	jmp.Set<uint32_t>(GetRelativeAddress(mem, (uint32_t)dest - 5), true);
-	return GetRelativeAddress(mem, (uint32_t)dest);
+	jmp.Set<uint32_t>(GetRelativeAddress(mem, (uint32_t)dest - 5), bProtect);
+	return GetRelativeAddress(mem, (uint32_t)dest - 5);
 }
 
 uint32_t MemoryInjector::MakeJMP(uint32_t mem, void* dest, bool bProtect)
 {
 	Memory jmp(mem);
-	jmp.Set<BYTE>(0xE9, true);
+	jmp.Set<BYTE>(0xE9, bProtect);
 	jmp.ChangeAddress(jmp.GetAddress() + 1);
-	jmp.Set<uint32_t>(GetRelativeAddress(mem, (uint32_t)dest - 5), true);
-	return GetRelativeAddress(mem, (uint32_t)dest);
+	jmp.Set<uint32_t>(GetRelativeAddress(mem, (uint32_t)dest - 5), bProtect);
+	return GetRelativeAddress(mem, (uint32_t)dest - 5);
 }
 
 template <class T>
