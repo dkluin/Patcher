@@ -61,6 +61,24 @@ uint32_t MemoryInjector::MakeJMP(uint32_t mem, void* dest, bool bProtect)
 	return GetRelativeAddress(mem, (uint32_t)dest - 5);
 }
 
+uint32_t MemoryInjector::MakeJMP(HMODULE mem, uint32_t dest, bool bProtect)
+{
+	Memory jmp((uint32_t)mem);
+	jmp.Set<BYTE>(0xE9, bProtect);
+	jmp.ChangeAddress(jmp.GetAddress() + 1);
+	jmp.Set<uint32_t>(GetRelativeAddress((uint32_t)mem, (uint32_t)dest - 5), bProtect);
+	return GetRelativeAddress((uint32_t)mem, (uint32_t)dest - 5);
+}
+
+uint32_t MemoryInjector::MakeJMP(HMODULE mem, void* dest, bool bProtect)
+{
+	Memory jmp((uint32_t)mem);
+	jmp.Set<BYTE>(0xE9, bProtect);
+	jmp.ChangeAddress(jmp.GetAddress() + 1);
+	jmp.Set<uint32_t>(GetRelativeAddress((uint32_t)mem, (uint32_t)dest - 5), bProtect);
+	return GetRelativeAddress((uint32_t)mem, (uint32_t)dest - 5);
+}
+
 template <class T>
 T MemoryInjector::ReadMemory(uint32_t address, bool bProtect)
 {
