@@ -123,6 +123,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Memory.cpp" />
     <ClCompile Include="PluginPatcher.cpp" />
+    <ClCompile Include="RawHooks\RawHooks.cpp" />
     <ClCompile Include="VersionMgr\VersionMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -134,6 +135,7 @@
     <ClInclude Include="Main.h" />
     <ClInclude Include="Memory.h" />
     <ClInclude Include="PluginPatcher.h" />
+    <ClInclude Include="RawHooks\RawHooks.h" />
     <ClInclude Include="VersionMgr\VersionMgr.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

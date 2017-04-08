@@ -16,6 +16,9 @@
     <ClCompile Include="Memory.cpp" />
     <ClCompile Include="Calling.cpp" />
     <ClCompile Include="PluginPatcher.cpp" />
+    <ClCompile Include="RawHooks\RawHooks.cpp">
+      <Filter>RawHooks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
@@ -33,6 +36,9 @@
     <ClInclude Include="Memory.h" />
     <ClInclude Include="Calling.h" />
     <ClInclude Include="PluginPatcher.h" />
+    <ClInclude Include="RawHooks\RawHooks.h">
+      <Filter>RawHooks</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Legacy">
@@ -43,6 +49,9 @@
     </Filter>
     <Filter Include="HookingList">
       <UniqueIdentifier>{b552b79e-ed50-40f3-91d5-c10867b39f04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RawHooks">
+      <UniqueIdentifier>{b313f5d0-d853-405e-9347-33c6fe8b62ab}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

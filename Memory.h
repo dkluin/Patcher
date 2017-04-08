@@ -2,12 +2,35 @@
 
 #include <cstdint>
 #include <Windows.h>
+#include <vector>
 
 /////////////// New code which uses operators for comparing, setting, and even adding, multiplying, and much more 
+enum eMemoryBackupRestoreType
+{
+	BACKUP_NOTHING,
+	BACKUP_OLD_JUMP_ADDRESS,
+	BACKUP_OLD_CALL_ADDRESS,
+};
+
+class MemoryBackup
+{
+public:
+	uint32_t m_dwOldAddress;
+	void* m_dwOldValue; // TODO: change this?
+	eMemoryBackupRestoreType m_eRestoreType;
+};
+
 class Memory
 {
 private:
 	uint32_t Address;
+
+	struct
+	{
+		bool bShouldStoreOriginal : 1; // When setting memory, keep the original value.
+	} AddressFlags;
+
+	std::vector<MemoryBackup> m_vMemoryBackupData;
 
 public:
 	Memory() { Address = 0; };
