@@ -29,7 +29,10 @@ class VersionMgr
 {
 public:
 	// Initializes version manager
-	static bool InitializeVersionMgr();
+	static bool InitializeVersionMgr(bool bEntryPointBasedVersionMgr); 
+
+	// Initializes with a static entry point address - useful for PE loaders
+	static bool InitializeVersionMgrStatic(uint32_t m_dwEntryPoint);
 
 	// Shutdown version manager
 	static bool ShutdownVersionMgr();
@@ -58,4 +61,7 @@ private:
 
 	// Gets entry point
 	static uint32_t GetEntryPoint();
+
+	// Is file size based?
+	static bool ms_bIsFileSizeBased;
 };

@@ -10,5 +10,6 @@
 class Main
 {
 public:
-	static bool Initialize();
+	// Standard initializer
+	static bool Initialize(bool bEntryPointBasedVersionMgr);
 };
