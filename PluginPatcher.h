@@ -20,6 +20,7 @@ public:
 	// Plugin detours
 	static uint32_t MakePluginJMP(HMODULE m_aModule, DWORD m_dwRelativeAddress, void* pDest, bool bVirtualProtect = true);
 	static uint32_t MakePluginCALL(HMODULE m_aModule, DWORD m_dwRelativeAddress, void* pDest, bool bVirtualProtect = true);
-	static uint32_t MakePluginRET(HMODULE m_aModule, DWORD m_dwRelativeAddress, size_t m_iSize);
+
+	static void MakePluginRET(HMODULE m_aModule, DWORD m_dwRelativeAddress, bool bVirtualProtect = true);
 };
 #endif

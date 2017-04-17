@@ -34,8 +34,8 @@ uint32_t PluginPatcher::MakePluginCALL(HMODULE m_aModule, DWORD m_dwRelativeAddr
 	return MemoryInjector::MakeCALL((uint32_t)m_aModule + m_dwRelativeAddress, pDest, bVirtualProtect);
 }
 
-uint32_t PluginPatcher::MakePluginRET(HMODULE m_aModule, DWORD m_dwRelativeAddress, size_t m_iSize)
+void PluginPatcher::MakePluginRET(HMODULE m_aModule, DWORD m_dwRelativeAddress, bool bVirtualProtect)
 {
-	return NULL; // Still need to do it
+	MemoryInjector::MakeRET((uint32_t)m_aModule + m_dwRelativeAddress, bVirtualProtect);
 }
 #endif
