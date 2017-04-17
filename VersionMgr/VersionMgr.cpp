@@ -147,13 +147,13 @@ int VersionMgr::GetGameVersion()
 
 uint32_t VersionMgr::ConvertAddressFromEUtoUS(uint32_t addr)
 {
-
+	return 0;
 }
 
 
 void VersionMgr::ConvertAddressFromEUtoUS(Memory* addr)
 {
-
+	
 }
 
 uint32_t VersionMgr::ConvertAddressFromUStoEU(uint32_t addr)

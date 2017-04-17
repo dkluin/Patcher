@@ -38,6 +38,10 @@ public:
 	template <class T>
 	static void WriteMemory(uint32_t address, T value, bool bProtect = true);
 
+	// Makes a return
+	static void MakeRET(Memory* mem, bool bProtect = true);
+	static void MakeRET(uint32_t mem, bool bProtect = true);
+
 	// Get last error
 	static eInjectorError GetLastError();
 

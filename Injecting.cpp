@@ -82,15 +82,25 @@ uint32_t MemoryInjector::MakeJMP(HMODULE mem, void* dest, bool bProtect)
 template <class T>
 T MemoryInjector::ReadMemory(uint32_t address, bool bProtect)
 {
-	T result;
-	General::MemCpyWithMemoryProtect(result, address, sizeof(T));
-	return result;
+	Memory mem(address);
+	return Memory.Get<T>(bProtect);
 }
 
 template <class T>
 void MemoryInjector::WriteMemory(uint32_t address, T value, bool bProtect)
 {
-	General::MemCpyWithMemoryProtect(address, value, sizeof(T));
+	Memory mem(address);
+	mem.Set<T>(value, bProtect);
+}
+
+void MemoryInjector::MakeRET(Memory* mem, bool bProtect)
+{
+	WriteMemory<uint8_t>(mem->GetAddress(), 0xC3, bProtect);
+}
+
+void MemoryInjector::MakeRET(uint32_t mem, bool bProtect)
+{
+	WriteMemory<uint8_t>(mem, 0xC3, bProtect);
 }
 
 // Makes a CALL to a relative address or function
