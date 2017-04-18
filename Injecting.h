@@ -36,7 +36,7 @@ public:
 	static T ReadMemory(uint32_t address, bool bProtect = true)
 	{
 		Memory mem(address);
-		return Memory.Get<T>(bProtect);
+		return mem.Get<T>(bProtect);
 	}
 
 	template <class T>
