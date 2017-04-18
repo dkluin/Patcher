@@ -1,12 +1,7 @@
 #pragma once
 
 #include <cstdint>
-
-#ifdef _WIN32
 #include <Windows.h>
-#else
-#define NULL 0
-#endif
 
 #define THERAWHOOKS_SPACE 0xFFFF
 

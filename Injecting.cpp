@@ -1,15 +1,6 @@
 #include "Injecting.h"
 #include "General.h"
 
-
-eInjectorError MemoryInjector::InjectorError = INJECTOR_ERROR_NONE;
-
-// Gets injector error
-eInjectorError MemoryInjector::GetLastError()
-{
-	return InjectorError;
-}
-
 // Gets a relative addresss
 uint32_t MemoryInjector::GetRelativeAddress(uint32_t src, uint32_t dest)
 {
@@ -31,11 +22,6 @@ void MemoryInjector::MakeNOP(uint32_t mem, uint32_t m_dwSize, bool bProtect)
 // Makes a JMP to a relative address or function
 uint32_t MemoryInjector::MakeJMP(Memory* mem, uint32_t dest, bool bProtect)
 {
-	if (mem == nullptr)
-	{
-		InjectorError = INJECTOR_ERROR_INVALID_MEMORY_PTR;
-		return 0;
-	}
 	mem->Set<BYTE>(0xE9, bProtect);
 	mem->ChangeAddress(mem->GetAddress() + 1);
 	mem->Set<uint32_t>(GetRelativeAddress(mem->GetAddress(), dest - 4), bProtect);
@@ -44,11 +30,6 @@ uint32_t MemoryInjector::MakeJMP(Memory* mem, uint32_t dest, bool bProtect)
 
 uint32_t MemoryInjector::MakeJMP(Memory* mem, void* dest, bool bProtect)
 {
-	if (mem == nullptr)
-	{
-		InjectorError = INJECTOR_ERROR_INVALID_MEMORY_PTR;
-		return 0;
-	}
 	mem->Set<BYTE>(0xE9, bProtect);
 	mem->ChangeAddress(mem->GetAddress() + 1);
 	mem->Set<uint32_t>(GetRelativeAddress(mem->GetAddress(), (uint32_t)dest - 4), bProtect);
@@ -130,11 +111,6 @@ void MemoryInjector::MakeRET(uint32_t mem, bool bProtect)
 // Makes a CALL to a relative address or function
 uint32_t MemoryInjector::MakeCALL(Memory* mem, uint32_t dest, bool bProtect)
 {
-	if (mem == nullptr)
-	{
-		InjectorError = INJECTOR_ERROR_INVALID_MEMORY_PTR;
-		return 0;
-	}
 	mem->Set<BYTE>(0xE8, bProtect);
 	mem->ChangeAddress(mem->GetAddress() + 1);
 	mem->Set<uint32_t>(GetRelativeAddress(mem->GetAddress(), dest - 4), bProtect);
@@ -143,11 +119,6 @@ uint32_t MemoryInjector::MakeCALL(Memory* mem, uint32_t dest, bool bProtect)
 
 uint32_t MemoryInjector::MakeCALL(Memory* mem, void* dest, bool bProtect)
 {
-	if (mem == nullptr)
-	{
-		InjectorError = INJECTOR_ERROR_INVALID_MEMORY_PTR;
-		return 0;
-	}
 	mem->Set<BYTE>(0xE8, bProtect);
 	mem->ChangeAddress(mem->GetAddress() + 1);
 	mem->Set<uint32_t>(GetRelativeAddress(mem->GetAddress(), (uint32_t)dest - 4), bProtect);
