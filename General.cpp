@@ -2,11 +2,11 @@
 
 // memcpy with memory protection
 
-void General::MemCpyWithMemoryProtect(uint32_t dest, uint32_t src, size_t size)
+void General::MemCpyWithMemoryProtect(uint32_t dest, void* src, size_t size)
 {
 	DWORD dwProtect[2];
 	VirtualProtect((void*)dest, size, PAGE_EXECUTE_READWRITE, &dwProtect[0]);
-	memcpy((void*)dest, (void*)src, size);
+	memcpy((void*)dest, src, size);
 	VirtualProtect((void*)dest, size, dwProtect[0], &dwProtect[1]);
 }
 

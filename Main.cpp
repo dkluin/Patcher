@@ -4,13 +4,16 @@
 
 bool Main::Initialize(bool bEntryPointBasedVersionMgr)
 {
-	if (VersionMgr::InitializeVersionMgr(bEntryPointBasedVersionMgr))
+	if (bEntryPointBasedVersionMgr)
 	{
-		HookingList::RunAll();
-		return true;
-	}
-	else
-	{
-		return false;
+		if (VersionMgr::InitializeVersionMgr(bEntryPointBasedVersionMgr))
+		{
+			HookingList::RunAll();
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }

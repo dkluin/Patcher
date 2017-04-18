@@ -33,14 +33,34 @@ public:
 
 	// Read/Write - replacement for Memory.Get
 	template <class T>
-	static T ReadMemory(uint32_t address, bool bProtect = true);
+	static T ReadMemory(uint32_t address, bool bProtect = true)
+	{
+		Memory mem(address);
+		return Memory.Get<T>(bProtect);
+	}
 
 	template <class T>
-	static void WriteMemory(uint32_t address, T value, bool bProtect = true);
+	static void WriteMemory(uint32_t address, T value, bool bProtect = true)
+	{
+		Memory mem(address);
+		mem.Set<T>(value, bProtect);
+	}
 
-	// Makes a return
+	// NOPs data
+	static void MakeNOP(Memory* mem, uint32_t m_dwSize, bool bProtect = true);
+	static void MakeNOP(uint32_t mem, uint32_t m_dwSize, bool bProtect = true);
+
+	// Makes a return (0xC3 RET)
 	static void MakeRET(Memory* mem, bool bProtect = true);
 	static void MakeRET(uint32_t mem, bool bProtect = true);
+
+	// Makes a return (0xC2 RET)
+	static void MakeRET(Memory* mem, uint16_t pop, bool bProtect = true);
+	static void MakeRET(uint32_t mem, uint16_t pop, bool bProtect = true);
+
+	// Makes a function return NULL
+	static void MakeRET0(Memory* mem, bool bProtect = true);
+	static void MakeRET0(uint32_t mem, bool bProtect = true);
 
 	// Get last error
 	static eInjectorError GetLastError();

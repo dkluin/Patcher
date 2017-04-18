@@ -8,7 +8,7 @@ class General
 {
 public:
 	// memcpy with memory protection
-	static void MemCpyWithMemoryProtect(uint32_t dest, uint32_t src, size_t size);
+	static void MemCpyWithMemoryProtect(uint32_t dest, void* src, size_t size);
 
 	// strncpy with memory protection
 	static void StrNCpyWithMemoryProtect(void* dest, char* src, size_t size);

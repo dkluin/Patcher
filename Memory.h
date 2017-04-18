@@ -80,6 +80,7 @@ public:
 	// Returns the current address
 	inline uint32_t GetAddress() { return this->Address; }
 
+	// todo: finish this!!
 	// Comparison
 
 	template <class T>

@@ -16,6 +16,18 @@ uint32_t MemoryInjector::GetRelativeAddress(uint32_t src, uint32_t dest)
 	return dest - src;
 }
 
+void MemoryInjector::MakeNOP(Memory* mem, uint32_t m_dwSize, bool bProtect)
+{
+	uint8_t m_dwNop = 0x90;
+	General::MemCpyWithMemoryProtect(mem->GetAddress(), &m_dwNop, m_dwSize);
+}
+
+void MemoryInjector::MakeNOP(uint32_t mem, uint32_t m_dwSize, bool bProtect)
+{
+	uint8_t m_dwNop = 0x90;
+	General::MemCpyWithMemoryProtect(mem, &m_dwNop, m_dwSize);
+}
+
 // Makes a JMP to a relative address or function
 uint32_t MemoryInjector::MakeJMP(Memory* mem, uint32_t dest, bool bProtect)
 {
@@ -79,18 +91,30 @@ uint32_t MemoryInjector::MakeJMP(HMODULE mem, void* dest, bool bProtect)
 	return GetRelativeAddress((uint32_t)mem, (uint32_t)dest - 5);
 }
 
-template <class T>
-T MemoryInjector::ReadMemory(uint32_t address, bool bProtect)
+void MemoryInjector::MakeRET(Memory* mem, uint16_t pop, bool bProtect)
 {
-	Memory mem(address);
-	return Memory.Get<T>(bProtect);
+	WriteMemory<uint8_t>(mem->GetAddress(), 0xC2, bProtect);
+	WriteMemory<uint16_t>(mem->GetAddress() + 1, pop, bProtect);
 }
 
-template <class T>
-void MemoryInjector::WriteMemory(uint32_t address, T value, bool bProtect)
+void MemoryInjector::MakeRET(uint32_t mem, uint16_t pop, bool bProtect)
 {
-	Memory mem(address);
-	mem.Set<T>(value, bProtect);
+	WriteMemory<uint8_t>(mem, 0xC2, bProtect);
+	WriteMemory<uint16_t>(mem + 1, pop, bProtect);
+}
+
+void MemoryInjector::MakeRET0(Memory* mem, bool bProtect)
+{
+	WriteMemory<uint8_t>(mem->GetAddress(), 0x33, bProtect);
+	WriteMemory<uint8_t>(mem->GetAddress() + 1, 0xC0, bProtect);
+	MakeRET(mem->GetAddress() + 2, 4, bProtect);
+}
+
+void MemoryInjector::MakeRET0(uint32_t mem, bool bProtect)
+{
+	WriteMemory<uint8_t>(mem, 0x33, bProtect);
+	WriteMemory<uint8_t>(mem + 1, 0xC0, bProtect);
+	MakeRET(mem + 2, 4, bProtect);
 }
 
 void MemoryInjector::MakeRET(Memory* mem, bool bProtect)
