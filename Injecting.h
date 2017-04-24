@@ -62,7 +62,7 @@ public:
 	static void MakeRET0(Memory* mem, bool bProtect = true);
 	static void MakeRET0(uint32_t mem, bool bProtect = true);
 
-private:
 	// Gets a relative address
 	static uint32_t GetRelativeAddress(uint32_t src, uint32_t dest);
+	static uint32_t GetRelativeAddress(uint32_t src, void* dest);
 };

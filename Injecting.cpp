@@ -7,16 +7,25 @@ uint32_t MemoryInjector::GetRelativeAddress(uint32_t src, uint32_t dest)
 	return dest - src;
 }
 
+uint32_t MemoryInjector::GetRelativeAddress(uint32_t src, void* dest)
+{
+	return (uint32_t)dest - src;
+}
+
 void MemoryInjector::MakeNOP(Memory* mem, uint32_t m_dwSize, bool bProtect)
 {
-	uint8_t m_dwNop = 0x90;
-	General::MemCpyWithMemoryProtect(mem->GetAddress(), &m_dwNop, m_dwSize);
+	for (uint32_t i = 0; i < m_dwSize; i++)
+	{
+		WriteMemory<uint8_t>(mem->GetAddress() + i, 0x90);
+	}
 }
 
 void MemoryInjector::MakeNOP(uint32_t mem, uint32_t m_dwSize, bool bProtect)
 {
-	uint8_t m_dwNop = 0x90;
-	General::MemCpyWithMemoryProtect(mem, &m_dwNop, m_dwSize);
+	for (uint32_t i = 0; i < m_dwSize; i++)
+	{
+		WriteMemory<uint8_t>(mem + i, 0x90);
+	}
 }
 
 // Makes a JMP to a relative address or function
