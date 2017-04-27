@@ -22,6 +22,9 @@
     <ClCompile Include="RawHooks\RawHook.cpp">
       <Filter>RawHooks</Filter>
     </ClCompile>
+    <ClCompile Include="Detours\Detours.cpp">
+      <Filter>Detours</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
@@ -45,6 +48,9 @@
     <ClInclude Include="RawHooks\RawHook.h">
       <Filter>RawHooks</Filter>
     </ClInclude>
+    <ClInclude Include="Detours\Detours.h">
+      <Filter>Detours</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="VersionMgr">
@@ -55,6 +61,9 @@
     </Filter>
     <Filter Include="RawHooks">
       <UniqueIdentifier>{b313f5d0-d853-405e-9347-33c6fe8b62ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Detours">
+      <UniqueIdentifier>{e8bca937-35c9-415f-b33d-9cb5858899fb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

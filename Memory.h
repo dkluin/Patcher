@@ -18,6 +18,16 @@ public:
 	uint32_t m_dwOldAddress;
 	void* m_dwOldValue; // TODO: change this?
 	eMemoryBackupRestoreType m_eRestoreType;
+
+	// For laziness sake
+	MemoryBackup(uint32_t m_OldAddr, void* m_OldValue, eMemoryBackupRestoreType m_Type)
+	{
+		this->m_dwOldAddress = m_OldAddr;
+		this->m_dwOldValue = m_OldValue;
+		this->m_eRestoreType = m_Type;
+	}
+
+	MemoryBackup();
 };
 
 class Memory
@@ -25,16 +35,38 @@ class Memory
 private:
 	uint32_t Address;
 
-	struct
-	{
-		bool bShouldStoreOriginal : 1; // When setting memory, keep the original value.
-	} AddressFlags;
+	bool bShouldStoreOriginal : 1; // When setting memory, keep the original value.
+	bool bRequiresVirtualProtection : 1; // We need to override the current address permissions when using the operators
 
 	std::vector<MemoryBackup> m_vMemoryBackupData;
 
 public:
 	Memory() { Address = 0; };
 	Memory(uint32_t addr) { Address = addr; }
+
+	// Sets the Memory struct's flags
+	void SetFlags(bool bBackup, bool bVirtualProtect)
+	{
+		if (this->bShouldStoreOriginal && !bBackup)
+		{
+			for (uint32_t i = 0; i < this->m_vMemoryBackupData.size(); i++)
+			{
+				this->m_vMemoryBackupData.erase(this->m_vMemoryBackupData.begin() + i); // Let's erase the backup list as we do not need it
+			}
+		}
+
+		this->bShouldStoreOriginal = bBackup;
+		this->bRequiresVirtualProtection = bVirtualProtect;
+	}
+
+	// Adds a MemoryBackup to the list
+	void AddBackup(MemoryBackup m_pBackup)
+	{
+		if (this->bShouldStoreOriginal)
+		{
+			this->m_vMemoryBackupData.push_back(m_pBackup);
+		}
+	}
 
 	// Change address
 	void ChangeAddress(uint32_t newAddr) { Address = newAddr; }

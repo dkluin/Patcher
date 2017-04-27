@@ -116,6 +116,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Calling.cpp" />
+    <ClCompile Include="Detours\Detours.cpp" />
     <ClCompile Include="General.cpp" />
     <ClCompile Include="HookingList\HookingList.cpp" />
     <ClCompile Include="Injecting.cpp" />
@@ -129,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Calling.h" />
+    <ClInclude Include="Detours\Detours.h" />
     <ClInclude Include="General.h" />
     <ClInclude Include="HookingList\HookingList.h" />
     <ClInclude Include="Injecting.h" />
