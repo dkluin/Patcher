@@ -17,5 +17,5 @@ public:
 	static uint8_t* ms_pTheRawHooks;
 	static uint32_t ms_nGlobalPos;
 
-	static std::vector<RawHookVariable> m_vVariables;
+	static std::vector<RawHookVariable*> m_vVariables;
 };

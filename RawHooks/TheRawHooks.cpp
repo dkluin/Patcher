@@ -4,7 +4,7 @@
 
 uint8_t* TheRawHooks::ms_pTheRawHooks;
 uint32_t TheRawHooks::ms_nGlobalPos;
-std::vector<RawHookVariable> TheRawHooks::m_vVariables;
+std::vector<RawHookVariable*> TheRawHooks::m_vVariables;
 
 bool TheRawHooks::Initialize()
 {

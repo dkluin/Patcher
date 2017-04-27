@@ -56,3 +56,21 @@ void RawHook::Start()
 		this->m_bStarted = true;
 	}
 }
+
+void RawHook::WriteIntVariable(std::string m_szVariableName)
+{
+	for (uint32_t i = 0; i < TheRawHooks::m_vVariables.size(); i++)
+	{
+		if (TheRawHooks::m_vVariables[i]->GetVariableName() == m_szVariableName)
+		{
+			uint32_t value = TheRawHooks::m_vVariables[i]->GetVariableValue();
+			this->Write(static_cast<const void*>(&value), sizeof(uint32_t));
+		}
+	}
+}
+
+void RawHook::WriteIntVariable(RawHookVariable* m_pVar)
+{
+	uint32_t value = m_pVar->GetVariableValue();
+	this->Write(static_cast<const void*>(&value), sizeof(uint32_t));
+}
