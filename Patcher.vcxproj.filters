@@ -13,7 +13,13 @@
     <ClCompile Include="Memory.cpp" />
     <ClCompile Include="Calling.cpp" />
     <ClCompile Include="PluginPatcher.cpp" />
-    <ClCompile Include="RawHooks\RawHooks.cpp">
+    <ClCompile Include="RawHooks\TheRawHooks.cpp">
+      <Filter>RawHooks</Filter>
+    </ClCompile>
+    <ClCompile Include="RawHooks\RawHookVariable.cpp">
+      <Filter>RawHooks</Filter>
+    </ClCompile>
+    <ClCompile Include="RawHooks\RawHook.cpp">
       <Filter>RawHooks</Filter>
     </ClCompile>
   </ItemGroup>
@@ -30,7 +36,13 @@
     <ClInclude Include="Memory.h" />
     <ClInclude Include="Calling.h" />
     <ClInclude Include="PluginPatcher.h" />
-    <ClInclude Include="RawHooks\RawHooks.h">
+    <ClInclude Include="RawHooks\TheRawHooks.h">
+      <Filter>RawHooks</Filter>
+    </ClInclude>
+    <ClInclude Include="RawHooks\RawHookVariable.h">
+      <Filter>RawHooks</Filter>
+    </ClInclude>
+    <ClInclude Include="RawHooks\RawHook.h">
       <Filter>RawHooks</Filter>
     </ClInclude>
   </ItemGroup>

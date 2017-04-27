@@ -5,8 +5,7 @@
 
 #include <cstdint>
 #include <Windows.h>
-
-#define THERAWHOOKS_SPACE 0xFFFF
+#include <vector>
 
 class RawHook
 {
@@ -35,14 +34,4 @@ private:
 	uint32_t m_dwPositionOnStart;
 	bool m_bFinished;
 	bool m_bStarted;
-};
-
-class TheRawHooks
-{
-public:
-	static bool Initialize();
-	static bool Shutdown();
-
-	static uint8_t* ms_pTheRawHooks;
-	static uint32_t ms_nGlobalPos;
 };

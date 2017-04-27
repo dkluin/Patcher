@@ -1,7 +1,7 @@
 #include "Main.h"
 #include "VersionMgr/VersionMgr.h"
 #include "HookingList/HookingList.h"
-#include "RawHooks/RawHooks.h"
+#include "RawHooks/TheRawHooks.h"
 
 bool Main::Initialize(bool bEntryPointBasedVersionMgr)
 {
