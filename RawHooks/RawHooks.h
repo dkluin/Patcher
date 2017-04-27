@@ -40,8 +40,8 @@ private:
 class TheRawHooks
 {
 public:
-	bool Initialize();
-	bool Shutdown();
+	static bool Initialize();
+	static bool Shutdown();
 
 	static uint8_t* ms_pTheRawHooks;
 	static uint32_t ms_nGlobalPos;

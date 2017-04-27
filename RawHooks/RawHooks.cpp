@@ -67,7 +67,7 @@ void RawHook::Finish()
 		this->Write("\x90\x90", 2);
 
 		// Write a JMP instruction on the specified address to the starting position
-		MemoryInjector::MakeJMP(this->m_dwJumpedFromAddr, this->m_dwPositionOnStart, true);
+		MemoryInjector::MakeJMP(this->m_dwJumpedFromAddr, TheRawHooks::ms_pTheRawHooks + this->m_dwPositionOnStart, true);
 		this->m_bFinished = true;
 	}
 }
@@ -76,7 +76,7 @@ void RawHook::Start()
 {
 	if (!this->m_bStarted)
 	{
-		this->m_dwPositionOnStart = TheRawHooks::ms_nGlobalPos;
+		this->m_dwPositionOnStart = TheRawHooks::ms_nGlobalPos + sizeof(uint16_t);
 		this->Write("\x90\x90", 2);
 		this->m_bStarted = true;
 	}
