@@ -134,6 +134,7 @@
     <ClCompile Include="VersionMgr\VersionMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Assembly.h" />
     <ClInclude Include="Calling.h" />
     <ClInclude Include="Detours\Detours.h" />
     <ClInclude Include="General.h" />

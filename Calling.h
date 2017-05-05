@@ -2,6 +2,12 @@
 
 #include <cstdint>
 
+/*
+	TODO:
+	- allow Memory class to be used?
+	- Vtable?
+*/
+
 class Calling
 {
 public:

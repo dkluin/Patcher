@@ -3,6 +3,14 @@
 #include "Main.h"
 #include "Memory.h"
 
+/*
+	TODO:
+
+	- Sort this into different files in Hooking directory?
+	- Proper patching with restore option 
+	- Statistics integration?
+*/
+
 enum eInjectorError
 {
 	INJECTOR_ERROR_NONE = 0,

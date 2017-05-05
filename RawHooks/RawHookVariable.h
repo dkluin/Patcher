@@ -16,12 +16,12 @@ public:
 
 	std::string GetVariableName()
 	{
-		return this->m_szVariableName;
+		return m_szVariableName;
 	}
 
 	bool ShouldUseVector()
 	{
-		return this->m_bShouldUseVector;
+		return m_bShouldUseVector;
 	}
 
 	uint32_t GetVariableValue()

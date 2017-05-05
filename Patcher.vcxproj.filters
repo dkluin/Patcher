@@ -53,6 +53,7 @@
       <Filter>Detours</Filter>
     </ClInclude>
     <ClInclude Include="Statistics.h" />
+    <ClInclude Include="Assembly.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="VersionMgr">
