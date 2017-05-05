@@ -29,7 +29,7 @@ class VersionMgr
 {
 public:
 	// Initializes version manager
-	static bool InitializeVersionMgr(bool bEntryPointBasedVersionMgr); 
+	static bool InitializeVersionMgr(bool bEntryPointBasedVersionMgr);
 
 	// Initializes with a static entry point address - useful for PE loaders
 	static bool InitializeVersionMgrStatic(uint32_t m_dwEntryPoint);

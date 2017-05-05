@@ -3,6 +3,7 @@
 #include "../General.h"
 #include "../Injecting.h"
 
+
 RawHook::RawHook(uint32_t m_dwJumpFrom, uint32_t m_dwJumpTo)
 {
 	this->m_dwJumpedFromAddr = m_dwJumpFrom;

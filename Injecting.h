@@ -26,10 +26,16 @@ public:
 	static uint32_t MakeCALL(Memory* mem, void* dest, bool bProtect = true);
 	static uint32_t MakeCALL(uint32_t mem, uint32_t dest, bool bProtect = true);
 	static uint32_t MakeCALL(uint32_t mem, void* dest, bool bProtect = true);
-		
+
 	// JMP functions
-	static uint32_t MakeJE(uint32_t mem, uint32_t dest, bool bProtect);
-	static uint32_t MakeJA(uint32_t mem, uint32_t dest, bool bProtect);
+	static uint32_t MakeJE(uint32_t mem, uint32_t dest, bool bProtect = true);
+	static uint32_t MakeJE(uint32_t mem, void* dest, bool bProtect = true);
+	static uint32_t MakeJE(Memory* mem, uint32_t dest, bool bProtect = true);
+	static uint32_t MakeJE(Memory* mem, void* dest, bool bProtect = true);
+	static uint32_t MakeJA(uint32_t mem, uint32_t dest, bool bProtect = true);
+	static uint32_t MakeJA(uint32_t mem, void* dest, bool bProtect = true);
+	static uint32_t MakeJA(Memory* mem, uint32_t dest, bool bProtect = true);
+	static uint32_t MakeJA(Memory* mem, void* dest, bool bProtect = true);
 
 	// Read/Write - replacement for Memory.Get
 	template <class T>

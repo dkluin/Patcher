@@ -2,7 +2,6 @@
 #include "../Main.h"
 #include <Psapi.h>
 
-
 bool VersionMgr::ms_bIsFileSizeBased = false;
 
 // Game version

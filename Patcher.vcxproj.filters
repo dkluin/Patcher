@@ -25,6 +25,7 @@
     <ClCompile Include="Detours\Detours.cpp">
       <Filter>Detours</Filter>
     </ClCompile>
+    <ClCompile Include="Statistics.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
@@ -51,6 +52,7 @@
     <ClInclude Include="Detours\Detours.h">
       <Filter>Detours</Filter>
     </ClInclude>
+    <ClInclude Include="Statistics.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="VersionMgr">

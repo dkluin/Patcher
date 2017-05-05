@@ -28,6 +28,74 @@ void MemoryInjector::MakeNOP(uint32_t mem, uint32_t m_dwSize, bool bProtect)
 	}
 }
 
+uint32_t MemoryInjector::MakeJE(uint32_t mem, uint32_t dest, bool bProtect)
+{
+	Memory jmp(mem);
+	jmp.Set<uint16_t>(0x840F, bProtect);
+	jmp.ChangeAddress(mem + 2);
+	jmp.Set<uint32_t>(GetRelativeAddress(mem, dest - 6), bProtect);
+	return GetRelativeAddress(mem, dest - 4);
+}
+
+uint32_t MemoryInjector::MakeJE(uint32_t mem, void* dest, bool bProtect)
+{
+	Memory jmp(mem);
+	jmp.Set<uint16_t>(0x840F, bProtect);
+	jmp.ChangeAddress(mem + 2);
+	jmp.Set<uint32_t>(GetRelativeAddress(mem, (uint32_t)dest - 6), bProtect);
+	return GetRelativeAddress(mem, (uint32_t)dest - 4);
+}
+
+uint32_t MemoryInjector::MakeJE(Memory* mem, uint32_t dest, bool bProtect)
+{
+	mem->Set<uint16_t>(0x840F, bProtect);
+	mem->ChangeAddress(mem->GetAddress() + 2);
+	mem->Set<uint32_t>(GetRelativeAddress(mem->GetAddress(), dest - 6), bProtect);
+	return GetRelativeAddress(mem->GetAddress(), dest - 4);
+}
+
+uint32_t MemoryInjector::MakeJE(Memory* mem, void* dest, bool bProtect)
+{
+	mem->Set<uint16_t>(0x840F, bProtect);
+	mem->ChangeAddress(mem->GetAddress() + 2);
+	mem->Set<uint32_t>(GetRelativeAddress(mem->GetAddress(), (uint32_t)dest - 6), bProtect);
+	return GetRelativeAddress(mem->GetAddress(), (uint32_t)dest - 4);
+}
+
+uint32_t MemoryInjector::MakeJA(uint32_t mem, uint32_t dest, bool bProtect)
+{
+	Memory jmp(mem);
+	jmp.Set<uint16_t>(0x870F, bProtect);
+	jmp.ChangeAddress(mem + 2);
+	jmp.Set<uint32_t>(GetRelativeAddress(mem, dest - 6), bProtect);
+	return GetRelativeAddress(mem, dest - 4);
+}
+
+uint32_t MemoryInjector::MakeJA(uint32_t mem, void* dest, bool bProtect)
+{
+	Memory jmp(mem);
+	jmp.Set<uint16_t>(0x870F, bProtect);
+	jmp.ChangeAddress(mem + 2);
+	jmp.Set<uint32_t>(GetRelativeAddress(mem, (uint32_t)dest - 6), bProtect);
+	return GetRelativeAddress(mem, (uint32_t)dest - 4);
+}
+
+uint32_t MemoryInjector::MakeJA(Memory* mem, uint32_t dest, bool bProtect)
+{
+	mem->Set<uint16_t>(0x870F, bProtect);
+	mem->ChangeAddress(mem->GetAddress() + 2);
+	mem->Set<uint32_t>(GetRelativeAddress(mem->GetAddress(), dest - 6), bProtect);
+	return GetRelativeAddress(mem->GetAddress(), dest - 4);
+}
+
+uint32_t MemoryInjector::MakeJA(Memory* mem, void* dest, bool bProtect)
+{
+	mem->Set<uint16_t>(0x870F, bProtect);
+	mem->ChangeAddress(mem->GetAddress() + 2);
+	mem->Set<uint32_t>(GetRelativeAddress(mem->GetAddress(), (uint32_t)dest - 6), bProtect);
+	return GetRelativeAddress(mem->GetAddress(), (uint32_t)dest - 4);
+}
+
 // Makes a JMP to a relative address or function
 uint32_t MemoryInjector::MakeJMP(Memory* mem, uint32_t dest, bool bProtect)
 {

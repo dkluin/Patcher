@@ -27,7 +27,7 @@ public:
 		this->m_eRestoreType = m_Type;
 	}
 
-	MemoryBackup();
+	MemoryBackup() { this->m_dwOldAddress = 0x0; this->m_dwOldValue = 0x0; this->m_eRestoreType = BACKUP_NOTHING; }
 };
 
 class Memory

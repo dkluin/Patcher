@@ -3,7 +3,6 @@
 #include <vector>
 #include <functional>
 
-
 class HookingList
 {
 private:

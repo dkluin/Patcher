@@ -1,6 +1,5 @@
-#pragma once
-
 #include "TheRawHooks.h"
+
 
 uint8_t* TheRawHooks::ms_pTheRawHooks;
 uint32_t TheRawHooks::ms_nGlobalPos;
@@ -29,7 +28,7 @@ bool TheRawHooks::Shutdown()
 	return true;
 }
 
-
+// TODO: add proper variable to value translation
 void TheRawHooks::StaticRawHook(uint32_t m_dwJumpFrom, uint32_t m_dwJumpTo, const void* m_nData, size_t m_iSize)
 {
 	RawHook m_Hook(m_dwJumpFrom, m_dwJumpTo);
