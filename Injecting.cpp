@@ -185,6 +185,71 @@ void MemoryInjector::MakeRET(uint32_t mem, bool bProtect)
 	WriteMemory<uint8_t>(mem, 0xC3, bProtect);
 }
 
+// For laziness sake, let's inject a call/jmp to a certain place with a list of multiple addresses for fun!
+void MemoryInjector::MakeMultipleCALLs(std::initializer_list<uint32_t> m_vAddresses, uint32_t m_pDest, bool bProtect)
+{
+	for (auto m_nAddr : m_vAddresses)
+	{
+		MakeCALL(m_nAddr, m_pDest, bProtect);
+	}
+}
+
+void MemoryInjector::MakeMultipleCALLs(std::initializer_list<uint32_t> m_vAddresses, void* m_pDest, bool bProtect)
+{
+	for (auto m_nAddr : m_vAddresses)
+	{
+		MakeCALL(m_nAddr, m_pDest, bProtect);
+	}
+}
+
+void MemoryInjector::MakeMultipleCALLs(std::initializer_list<Memory*> m_vAddresses, uint32_t m_pDest, bool bProtect)
+{
+	for (auto m_nAddr : m_vAddresses)
+	{
+		MakeCALL(m_nAddr->GetAddress(), m_pDest, bProtect);
+	}
+}
+
+void MemoryInjector::MakeMultipleCALLs(std::initializer_list<Memory*> m_vAddresses, void* m_pDest, bool bProtect)
+{
+	for (auto m_nAddr : m_vAddresses)
+	{
+		MakeCALL(m_nAddr->GetAddress(), m_pDest, bProtect);
+	}
+}
+
+void MemoryInjector::MakeMultipleJMPs(std::initializer_list<uint32_t> m_vAddresses, uint32_t m_pDest, bool bProtect)
+{
+	for (auto m_nAddr : m_vAddresses)
+	{
+		MakeJMP(m_nAddr, m_pDest, bProtect);
+	}
+}
+
+void MemoryInjector::MakeMultipleJMPs(std::initializer_list<uint32_t> m_vAddresses, void* m_pDest, bool bProtect)
+{
+	for (auto m_nAddr : m_vAddresses)
+	{
+		MakeJMP(m_nAddr, m_pDest, bProtect);
+	}
+}
+
+void MemoryInjector::MakeMultipleJMPs(std::initializer_list<Memory*> m_vAddresses, uint32_t m_pDest, bool bProtect)
+{
+	for (auto m_nAddr : m_vAddresses)
+	{
+		MakeJMP(m_nAddr->GetAddress(), m_pDest, bProtect);
+	}
+}
+
+void MemoryInjector::MakeMultipleJMPs(std::initializer_list<Memory*> m_vAddresses, void* m_pDest, bool bProtect)
+{
+	for (auto m_nAddr : m_vAddresses)
+	{
+		MakeJMP(m_nAddr->GetAddress(), m_pDest, bProtect);
+	}
+}
+
 // Makes a CALL to a relative address or function
 uint32_t MemoryInjector::MakeCALL(Memory* mem, uint32_t dest, bool bProtect)
 {

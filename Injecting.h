@@ -2,6 +2,7 @@
 
 #include "Main.h"
 #include "Memory.h"
+#include <initializer_list>
 
 /*
 	TODO:
@@ -44,6 +45,17 @@ public:
 	static uint32_t MakeJA(uint32_t mem, void* dest, bool bProtect = true);
 	static uint32_t MakeJA(Memory* mem, uint32_t dest, bool bProtect = true);
 	static uint32_t MakeJA(Memory* mem, void* dest, bool bProtect = true);
+
+	// Injects a function patch on multiple addresses 
+	// Memory protection is applied to all addresses defined
+	static void MakeMultipleCALLs(std::initializer_list<uint32_t> m_vAddresses, uint32_t m_pDest, bool bProtect = true);
+	static void MakeMultipleCALLs(std::initializer_list<uint32_t> m_vAddresses, void* m_pDest, bool bProtect = true);
+	static void MakeMultipleCALLs(std::initializer_list<Memory*> m_vAddresses, uint32_t m_pDest, bool bProtect = true);
+	static void MakeMultipleCALLs(std::initializer_list<Memory*> m_vAddresses, void* m_pDest, bool bProtect = true);
+	static void MakeMultipleJMPs(std::initializer_list<uint32_t> m_vAddresses, uint32_t m_pDest, bool bProtect = true);
+	static void MakeMultipleJMPs(std::initializer_list<uint32_t> m_vAddresses, void* m_pDest, bool bProtect = true);
+	static void MakeMultipleJMPs(std::initializer_list<Memory*> m_vAddresses, uint32_t m_pDest, bool bProtect = true);
+	static void MakeMultipleJMPs(std::initializer_list<Memory*> m_vAddresses, void* m_pDest, bool bProtect = true);
 
 	// Read/Write - replacement for Memory.Get
 	template <class T>

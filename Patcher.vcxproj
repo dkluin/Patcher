@@ -146,6 +146,7 @@
     <ClInclude Include="RawHooks\RawHook.h" />
     <ClInclude Include="RawHooks\RawHookVariable.h" />
     <ClInclude Include="RawHooks\TheRawHooks.h" />
+    <ClInclude Include="Shared.hpp" />
     <ClInclude Include="Statistics.h" />
     <ClInclude Include="VersionMgr\VersionMgr.h" />
   </ItemGroup>

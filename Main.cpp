@@ -18,4 +18,8 @@ bool Main::Initialize(bool bEntryPointBasedVersionMgr)
 			return false;
 		}
 	}
+	else
+	{
+		return false; // aaaaaaaaaaaaa
+	}
 }
