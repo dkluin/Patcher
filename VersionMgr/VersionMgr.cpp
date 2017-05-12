@@ -247,12 +247,16 @@ uint32_t VersionMgr::GetEntryPoint()
 
 bool VersionMgr::IsHoodlumUS()
 {
-	return Memory::Memory(0x406A20).Get<BYTE>(true) == 0xE9;
+	Memory mem(0x406A20);
+	mem.SetVirtualProtect(true);
+	return mem.Get<uint8_t>() == 0xE9;
 }
 
 bool VersionMgr::IsHoodlumEU()
 {
-	return Memory::Memory(0x406A20).Get<BYTE>(true) == 0xE9;
+	Memory mem(0x406A20);
+	mem.SetVirtualProtect(true);
+	return mem.Get<uint8_t>() == 0xE9;
 }
 
 int VersionMgr::GetGameVersion()
@@ -304,5 +308,7 @@ void VersionMgr::ConvertAddressFromUStoEU(Memory* addr)
 
 bool VersionMgr::IsDevianceEU()
 {
-	return Memory::Memory(0x464780).Get<BYTE>(true) == 0xFF;
+	Memory mem(0x464780);
+	mem.SetVirtualProtect(true);
+	return mem.Get<uint8_t>() == 0xFF;
 }
