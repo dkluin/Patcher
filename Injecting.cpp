@@ -267,6 +267,38 @@ void MemoryInjector::MakeMultipleJMPs(std::initializer_list<Memory*> m_vAddresse
 	}
 }
 
+void MemoryInjector::MakeRangedNOP(Memory* m_pMemoryStart, Memory* m_pMemoryEnd)
+{
+	if (m_pMemoryEnd > m_pMemoryStart)
+	{
+		MakeNOP(m_pMemoryStart, m_pMemoryEnd - m_pMemoryStart);
+	}
+}
+
+void MemoryInjector::MakeRangedNOP(uint32_t m_MemoryStart, uint32_t m_MemoryEnd)
+{
+	if (m_MemoryEnd > m_MemoryStart)
+	{
+		MakeNOP(m_MemoryStart, m_MemoryEnd - m_MemoryStart);
+	}
+}
+
+void MemoryInjector::MakeRangedNOP(Memory* m_pMemoryStart, uint32_t m_MemoryEnd)
+{
+	if (m_MemoryEnd > m_pMemoryStart->GetAddress())
+	{
+		MakeNOP(m_pMemoryStart, m_MemoryEnd - m_pMemoryStart->GetAddress());
+	}
+}
+
+void MemoryInjector::MakeRangedNOP(uint32_t m_MemoryStart, Memory* m_pMemoryEnd)
+{
+	if (m_pMemoryEnd->GetAddress() > m_MemoryStart)
+	{
+		MakeNOP(m_MemoryStart, m_pMemoryEnd->GetAddress() - m_MemoryStart);
+	}
+}
+
 // Makes a CALL to a relative address or function
 uint32_t MemoryInjector::MakeCALL(Memory* mem, uint32_t dest)
 {

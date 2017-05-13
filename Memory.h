@@ -66,11 +66,41 @@ public:
 
 	// Sets memory value with protect parameter
 	template <class T>
-	inline void Set(T value);
+	inline void Set(T value)
+	{
+		DWORD dwProtect[2];
+
+		if (bRequiresVirtualProtection)
+		{
+			VirtualProtect((void*)Address, sizeof(T), PAGE_EXECUTE_READWRITE, &dwProtect[0]);
+			*(T*)Address = value;
+			VirtualProtect((void*)Address, sizeof(T), dwProtect[0], &dwProtect[1]);
+		}
+		else
+		{
+			*(T*)Address = value;
+		}
+	}
 
 	// Gets memory value with virtual protect parameter
 	template <class T>
-	inline T Get();
+	inline T Get()
+	{
+		T result;
+		DWORD dwProtect[2];
+
+		if (bRequiresVirtualProtection)
+		{
+			VirtualProtect((LPVOID)Address, sizeof(T), PAGE_EXECUTE_READWRITE, &dwProtect[0]);
+			result = *(T*)Address;
+			VirtualProtect((LPVOID)Address, sizeof(T), dwProtect[0], &dwProtect[1]);
+		}
+		else
+		{
+			result = *(T*)Address;
+		}
+		return result;
+	}
 
 	// Returns the current address
 	inline uint32_t GetAddress() { return Address; }

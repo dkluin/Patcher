@@ -110,6 +110,12 @@ public:
 	static void MakeNOP(Memory* mem, uint32_t m_dwSize);
 	static void MakeNOP(uint32_t mem, uint32_t m_dwSize, bool bProtect = true);
 
+	// Ranged NOPs
+	static void MakeRangedNOP(Memory* m_pMemoryStart, Memory* m_pMemoryEnd);
+	static void MakeRangedNOP(uint32_t m_MemoryStart, uint32_t m_MemoryEnd);
+	static void MakeRangedNOP(Memory* m_pMemoryStart, uint32_t m_MemoryEnd);
+	static void MakeRangedNOP(uint32_t m_MemoryStart, Memory* m_pMemoryEnd);
+
 	// Makes a return (0xC3 RET)
 	static void MakeRET(Memory* mem);
 	static void MakeRET(uint32_t mem, bool bProtect = true);
