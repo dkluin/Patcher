@@ -203,7 +203,6 @@ void MemoryInjector::MakeRET(uint32_t mem, bool bProtect)
 	WriteMemory<uint8_t>(mem, 0xC3, bProtect);
 }
 
-// For laziness sake, let's inject a call/jmp to a certain place with a list of multiple addresses for fun!
 void MemoryInjector::MakeMultipleCALLs(std::initializer_list<uint32_t> m_vAddresses, uint32_t m_pDest, bool bProtect)
 {
 	for (auto m_nAddr : m_vAddresses)

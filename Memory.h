@@ -6,6 +6,21 @@
 
 /////////////// New code which uses operators for comparing, setting, and even adding, multiplying, and much more 
 
+enum eRestorableType
+{
+	RESTORE_NONE = 0,
+	RESTORE_MEMORY_WRITE,
+	RESTORE_JMP,
+	RESTORE_CALL,
+	RESTORE_RET_1,
+	RESTORE_RET_2,
+	RESTORE_RET_0,
+	RESTORE_NOP,
+	RESTORE_PLUGIN_JMP,
+	RESTORE_PLUGIN_CALL,
+	RESTORE_PLUGIN_RET
+};
+
 class Memory
 {
 private:
@@ -16,9 +31,12 @@ private:
 
 	bool bOldVirtualProtect; // Old virtual protection setting 
 
+	eRestorableType m_Type;
+
 public:
 	Memory() { Address = 0; };
 	Memory(uint32_t addr) { Address = addr; }
+	Memory(Memory* m_pMemory);
 
 	// Change address
 	void ChangeAddress(uint32_t newAddr) { Address = newAddr; }
@@ -26,109 +44,55 @@ public:
 	// Enable/disable virtual protection
 	void SetVirtualProtect(bool m_bNewVirtualProtect)
 	{
-		this->bOldVirtualProtect = this->bRequiresVirtualProtection;
-		this->bRequiresVirtualProtection = m_bNewVirtualProtect;
+		bOldVirtualProtect = bRequiresVirtualProtection;
+		bRequiresVirtualProtection = m_bNewVirtualProtect;
 	}
 
 	void RestoreVirtualProtect()
 	{
-		this->bRequiresVirtualProtection = this->bOldVirtualProtect;
+		bRequiresVirtualProtection = bOldVirtualProtect;
 	}
 
 	bool GetVirtualProtect()
 	{
-		return this->bRequiresVirtualProtection;
+		return bRequiresVirtualProtection;
+	}
+
+	// Enable/disable memory restore ability (kindof useless for Memory class)
+	void ToggleRestorablePatching(bool m_bRestore)
+	{
+		bShouldStoreOriginal = m_bRestore;
 	}
 
 	// Sets memory value with protect parameter
 	template <class T>
-	inline void Set(T value)
-	{
-		DWORD dwProtect[2];
-
-		if (this->bRequiresVirtualProtection)
-		{
-			VirtualProtect((void*)this->Address, sizeof(T), PAGE_EXECUTE_READWRITE, &dwProtect[0]);
-			*(T*)this->Address = value;
-			VirtualProtect((void*)this->Address, sizeof(T), dwProtect[0], &dwProtect[1]);
-		}
-		else
-		{
-			*(T*)this->Address = value;
-		}
-	}
+	inline void Set(T value);
 
 	// Gets memory value with virtual protect parameter
 	template <class T>
-	inline T Get()
-	{
-		T result;
-		DWORD dwProtect[2];
-
-		if (this->bRequiresVirtualProtection)
-		{
-			VirtualProtect((LPVOID)this->Address, sizeof(T), PAGE_EXECUTE_READWRITE, &dwProtect[0]);
-			result = *(T*)this->Address;
-			VirtualProtect((LPVOID)this->Address, sizeof(T), dwProtect[0], &dwProtect[1]);
-		}
-		else
-		{
-			result = *(T*)this->Address;
-		}
-		return result;
-	}
+	inline T Get();
 
 	// Returns the current address
-	inline uint32_t GetAddress() { return this->Address; }
+	inline uint32_t GetAddress() { return Address; }
 
-	// todo: finish this!!
-	// Comparison
+	// Comparison operators
+	bool operator==(const Memory& m_Memory) const { return Address == m_Memory.Address; };
+	bool operator>(const Memory& m_Memory) const { return Address > m_Memory.Address; };
+	bool operator<(const Memory& m_Memory) const { return Address < m_Memory.Address; };
+	bool operator>=(const Memory& m_Memory) const { return Address >= m_Memory.Address; };
+	bool operator<=(const Memory& m_Memory) const { return Address <= m_Memory.Address; };
+	bool operator!=(const Memory& m_Memory) const { return Address != m_Memory.Address; };
 
-	template <class T>
-	bool operator==(const T& rvalue) { return *(T*)this->Address == rvalue; }
+	// Normal operators
+	Memory& operator+(const Memory& m_Memory) const { return Memory(Address + m_Memory.Address); };
+	Memory& operator-(const Memory& m_Memory) const { return Memory(Address - m_Memory.Address); };
+	Memory& operator*(const Memory& m_Memory) const { return Memory(Address * m_Memory.Address); };
+	Memory& operator/(const Memory& m_Memory) const { return Memory(Address / m_Memory.Address); };
+	Memory& operator%(const Memory& m_Memory) const { return Memory(Address % m_Memory.Address); };
 
-	template <class T>
-	bool operator>(const T& value) { return *(T*)this->Address > value; }
-		
-	template <class T>
-	bool operator<(const T& value) { return *(T*)this->Address < value; }
-
-	template <class T>
-	bool operator>=(const T& value) { return *(T*)this->Address >= value; }
-
-	template <class T>
-	bool operator<=(const T& value) { return *(T*)this->Address <= value; }
-
-	template <class T>
-	bool operator!=(const T& value) { return *(T*)this->Address != value; }
-
-	// Operators
-	template <class T>
-	void operator=(const T& value) { *(T*)this->Address = value; }
-
-	template <class T>
-	void operator+(const T& value) { *(T*)this->Address = *(T*)this->Address + value; }
-
-	template <class T>
-	void operator-(const T& value) { *(T*)this->Address = *(T*)this->Address - value; }
-
-	template <class T>
-	void operator*(const T& value) { *(T*)this->Address = *(T*)this->Address * value; }
-
-	template <class T>
-	void operator/(const T& value) { *(T*)this->Address = *(T*)this->Address / value; }
-	void operator%(const int& value) { *(int*)this->Address = *(int*)this->Address % value; }
-
-	template <class T>
-	void operator+=(const T& value) { *(T*)this->Address += value; }
-
-	template <class T>
-	void operator-=(const T& value) { *(T*) this->Address -= value; }
-
-	template <class T>
-	void operator*=(const T& value) { *(T*) this->Address *= value; }
-
-	template <class T>
-	void operator/=(const T& value) { *(T*) this->Address /= value; }
-	void operator%=(const int& value) { *(int*) this->Address %= value; }
+	Memory& operator+=(const Memory& m_Memory) const { return Memory(Address + m_Memory.Address); };
+	Memory& operator-=(const Memory& m_Memory) const { return Memory(Address - m_Memory.Address); };
+	Memory& operator*=(const Memory& m_Memory) const { return Memory(Address * m_Memory.Address); };
+	Memory& operator/=(const Memory& m_Memory) const { return Memory(Address / m_Memory.Address); };
+	Memory& operator%=(const Memory& m_Memory) const { return Memory(Address % m_Memory.Address); };
 };

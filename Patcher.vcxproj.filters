@@ -53,7 +53,6 @@
       <Filter>Detours</Filter>
     </ClInclude>
     <ClInclude Include="Statistics.h" />
-    <ClInclude Include="Assembly.h" />
     <ClInclude Include="Shared.hpp" />
   </ItemGroup>
   <ItemGroup>
