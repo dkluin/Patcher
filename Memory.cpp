@@ -9,6 +9,5 @@ Memory::Memory(Memory* m_pMemory)
 		bOldVirtualProtect = m_pMemory->bOldVirtualProtect;
 		bRequiresVirtualProtection = m_pMemory->bRequiresVirtualProtection;
 		bShouldStoreOriginal = m_pMemory->bShouldStoreOriginal;
-		m_Type = m_pMemory->m_Type;
 	}
 }

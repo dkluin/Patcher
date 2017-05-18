@@ -59,7 +59,7 @@ public:
 
 	// Writes memory to multiple addresses
 	template <class T>
-	static void WriteMemoryMultipleAddresses(std::initializer_list<uint32_t> m_vAddresses, T m_Value, bool bProtect = true)
+	inline static void WriteMemoryMultipleAddresses(std::initializer_list<uint32_t> m_vAddresses, T m_Value, bool bProtect = true)
 	{
 		for (auto m_nAddress : m_vAddresses)
 		{
@@ -68,7 +68,7 @@ public:
 	}
 
 	template <class T>
-	static void WriteMemoryMultipleAddresses(std::initializer_list<Memory*> m_vAddresses, T m_Value, bool bProtect = true)
+	inline static void WriteMemoryMultipleAddresses(std::initializer_list<Memory*> m_vAddresses, T m_Value, bool bProtect = true)
 	{
 		for (auto m_nAddress : m_vAddresses)
 		{
@@ -78,22 +78,45 @@ public:
 
 	// Read/Write - replacement for Memory.Get
 	template <class T>
-	static T ReadMemory(uint32_t address, bool bProtect = true)
+	inline static T ReadMemory(uint32_t address, bool bProtect = true)
 	{
-		Memory mem(address);
-		mem.SetVirtualProtect(bProtect);
-		return mem.Get<T>();
+		DWORD m_OldVirtualProtect[2];
+
+		if (bProtect)
+		{
+			VirtualProtect(reinterpret_cast<void*>(address), sizeof(T), PAGE_EXECUTE_READWRITE, &m_OldVirtualProtect[0]);
+			return *reinterpret_cast<T*>(address);
+			VirtualProtect(reinterpret_cast<void*>(address), sizeof(T), m_OldVirtualProtect[0], &m_OldVirtualProtect[1]);
+		}
+		else
+		{
+			return *reinterpret_cast<T*>(address);
+		}
 	}
 
 	template <class T>
-	static T ReadMemory(Memory* m_pAddress)
+	inline static T ReadMemory(Memory* m_pAddress)
 	{
-		return m_pAddress->Get<T>(bProtect);
+		return m_pAddress->Get<T>();
 	}
 
 	template <class T>
-	static void WriteMemory(uint32_t address, T value, bool bProtect = true)
+	inline static void WriteMemory(uint32_t address, T value, bool bProtect = true)
 	{
+		DWORD m_OldVirtualProtect[2];
+
+		if (bProtect)
+		{
+			VirtualProtect(reinterpret_cast<void*>(address), sizeof(T), PAGE_EXECUTE_READWRITE, &m_OldVirtualProtect[0]);
+			*reinterpret_cast<T*>(address) = value;
+			VirtualProtect(reinterpret_cast<void*>(address), sizeof(T), m_OldVirtualProtect[0], &m_OldVirtualProtect[1]);
+		}
+		else
+		{
+			*reinterpret_cast<T*>(address) = value;
+		}
+
+
 		Memory mem(address);
 		mem.SetVirtualProtect(bProtect);
 		mem.Set<T>(value);
@@ -101,7 +124,7 @@ public:
 
 	// Same variant, but with Memory class
 	template <class T>
-	static void WriteMemory(Memory* m_pAddress, T m_Value)
+	inline static void WriteMemory(Memory* m_pAddress, T m_Value)
 	{
 		m_pAddress->Set<T>(m_Value);
 	}

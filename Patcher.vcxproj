@@ -125,6 +125,12 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../Shared.hpp</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="Calling.cpp" />
+    <ClCompile Include="Detours\Detour.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../Shared.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Detours\Detours.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../Shared.hpp</PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="General.cpp" />
     <ClCompile Include="HookingList\HookingList.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../Shared.hpp</PrecompiledHeaderFile>
@@ -153,6 +159,8 @@
     <ClInclude Include="Assembly\Assembly.h" />
     <ClInclude Include="Assembly\Registers.h" />
     <ClInclude Include="Calling.h" />
+    <ClInclude Include="Detours\Detour.h" />
+    <ClInclude Include="Detours\Detours.h" />
     <ClInclude Include="General.h" />
     <ClInclude Include="HookingList\HookingList.h" />
     <ClInclude Include="Injecting.h" />

@@ -26,6 +26,12 @@
     <ClCompile Include="Assembly\Assembly.cpp">
       <Filter>Assembly</Filter>
     </ClCompile>
+    <ClCompile Include="Detours\Detours.cpp">
+      <Filter>Detours</Filter>
+    </ClCompile>
+    <ClCompile Include="Detours\Detour.cpp">
+      <Filter>Detours</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
@@ -57,6 +63,12 @@
     <ClInclude Include="Assembly\Assembly.h">
       <Filter>Assembly</Filter>
     </ClInclude>
+    <ClInclude Include="Detours\Detours.h">
+      <Filter>Detours</Filter>
+    </ClInclude>
+    <ClInclude Include="Detours\Detour.h">
+      <Filter>Detours</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="VersionMgr">
@@ -70,6 +82,9 @@
     </Filter>
     <Filter Include="Assembly">
       <UniqueIdentifier>{235f914b-dfb1-45c1-83a6-1660333044c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Detours">
+      <UniqueIdentifier>{96f49f6e-4f5e-42a1-81f4-079edd73683c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

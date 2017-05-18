@@ -1,0 +1,29 @@
+#pragma once
+
+#include "../Memory.h"
+
+class Detour : public Memory
+{
+private:
+	bool m_bApplied;
+
+	union
+	{
+		std::string m_szDetouredFunctionName;
+		void* m_pDetouredFunction;
+	};
+
+	union
+	{
+		std::string m_szOriginalFunctionName;
+		void* m_pOriginalFunction;
+	};
+
+public:
+	Detour(void* m_pOriginal, void* m_pDetoured);
+	Detour(std::string m_szOriginalName, std::string m_szDetouredName);
+	~Detour();
+
+	void ApplyDetour();
+	void UndoDetour();
+};

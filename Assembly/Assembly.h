@@ -3,6 +3,13 @@
 #include "Registers.h"
 #include "../Injecting.h" 
 
+/*
+	TODO:
+	- Introduce a sense of control after destructing the functor?
+	- Memory support
+	- Restorable patching
+*/
+
 template <class T>
 struct WrapperFunctor
 {
