@@ -1,3 +1,4 @@
+#include "../Shared.hpp" 
 #include "VersionMgr.h"
 #include "../Main.h"
 #include <Psapi.h>

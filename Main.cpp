@@ -1,3 +1,4 @@
+#include "Shared.hpp"
 #include "Main.h"
 #include "VersionMgr/VersionMgr.h"
 #include "HookingList/HookingList.h"

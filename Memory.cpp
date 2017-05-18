@@ -1,3 +1,4 @@
+#include "Shared.hpp"
 #include "Memory.h"
 
 Memory::Memory(Memory* m_pMemory)

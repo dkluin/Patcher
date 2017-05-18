@@ -1,3 +1,4 @@
+#include "../Shared.hpp"
 #include "RawHookVariable.h"
 #include "TheRawHooks.h"
 

@@ -1,3 +1,4 @@
+#include "../Shared.hpp"
 #include "HookingList.h"
 
 std::vector<std::function<void()>>* HookingList::function_list;

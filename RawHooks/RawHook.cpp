@@ -1,3 +1,4 @@
+#include "../Shared.hpp"
 #include "RawHook.h"
 #include "TheRawHooks.h"
 #include "../General.h"

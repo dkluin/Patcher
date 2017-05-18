@@ -1,3 +1,4 @@
+#include "Shared.hpp"
 #include "PluginPatcher.h"
 #include <Psapi.h>
 #include "Injecting.h"

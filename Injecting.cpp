@@ -1,3 +1,4 @@
+#include "Shared.hpp"
 #include "Injecting.h"
 #include "General.h"
 

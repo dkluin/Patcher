@@ -3,7 +3,6 @@
 #include <cstdint>
 #include <Windows.h>
 #include <vector>
-
 /////////////// New code which uses operators for comparing, setting, and even adding, multiplying, and much more 
 
 enum eRestorableType
@@ -23,7 +22,7 @@ enum eRestorableType
 
 class Memory
 {
-private:
+protected:
 	uint32_t Address;
 
 	bool bShouldStoreOriginal : 1; // When setting memory, keep the original value.

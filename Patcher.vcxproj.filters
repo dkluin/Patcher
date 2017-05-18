@@ -22,10 +22,10 @@
     <ClCompile Include="RawHooks\RawHook.cpp">
       <Filter>RawHooks</Filter>
     </ClCompile>
-    <ClCompile Include="Detours\Detours.cpp">
-      <Filter>Detours</Filter>
-    </ClCompile>
     <ClCompile Include="Statistics.cpp" />
+    <ClCompile Include="Assembly\Assembly.cpp">
+      <Filter>Assembly</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
@@ -49,11 +49,14 @@
     <ClInclude Include="RawHooks\RawHook.h">
       <Filter>RawHooks</Filter>
     </ClInclude>
-    <ClInclude Include="Detours\Detours.h">
-      <Filter>Detours</Filter>
-    </ClInclude>
     <ClInclude Include="Statistics.h" />
     <ClInclude Include="Shared.hpp" />
+    <ClInclude Include="Assembly\Registers.h">
+      <Filter>Assembly</Filter>
+    </ClInclude>
+    <ClInclude Include="Assembly\Assembly.h">
+      <Filter>Assembly</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="VersionMgr">
@@ -65,8 +68,8 @@
     <Filter Include="RawHooks">
       <UniqueIdentifier>{b313f5d0-d853-405e-9347-33c6fe8b62ab}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Detours">
-      <UniqueIdentifier>{e8bca937-35c9-415f-b33d-9cb5858899fb}</UniqueIdentifier>
+    <Filter Include="Assembly">
+      <UniqueIdentifier>{235f914b-dfb1-45c1-83a6-1660333044c8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -1,3 +1,4 @@
+#include "Shared.hpp"
 #include "General.h"
 
 // memcpy with memory protection

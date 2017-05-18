@@ -93,6 +93,8 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <BrowseInformation>true</BrowseInformation>
+      <PrecompiledHeaderFile>Shared.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -119,23 +121,38 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Assembly\Assembly.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../Shared.hpp</PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="Calling.cpp" />
-    <ClCompile Include="Detours\Detours.cpp" />
     <ClCompile Include="General.cpp" />
-    <ClCompile Include="HookingList\HookingList.cpp" />
+    <ClCompile Include="HookingList\HookingList.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../Shared.hpp</PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="Injecting.cpp" />
-    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Main.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="Memory.cpp" />
     <ClCompile Include="PluginPatcher.cpp" />
-    <ClCompile Include="RawHooks\RawHook.cpp" />
-    <ClCompile Include="RawHooks\RawHookVariable.cpp" />
-    <ClCompile Include="RawHooks\TheRawHooks.cpp" />
+    <ClCompile Include="RawHooks\RawHook.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../Shared.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="RawHooks\RawHookVariable.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../Shared.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="RawHooks\TheRawHooks.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../Shared.hpp</PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="Statistics.cpp" />
-    <ClCompile Include="VersionMgr\VersionMgr.cpp" />
+    <ClCompile Include="VersionMgr\VersionMgr.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../Shared.hpp</PrecompiledHeaderFile>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Assembly\Assembly.h" />
+    <ClInclude Include="Assembly\Registers.h" />
     <ClInclude Include="Calling.h" />
-    <ClInclude Include="Detours\Detours.h" />
     <ClInclude Include="General.h" />
     <ClInclude Include="HookingList\HookingList.h" />
     <ClInclude Include="Injecting.h" />

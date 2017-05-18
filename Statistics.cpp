@@ -1,3 +1,4 @@
+#include "Shared.hpp"
 #include "Statistics.h"
 
 std::vector<Stat> Statistics::ms_vPatcherStats;

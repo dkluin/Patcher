@@ -1,5 +1,5 @@
+#include "../Shared.hpp"
 #include "TheRawHooks.h"
-
 
 uint8_t* TheRawHooks::ms_pTheRawHooks;
 uint32_t TheRawHooks::ms_nGlobalPos;

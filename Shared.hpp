@@ -4,8 +4,11 @@
 	TODO: 
 
 	- define all macroes tied to Patcher here and not in UG's Shared.hpp...
-	- make this a precompiled header
 */
+
+#ifndef _M_IX86
+#error Patcher only supports x86.
+#endif
 
 // Useful macroes
 #define X86_PUSHAD _asm pushad
