@@ -24,8 +24,8 @@ public:
 	static void StrNCpy(Memory* m_pDest, char* src, size_t size);
 
 	// Unprotect/protect functions
-	static void ProtectMemory(uint32_t m_dwAddr, size_t m_iSize);
-	static void ProtectMemory(Memory* m_dwAddr, size_t m_iSize);
-	static void UnprotectMemory(uint32_t m_dwAddr, size_t m_iSize);
-	static void UnprotectMemory(Memory* m_dwAddr, size_t m_iSize);
+	static DWORD ProtectMemory(uint32_t m_dwAddr, size_t m_iSize);
+	static DWORD ProtectMemory(Memory* m_dwAddr, size_t m_iSize);
+	static DWORD UnprotectMemory(uint32_t m_dwAddr, size_t m_iSize);
+	static DWORD UnprotectMemory(Memory* m_dwAddr, size_t m_iSize);
 };

@@ -110,17 +110,17 @@ public:
 	template <class T>
 	inline void Set(T value)
 	{
-		DWORD dwProtect[2];
+		DWORD m_OldVirtualProtect[2];
 
 		if (bRequiresVirtualProtection)
 		{
-			VirtualProtect((void*)Address, sizeof(T), PAGE_EXECUTE_READWRITE, &dwProtect[0]);
-			*(T*)Address = value;
-			VirtualProtect((void*)Address, sizeof(T), dwProtect[0], &dwProtect[1]);
+			VirtualProtect(reinterpret_cast<void*>(Address), sizeof(T), PAGE_EXECUTE_READWRITE, &m_OldVirtualProtect[0]);
+			*reinterpret_cast<T*>(Address) = value;
+			VirtualProtect(reinterpret_cast<void*>(Address), sizeof(T), m_OldVirtualProtect[0], &m_OldVirtualProtect[1]);
 		}
 		else
 		{
-			*(T*)Address = value;
+			*reinterpret_cast<T*>(Address) = value;
 		}
 	}
 
@@ -128,17 +128,17 @@ public:
 	template <class T>
 	inline void SetWithOffset(T value, uint32_t m_Offset)
 	{
-		DWORD dwProtect[2];
+		DWORD m_OldVirtualProtect[2];
 
 		if (bRequiresVirtualProtection)
 		{
-			VirtualProtect((void*)(Address + m_Offset), sizeof(T), PAGE_EXECUTE_READWRITE, &dwProtect[0]);
-			*(T*)(Address + m_Offset) = value;
-			VirtualProtect((void*)(Address + m_Offset), sizeof(T), dwProtect[0], &dwProtect[1]);
+			VirtualProtect(reinterpret_cast<void*>(Address + m_Offset), sizeof(T), PAGE_EXECUTE_READWRITE, &m_OldVirtualProtect[0]);
+			*reinterpret_cast<T*>(Address + m_Offset) = value;
+			VirtualProtect(reinterpret_cast<void*>(Address + m_Offset), sizeof(T), m_OldVirtualProtect[0], &m_OldVirtualProtect[1]);
 		}
 		else
 		{
-			*(T*)(Address + m_Offset) = value;
+			*reinterpret_cast<T*>(Address + m_Offset) = value;
 		}
 	}
 
@@ -147,17 +147,17 @@ public:
 	inline T Get()
 	{
 		T result;
-		DWORD dwProtect[2];
+		DWORD m_OldVirtualProtect[2];
 
 		if (bRequiresVirtualProtection)
 		{
-			VirtualProtect((LPVOID)Address, sizeof(T), PAGE_EXECUTE_READWRITE, &dwProtect[0]);
-			result = *(T*)Address;
-			VirtualProtect((LPVOID)Address, sizeof(T), dwProtect[0], &dwProtect[1]);
+			VirtualProtect(reinterpret_cast<void*>(Address), sizeof(T), PAGE_EXECUTE_READWRITE, &m_OldVirtualProtect[0]);
+			result = *reinterpret_cast<T*>(Address);
+			VirtualProtect(reinterpret_cast<T*>(Address), sizeof(T), m_OldVirtualProtect[0], &m_OldVirtualProtect[1]);
 		}
 		else
 		{
-			result = *(T*)Address;
+			result = *reinterpret_cast<T*>(Address);
 		}
 		return result;
 	}
@@ -170,17 +170,17 @@ public:
 	inline T GetWithOffset(uint32_t m_Offset)
 	{
 		T result;
-		DWORD dwProtect[2];
+		DWORD m_OldVirtualProtect[2];
 
 		if (bRequiresVirtualProtection)
 		{
-			VirtualProtect((LPVOID)(Address + m_Offset), sizeof(T), PAGE_EXECUTE_READWRITE, &dwProtect[0]);
-			result = *(T*)(Address + m_Offset);
-			VirtualProtect((LPVOID)(Address + m_Offset), sizeof(T), dwProtect[0], &dwProtect[1]);
+			VirtualProtect(reinterpret_cast<void*>(Address + m_Offset), sizeof(T), PAGE_EXECUTE_READWRITE, &m_OldVirtualProtect[0]);
+			result = *reinterpret_cast<T*>(Address + m_Offset);
+			VirtualProtect(reinterpret_cast<void*>(Address + m_Offset), sizeof(T), m_OldVirtualProtect[0], &m_OldVirtualProtect[1]);
 		}
 		else
 		{
-			result = *(T*)(Address + m_Offset);
+			result = *reinterpret_cast<T*>(Address + m_Offset);
 		}
 		return result;
 	}
