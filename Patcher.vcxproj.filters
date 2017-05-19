@@ -22,7 +22,6 @@
     <ClCompile Include="RawHooks\RawHook.cpp">
       <Filter>RawHooks</Filter>
     </ClCompile>
-    <ClCompile Include="Statistics.cpp" />
     <ClCompile Include="Assembly\Assembly.cpp">
       <Filter>Assembly</Filter>
     </ClCompile>
@@ -31,6 +30,9 @@
     </ClCompile>
     <ClCompile Include="Detours\Detour.cpp">
       <Filter>Detours</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessHook\ProcessMemory.cpp">
+      <Filter>ProcessHook</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -55,7 +57,6 @@
     <ClInclude Include="RawHooks\RawHook.h">
       <Filter>RawHooks</Filter>
     </ClInclude>
-    <ClInclude Include="Statistics.h" />
     <ClInclude Include="Shared.hpp" />
     <ClInclude Include="Assembly\Registers.h">
       <Filter>Assembly</Filter>
@@ -68,6 +69,9 @@
     </ClInclude>
     <ClInclude Include="Detours\Detour.h">
       <Filter>Detours</Filter>
+    </ClInclude>
+    <ClInclude Include="ProcessHook\ProcessMemory.h">
+      <Filter>ProcessHook</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +89,9 @@
     </Filter>
     <Filter Include="Detours">
       <UniqueIdentifier>{96f49f6e-4f5e-42a1-81f4-079edd73683c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ProcessHook">
+      <UniqueIdentifier>{b9af0aa0-47a6-4f21-8d44-73afc86fd27d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

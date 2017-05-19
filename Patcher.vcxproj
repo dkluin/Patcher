@@ -141,6 +141,9 @@
     </ClCompile>
     <ClCompile Include="Memory.cpp" />
     <ClCompile Include="PluginPatcher.cpp" />
+    <ClCompile Include="ProcessHook\ProcessMemory.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../Shared.hpp</PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="RawHooks\RawHook.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../Shared.hpp</PrecompiledHeaderFile>
     </ClCompile>
@@ -150,7 +153,6 @@
     <ClCompile Include="RawHooks\TheRawHooks.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../Shared.hpp</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="Statistics.cpp" />
     <ClCompile Include="VersionMgr\VersionMgr.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../Shared.hpp</PrecompiledHeaderFile>
     </ClCompile>
@@ -167,11 +169,11 @@
     <ClInclude Include="Main.h" />
     <ClInclude Include="Memory.h" />
     <ClInclude Include="PluginPatcher.h" />
+    <ClInclude Include="ProcessHook\ProcessMemory.h" />
     <ClInclude Include="RawHooks\RawHook.h" />
     <ClInclude Include="RawHooks\RawHookVariable.h" />
     <ClInclude Include="RawHooks\TheRawHooks.h" />
     <ClInclude Include="Shared.hpp" />
-    <ClInclude Include="Statistics.h" />
     <ClInclude Include="VersionMgr\VersionMgr.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
