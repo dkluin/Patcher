@@ -55,3 +55,8 @@ void ProcessHooking::MakeProcessRET0(ProcessMemory* m_pRemoteSourceAddress)
 	MakeProcessRET(m_pRemoteSourceAddress, 4);
 	m_pRemoteSourceAddress->ChangeAddress(m_pRemoteSourceAddress->GetAddress() - 2);
 }
+
+void ProcessHooking::MakeProcessRangedNOP(ProcessMemory* m_pRemoteSourceAddress, ProcessMemory* m_pRemoteDestinationAddress)
+{
+	MakeProcessNOP(m_pRemoteSourceAddress, m_pRemoteDestinationAddress->GetAddress() - m_pRemoteSourceAddress->GetAddress());
+}

@@ -32,6 +32,9 @@ public:
 	// Makes a RET with a return value (NULL in this case)
 	static void MakeProcessRET0(ProcessMemory* m_pRemoteSourceAddress);
 
+	// Makes a ranged NOP
+	static void MakeProcessRangedNOP(ProcessMemory* m_pRemoteSourceAddress, ProcessMemory* m_pRemoteDestinationAddress);
+
 	// Makes a JMP on multiple (processes and) virtual addresses.
 	static inline void MakeMultipleProcessJMPs(std::initializer_list<ProcessMemory*> m_pRemoteSourceAddressList, ProcessMemory* m_pRemoteDestinationAddress)
 	{
