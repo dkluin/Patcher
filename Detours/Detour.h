@@ -24,6 +24,9 @@ public:
 	Detour(std::string m_szOriginalName, std::string m_szDetouredName);
 	~Detour();
 
+	// Apply the detour
 	void ApplyDetour();
+
+	// Undo the detour 
 	void UndoDetour();
 };

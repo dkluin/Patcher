@@ -13,7 +13,7 @@ class Calling
 public:
 	// Standard function calling
 	template<class Ret, class ...Args>
-	static Ret Call(uint32_t p, Args... a)
+	static inline Ret Call(uint32_t p, Args... a)
 	{
 		auto fn = (Ret(*)(Args...)) p;
 		return fn(std::forward<Args>(a)...);
@@ -21,7 +21,7 @@ public:
 
 	// ThisCall
 	template<class Ret, class ...Args>
-	static Ret ThisCall(uint32_t p, Args... a)
+	static inline Ret ThisCall(uint32_t p, Args... a)
 	{
 		auto fn = (Ret(__thiscall*)(Args...)) p;
 		return fn(std::forward<Args>(a)...);
@@ -29,7 +29,7 @@ public:
 
 	// __stdcall
 	template<class Ret, class ...Args>
-	static Ret StdCall(uint32_t p, Args... a)
+	static inline Ret StdCall(uint32_t p, Args... a)
 	{
 		auto fn = (Ret(__stdcall*)(Args...)) p;
 		return fn(std::forward<Args>(a)...);
@@ -37,7 +37,7 @@ public:
 
 	// __cdecl
 	template<class Ret, class ...Args>
-	static Ret CDecl(uint32_t p, Args... a)
+	static inline Ret CDecl(uint32_t p, Args... a)
 	{
 		auto fn = (Ret(__cdecl*)(Args...)) p;
 		return fn(std::forward<Args>(a)...);
@@ -45,7 +45,7 @@ public:
 
 	// __fastcall
 	template<class Ret, class ...Args>
-	static Ret FastCall(uint32_t p, Args... a)
+	static inline Ret FastCall(uint32_t p, Args... a)
 	{
 		auto fn = (Ret(__fastcall*)(Args...)) p;
 		return fn(std::forward<Args>(a)...);
@@ -53,7 +53,7 @@ public:
 
 	// __vectorcall
 	template<class Ret, class ...Args>
-	static Ret VectorCall(uint32_t p, Args... a)
+	static inline Ret VectorCall(uint32_t p, Args... a)
 	{
 		auto fn = (Ret(__vectorcall*)(Args...)) p;
 		return fn(std::forward<Args>(a)...);

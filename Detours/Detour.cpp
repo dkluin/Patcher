@@ -41,6 +41,6 @@ void Detour::UndoDetour()
 {
 	if (m_bApplied)
 	{
-
+		m_bApplied = false;
 	}
 }

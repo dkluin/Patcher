@@ -73,33 +73,33 @@ public:
 	Memory(Memory* m_pMemory);
 
 	// Change address
-	void ChangeAddress(uint32_t newAddr) { Address = newAddr; }
+	inline void ChangeAddress(uint32_t newAddr) { Address = newAddr; }
 
 	// Enable/disable virtual protection
-	void SetVirtualProtect(bool m_bNewVirtualProtect)
+	inline void SetVirtualProtect(bool m_bNewVirtualProtect)
 	{
 		bOldVirtualProtect = bRequiresVirtualProtection;
 		bRequiresVirtualProtection = m_bNewVirtualProtect;
 	}
 
-	void RestoreVirtualProtect()
+	inline void RestoreVirtualProtect()
 	{
 		bRequiresVirtualProtection = bOldVirtualProtect;
 	}
 
-	bool GetVirtualProtect()
+	inline bool GetVirtualProtect()
 	{
 		return bRequiresVirtualProtection;
 	}
 
 	// Enable/disable memory restore ability (kindof useless for Memory class)
-	void ToggleRestorablePatching(bool m_bRestore)
+	inline void ToggleRestorablePatching(bool m_bRestore)
 	{
 		bShouldStoreOriginal = m_bRestore;
 	}
 
 	// Is restorable patching enabled?
-	bool IsRestorablePatchingEnabled()
+	inline bool IsRestorablePatchingEnabled()
 	{
 		return bShouldStoreOriginal && !bOverrideRestorablePatching;
 	}
