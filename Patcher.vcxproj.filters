@@ -34,6 +34,9 @@
     <ClCompile Include="ProcessHook\ProcessMemory.cpp">
       <Filter>ProcessHook</Filter>
     </ClCompile>
+    <ClCompile Include="ProcessHook\ProcessHooking.cpp">
+      <Filter>ProcessHook</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
@@ -71,6 +74,9 @@
       <Filter>Detours</Filter>
     </ClInclude>
     <ClInclude Include="ProcessHook\ProcessMemory.h">
+      <Filter>ProcessHook</Filter>
+    </ClInclude>
+    <ClInclude Include="ProcessHook\ProcessHooking.h">
       <Filter>ProcessHook</Filter>
     </ClInclude>
   </ItemGroup>

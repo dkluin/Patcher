@@ -3,6 +3,10 @@
 #include "../Memory.h"
 #include "../Shared.hpp"
 
+/*
+	ProcessMemory, the base for patching other processes
+*/
+
 class ProcessMemory : public Memory
 {
 protected:

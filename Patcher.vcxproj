@@ -141,6 +141,9 @@
     </ClCompile>
     <ClCompile Include="Memory.cpp" />
     <ClCompile Include="PluginPatcher.cpp" />
+    <ClCompile Include="ProcessHook\ProcessHooking.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../Shared.hpp</PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="ProcessHook\ProcessMemory.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../Shared.hpp</PrecompiledHeaderFile>
     </ClCompile>
@@ -169,6 +172,7 @@
     <ClInclude Include="Main.h" />
     <ClInclude Include="Memory.h" />
     <ClInclude Include="PluginPatcher.h" />
+    <ClInclude Include="ProcessHook\ProcessHooking.h" />
     <ClInclude Include="ProcessHook\ProcessMemory.h" />
     <ClInclude Include="RawHooks\RawHook.h" />
     <ClInclude Include="RawHooks\RawHookVariable.h" />
