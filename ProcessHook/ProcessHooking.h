@@ -23,6 +23,15 @@ public:
 	// Makes a NOP with a variable size
 	static void MakeProcessNOP(ProcessMemory* m_pRemoteSourceAddress, uint32_t m_nSize);
 
+	// Makes a RET (0xC3 variant)
+	static void MakeProcessRET(ProcessMemory* m_pRemoteSourceAddress);
+
+	// Makes a RET (0xC2 variant)
+	static void MakeProcessRET(ProcessMemory* m_pRemoteSourceAddress, uint16_t m_Pop);
+
+	// Makes a RET with a return value (NULL in this case)
+	static void MakeProcessRET0(ProcessMemory* m_pRemoteSourceAddress);
+
 	// Makes a JMP on multiple (processes and) virtual addresses.
 	static inline void MakeMultipleProcessJMPs(std::initializer_list<ProcessMemory*> m_pRemoteSourceAddressList, ProcessMemory* m_pRemoteDestinationAddress)
 	{
