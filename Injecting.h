@@ -63,13 +63,13 @@ public:
 	static void MakeJE(Memory* mem, void* dest);
 
 	// Makes a JA 
-	static void MakeJA(uint32_t mem, uint32_t dest, bool bProtect = true)
+	static inline void MakeJA(uint32_t mem, uint32_t dest, bool bProtect = true)
 	{
 		WriteMemory<uint16_t>(mem, 0x870F, bProtect);
 		WriteMemory<uint32_t>(mem + 2, GetRelativeAddress(mem, dest - 6), bProtect);
 	}
 
-	static void MakeJA(uint32_t mem, void* dest, bool bProtect = true)
+	static inline void MakeJA(uint32_t mem, void* dest, bool bProtect = true)
 	{
 		WriteMemory<uint16_t>(mem, 0x870F, bProtect);
 		WriteMemory<uint32_t>(mem + 2, GetRelativeAddress(mem, reinterpret_cast<uint32_t>(dest) - 6), bProtect);

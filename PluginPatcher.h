@@ -8,7 +8,6 @@
 /*
 	TODO:
 	- Rename PluginPatcher to ModulePatcher, even though UG uses it to patch plugins in Underground_Core.asi
-	- Memory support
 	- Restorable patching in the future
 */
 

@@ -3,6 +3,9 @@
 #include <cstdint>
 
 /*
+	Credits:
+	-iFarbod
+
 	TODO:
 	- Vtable?
 */
