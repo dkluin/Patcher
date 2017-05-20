@@ -19,12 +19,8 @@ bool TheRawHooks::Initialize()
 	}
 }
 
-void TheRawHooks::StaticRawHook(uint32_t dwJumpFrom, std::string szBytes, uint32_t dwJumpTo)
-{
-
-}
-
-void TheRawHooks::ReplaceAllInString(std::string& szTargetStr, const std::string& szFrom, const std::string& szTo) 
+// Replaces all occurences in a string from szFrom to szTo
+void TheRawHooks::ReplaceAllInString(std::string& szTargetStr, const std::string& szFrom, const std::string& szTo)
 {
 	size_t nStartPos = 0;
 
@@ -34,26 +30,27 @@ void TheRawHooks::ReplaceAllInString(std::string& szTargetStr, const std::string
 	}
 	else
 	{
-
-	}
-
-	while ((nStartPos = szTargetStr.find(szFrom, nStartPos)) != std::string::npos)
-	{
-		szTargetStr.replace(nStartPos, szFrom.length(), szTo);
-		nStartPos += szTo.length(); 
+		while ((nStartPos = szTargetStr.find(szFrom, nStartPos)) != std::string::npos)
+		{
+			szTargetStr.replace(nStartPos, szFrom.length(), szTo);
+			nStartPos += szTo.length();
+		}
 	}
 }
 
-void TheRawHooks::StaticRawHook(Memory* pJumpFrom, std::string szBytes, Memory* pJumpTo)
+void TheRawHooks::StaticRawHook(uint32_t dwJumpFrom, std::string szBytes, uint32_t dwJumpTo)
 {
 	// Construct a RawHook
-	RawHook m_Hook(pJumpFrom->GetAddress(), pJumpTo->GetAddress());
+	RawHook m_Hook(dwJumpFrom, dwJumpTo);
 	m_Hook.Start();
 
 	// Get rid of all spaces between stuff
 	ReplaceAllInString(szBytes, " ", "");
 
+	// Scan the string for any keywords
+
 	// Scan the string for any variables
+	// TODO: make it so multiple variable keywords of the same name are found and replaced (VERY important)
 	for (uint32_t i = 0; i < m_vVariables.size(); i++)
 	{
 		switch (m_vVariables[i]->m_eType)
@@ -63,7 +60,7 @@ void TheRawHooks::StaticRawHook(Memory* pJumpFrom, std::string szBytes, Memory* 
 			{
 				char m_Hex[512];
 				sprintf(m_Hex, "%X", m_vVariables[i]->m_bValue);
-				szBytes.replace(szBytes.find(m_vVariables[i]->m_szVariableName), m_vVariables[i]->m_szVariableName.size(), std::to_string(m_vVariables[i]->m_bValue));
+				szBytes.replace(szBytes.find(m_vVariables[i]->m_szVariableName), m_vVariables[i]->m_szVariableName.size(), m_Hex);
 			}
 			break;
 
@@ -72,7 +69,7 @@ void TheRawHooks::StaticRawHook(Memory* pJumpFrom, std::string szBytes, Memory* 
 			{
 				char m_Hex[512];
 				sprintf(m_Hex, "%X", m_vVariables[i]->m_wValue);
-				szBytes.replace(szBytes.find(m_vVariables[i]->m_szVariableName), m_vVariables[i]->m_szVariableName.size(), std::to_string(m_vVariables[i]->m_wValue));
+				szBytes.replace(szBytes.find(m_vVariables[i]->m_szVariableName), m_vVariables[i]->m_szVariableName.size(), m_Hex);
 			}
 			break;
 
@@ -81,7 +78,7 @@ void TheRawHooks::StaticRawHook(Memory* pJumpFrom, std::string szBytes, Memory* 
 			{
 				char m_Hex[512];
 				sprintf(m_Hex, "%X", m_vVariables[i]->m_dwValue);
-				szBytes.replace(szBytes.find(m_vVariables[i]->m_szVariableName), m_vVariables[i]->m_szVariableName.size(), std::to_string(m_vVariables[i]->m_dwValue));
+				szBytes.replace(szBytes.find(m_vVariables[i]->m_szVariableName), m_vVariables[i]->m_szVariableName.size(), m_Hex);
 			}
 			break;
 
@@ -90,13 +87,31 @@ void TheRawHooks::StaticRawHook(Memory* pJumpFrom, std::string szBytes, Memory* 
 			{
 				char m_Hex[512];
 				sprintf(m_Hex, "%X", m_vVariables[i]->m_fValue);
-				szBytes.replace(szBytes.find(m_vVariables[i]->m_szVariableName), m_vVariables[i]->m_szVariableName.size(), std::to_string(m_vVariables[i]->m_fValue));
+				szBytes.replace(szBytes.find(m_vVariables[i]->m_szVariableName), m_vVariables[i]->m_szVariableName.size(), m_Hex);
 			}
 			break;
 		}
 	}
 
+	uint8_t* bBytes = new uint8_t[szBytes.size()];
+
+	for (uint32_t i = 0; i < szBytes.size(); i++)
+	{
+		bBytes[i] = szBytes[i];
+	}
+
+	// Write the newly created data to the rawhook
+	m_Hook.Write(bBytes, szBytes.size());
+
+	PatcherPrintMessageBox("%s", szBytes.c_str());
+
+	// Finish the newly created RawHook
 	m_Hook.Finish();
+}
+
+void TheRawHooks::StaticRawHook(Memory* pJumpFrom, std::string szBytes, Memory* pJumpTo)
+{
+
 }
 
 bool TheRawHooks::Shutdown()
