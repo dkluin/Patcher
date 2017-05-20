@@ -3,8 +3,11 @@
 
 void ProcessHooking::MakeProcessJMP(ProcessMemory* m_pRemoteSourceAddress, ProcessMemory* m_pRemoteDestinationAddress)
 {
-	m_pRemoteSourceAddress->ProcessSet<BYTE>(0xE9);
-	m_pRemoteSourceAddress->ProcessSet<uint32_t>(GetRelativeProcessAddress(m_pRemoteSourceAddress, m_pRemoteDestinationAddress - 5));
+	if (m_pRemoteSourceAddress->m_hProcessHandle == m_pRemoteDestinationAddress->m_hProcessHandle)
+	{
+		m_pRemoteSourceAddress->ProcessSet<BYTE>(0xE9);
+		m_pRemoteSourceAddress->ProcessSet<uint32_t>(GetRelativeProcessAddress(m_pRemoteSourceAddress, m_pRemoteDestinationAddress - 5));
+	}
 }
 
 void ProcessHooking::MakeProcessJMP(ProcessMemory* m_pRemoteSourceAddress, void* m_pRemoteDestinationAddress)
@@ -15,8 +18,11 @@ void ProcessHooking::MakeProcessJMP(ProcessMemory* m_pRemoteSourceAddress, void*
 
 void ProcessHooking::MakeProcessCALL(ProcessMemory* m_pRemoteSourceAddress, ProcessMemory* m_pRemoteDestinationAddress)
 {
-	m_pRemoteSourceAddress->ProcessSet<BYTE>(0xE8);
-	m_pRemoteSourceAddress->ProcessSet<uint32_t>(GetRelativeProcessAddress(m_pRemoteSourceAddress, m_pRemoteDestinationAddress - 5));
+	if (m_pRemoteSourceAddress->m_hProcessHandle == m_pRemoteDestinationAddress->m_hProcessHandle)
+	{
+		m_pRemoteSourceAddress->ProcessSet<BYTE>(0xE8);
+		m_pRemoteSourceAddress->ProcessSet<uint32_t>(GetRelativeProcessAddress(m_pRemoteSourceAddress, m_pRemoteDestinationAddress - 5));
+	}
 }
 
 void ProcessHooking::MakeProcessCALL(ProcessMemory* m_pRemoteSourceAddress, void* m_pRemoteDestinationAddress)

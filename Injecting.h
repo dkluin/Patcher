@@ -9,7 +9,6 @@
 
 	- Sort this into different files in Hooking directory?
 	- Proper patching with restore option 
-	- Statistics integration?
 */
 
 enum eInjectorError
@@ -115,11 +114,6 @@ public:
 		{
 			*reinterpret_cast<T*>(address) = value;
 		}
-
-
-		Memory mem(address);
-		mem.SetVirtualProtect(bProtect);
-		mem.Set<T>(value);
 	}
 
 	// Same variant, but with Memory class

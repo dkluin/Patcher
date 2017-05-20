@@ -1,7 +1,12 @@
 #include "Shared.hpp"
 #include "General.h"
 
-// memcpy with memory protection
+/*
+	General
+
+	These functions are wrappers around the well-known C functions (memcpy, memset...)
+	to allow them to both support restorable patching through Memory class instances, and use WINAPI's virtual protect feature.
+*/
 
 void General::MemCpy(uint32_t dest, void* src, size_t size, bool bProtect)
 {

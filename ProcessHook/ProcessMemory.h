@@ -9,6 +9,9 @@
 
 class ProcessMemory : public Memory
 {
+public:
+	friend class ProcessHooking;
+
 protected:
 	HANDLE m_hProcessHandle;
 
@@ -66,6 +69,28 @@ public:
 		}
 	}
 
+	ProcessMemory(const char* m_szClassName, const char* m_szWindowName, uint32_t m_dwAddress) : Memory(m_dwAddress)
+	{
+		DWORD m_PID;
+		HWND m_Hwnd;
+		HANDLE m_hLocalProcessHandle;
+
+		m_Hwnd = FindWindow(m_szClassName, m_szWindowName);
+
+		if (m_Hwnd)
+		{
+			GetWindowThreadProcessId(m_Hwnd, &m_PID);
+			m_hLocalProcessHandle = OpenProcess(PROCESS_ALL_ACCESS, false, m_PID);
+			if (m_hLocalProcessHandle)
+			{
+				AdjustProcessTokens(m_hLocalProcessHandle);
+				m_bProcessOpen = true;
+
+				m_hProcessHandle = m_hLocalProcessHandle;
+			}
+		}
+	}
+
 	// Same as above, but only use a window name
 	ProcessMemory(std::string m_szWindowName, uint32_t m_dwAddress) : Memory(m_dwAddress)
 	{
@@ -90,10 +115,33 @@ public:
 		}
 	}
 
+	ProcessMemory(const char* m_szWindowName, uint32_t m_dwAddress) : Memory(m_dwAddress)
+	{
+		DWORD m_PID;
+		HWND m_Hwnd;
+		HANDLE m_hLocalProcessHandle;
+
+		m_Hwnd = FindWindow(NULL, m_szWindowName);
+
+		if (m_Hwnd)
+		{
+			GetWindowThreadProcessId(m_Hwnd, &m_PID);
+
+			m_hLocalProcessHandle = OpenProcess(PROCESS_ALL_ACCESS, false, m_PID);
+			if (m_hLocalProcessHandle)
+			{
+				AdjustProcessTokens(m_hLocalProcessHandle);
+				m_bProcessOpen = true;
+
+				m_hProcessHandle = m_hLocalProcessHandle;
+			}
+		}
+	}
+
 	// Destructs the ProcessMemory if not done so already, as we need to close the process handle anyway
 	~ProcessMemory()
 	{
-		if (m_bProcessOpen)
+		if (m_bProcessOpen && m_hProcessHandle)
 		{
 			AdjustProcessTokens(m_hProcessHandle, false); 
 			CloseHandle(m_hProcessHandle);
