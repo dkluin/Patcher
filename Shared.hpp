@@ -9,6 +9,8 @@
 	- define all macroes tied to Patcher here and not in UG's Shared.hpp...
 */
 
+#define PATCHER_VERSION "2.0"
+
 #ifndef _M_IX86
 #error Patcher only supports x86.
 #endif
@@ -17,7 +19,7 @@
 #define X86_PUSHAD _asm pushad
 #define X86_POPAD _asm popad
 
-// Prints message box and also stores a new line inside log file
+// Prints message box (just a wrapper around MessageBoxA to make it like printf
 static void PatcherPrintMessageBox(const char* message, ...)
 {
 	va_list vl;

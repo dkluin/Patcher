@@ -1,16 +1,3 @@
-/*
-	RawHookVariable.cpp
-
-	Nothing more than unfinished code at this point, but it is in an useable state - except that its still not fully implemented
-
-	TODO:
-	- Memory support
-	- Refactoring
-	- Wrapper functions which create a RawHook but iterate through the data and place variables where needed, see TheRawHooks::StaticRawHook
-	- Better destructors which finish the RawHook if not done so when the instance goes out of scope
-	- Improved RawHookVariable which uses templates?
-*/
-
 #include "../Shared.hpp"
 #include "RawHookVariable.h"
 #include "TheRawHooks.h"
@@ -35,7 +22,7 @@ RawHookVariable::RawHookVariable(const char* szName, uint8_t value)
 }
 
 /*
-Constructs a RawHookVariable with a fixed size of 2 bytes
+	Constructs a RawHookVariable with a fixed size of 2 bytes
 */
 RawHookVariable::RawHookVariable(std::string szName, uint16_t value)
 {
@@ -91,6 +78,9 @@ RawHookVariable::RawHookVariable(const char* szName, float value)
 	TheRawHooks::m_vVariables.push_back(this);
 }
 
+/*
+	Destructs the RawHookVariable
+*/
 RawHookVariable::~RawHookVariable()
 {
 	// Cut out the destructed variable from the list of variables

@@ -1,16 +1,3 @@
-/*
-	RawHook.h
-
-	Nothing more than unfinished code at this point, but it is in an useable state - except that its still not fully implemented
-
-	TODO:
-	- Memory support
-	- Refactoring
-	- Wrapper functions which create a RawHook but iterate through the data and place variables where needed, see TheRawHooks::StaticRawHook
-	- Better destructors which finish the RawHook if not done so when the instance goes out of scope
-	- Improved RawHookVariable which uses templates?
-*/
-
 #include "../Shared.hpp"
 #include "RawHook.h"
 #include "TheRawHooks.h"
