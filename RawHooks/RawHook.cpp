@@ -67,20 +67,46 @@ void RawHook::Start()
 	}
 }
 
-void RawHook::WriteIntVariable(std::string m_szVariableName)
+void RawHook::WriteVariable(std::string m_szVariableName)
 {
 	for (uint32_t i = 0; i < TheRawHooks::m_vVariables.size(); i++)
 	{
 		if (TheRawHooks::m_vVariables[i]->GetVariableName() == m_szVariableName)
 		{
-			uint32_t value = TheRawHooks::m_vVariables[i]->GetVariableValue();
-			Write(static_cast<const void*>(&value), sizeof(uint32_t));
+			switch (TheRawHooks::m_vVariables[i]->m_eType)
+			{
+			case RAWHOOKVARIABLE_BYTE:
+				Write(static_cast<const void*>(&TheRawHooks::m_vVariables[i]->m_bValue), sizeof(uint8_t));
+				break;
+			case RAWHOOKVARIABLE_WORD:
+				Write(static_cast<const void*>(&TheRawHooks::m_vVariables[i]->m_wValue), sizeof(uint16_t));
+				break;
+			case RAWHOOKVARIABLE_DWORD:
+				Write(static_cast<const void*>(&TheRawHooks::m_vVariables[i]->m_dwValue), sizeof(uint32_t));
+				break;
+			case RAWHOOKVARIABLE_FLOAT:
+				Write(static_cast<const void*>(&TheRawHooks::m_vVariables[i]->m_fValue), sizeof(float));
+				break;
+			}
 		}
 	}
 }
 
-void RawHook::WriteIntVariable(RawHookVariable* m_pVar)
+void RawHook::WriteVariable(RawHookVariable* m_pVar)
 {
-	uint32_t value = m_pVar->GetVariableValue();
-	Write(static_cast<const void*>(&value), sizeof(uint32_t));
+	switch (m_pVar->m_eType)
+	{
+	case RAWHOOKVARIABLE_BYTE:
+		Write(static_cast<const void*>(&m_pVar->m_bValue), sizeof(uint8_t));
+		break;
+	case RAWHOOKVARIABLE_WORD:
+		Write(static_cast<const void*>(&m_pVar->m_wValue), sizeof(uint16_t));
+		break;
+	case RAWHOOKVARIABLE_DWORD:
+		Write(static_cast<const void*>(&m_pVar->m_dwValue), sizeof(uint32_t));
+		break;
+	case RAWHOOKVARIABLE_FLOAT:
+		Write(static_cast<const void*>(&m_pVar->m_fValue), sizeof(float));
+		break;
+	}
 }

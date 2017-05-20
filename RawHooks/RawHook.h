@@ -20,6 +20,9 @@
 
 class RawHook
 {
+public:
+	friend class RawHookVariable;
+
 private:
 	uint32_t m_dwJumpedFromAddr;
 	uint32_t m_dwJumpOutAddr;
@@ -56,8 +59,8 @@ public:
 	void MakeRawRET();
 
 	// Writes a variable's value
-	void WriteIntVariable(std::string m_szVariableName);
-	void WriteIntVariable(RawHookVariable* m_pVar);
+	void WriteVariable(std::string m_szVariableName);
+	void WriteVariable(RawHookVariable* m_pVar);
 
 	// Finishes with the current raw hook - this will add a JMP opcode to m_dwJumpOutAddr specified and then adds 2 NOP instructions (just to make it easier to identify patches)
 	void Finish();
