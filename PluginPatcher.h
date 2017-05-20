@@ -45,16 +45,16 @@ public:
 	}
 
 	// Makes a JMP in a loaded module
-	static uint32_t MakePluginJMP(HMODULE m_aModule, uint32_t m_dwRelativeAddress, void* pDest, bool bVirtualProtect = true);
-	static uint32_t MakePluginJMP(HMODULE m_aModule, Memory* m_dwRelativeAddress, void* pDest);
-	static uint32_t MakePluginJMP(HMODULE m_aModule, uint32_t m_dwRelativeAddress, uint32_t m_pDest, bool bProtect = true);
-	static uint32_t MakePluginJMP(HMODULE m_aModule, Memory* m_dwRelativeAddress, uint32_t m_pDest);
+	static void MakePluginJMP(HMODULE m_aModule, uint32_t m_dwRelativeAddress, void* pDest, bool bVirtualProtect = true);
+	static void MakePluginJMP(HMODULE m_aModule, Memory* m_dwRelativeAddress, void* pDest);
+	static void MakePluginJMP(HMODULE m_aModule, uint32_t m_dwRelativeAddress, uint32_t m_pDest, bool bProtect = true);
+	static void MakePluginJMP(HMODULE m_aModule, Memory* m_dwRelativeAddress, uint32_t m_pDest);
 
 	// Makes a CALL in a loaded module
-	static uint32_t MakePluginCALL(HMODULE m_aModule, uint32_t m_dwRelativeAddress, void* pDest, bool bVirtualProtect = true);
-	static uint32_t MakePluginCALL(HMODULE m_aModule, Memory* m_dwRelativeAddress, void* pDest);
-	static uint32_t MakePluginCALL(HMODULE m_aModule, uint32_t m_dwRelativeAddress, uint32_t m_pDest, bool bProtect = true);
-	static uint32_t MakePluginCALL(HMODULE m_aModule, Memory* m_dwRelativeAddress, uint32_t m_pDest);
+	static void MakePluginCALL(HMODULE m_aModule, uint32_t m_dwRelativeAddress, void* pDest, bool bVirtualProtect = true);
+	static void MakePluginCALL(HMODULE m_aModule, Memory* m_dwRelativeAddress, void* pDest);
+	static void MakePluginCALL(HMODULE m_aModule, uint32_t m_dwRelativeAddress, uint32_t m_pDest, bool bProtect = true);
+	static void MakePluginCALL(HMODULE m_aModule, Memory* m_dwRelativeAddress, uint32_t m_pDest);
 
 	// Make a plugin RET
 	static void MakePluginRET(HMODULE m_aModule, uint32_t m_dwRelativeAddress, bool bVirtualProtect = true);

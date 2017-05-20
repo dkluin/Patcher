@@ -1,6 +1,7 @@
 #include "../Shared.hpp"
 #include "ProcessHooking.h"
 
+// Simple variant of MakeProcessJMP - this 
 void ProcessHooking::MakeProcessJMP(ProcessMemory* m_pRemoteSourceAddress, ProcessMemory* m_pRemoteDestinationAddress)
 {
 	if (m_pRemoteSourceAddress->m_hProcessHandle == m_pRemoteDestinationAddress->m_hProcessHandle)
@@ -10,12 +11,6 @@ void ProcessHooking::MakeProcessJMP(ProcessMemory* m_pRemoteSourceAddress, Proce
 	}
 }
 
-void ProcessHooking::MakeProcessJMP(ProcessMemory* m_pRemoteSourceAddress, void* m_pRemoteDestinationAddress)
-{
-	m_pRemoteSourceAddress->ProcessSet<BYTE>(0xE9);
-	m_pRemoteSourceAddress->ProcessSet<uint32_t>(GetRelativeProcessAddress(m_pRemoteSourceAddress->GetAddress(), reinterpret_cast<uint32_t>(m_pRemoteDestinationAddress) - 5));
-}
-
 void ProcessHooking::MakeProcessCALL(ProcessMemory* m_pRemoteSourceAddress, ProcessMemory* m_pRemoteDestinationAddress)
 {
 	if (m_pRemoteSourceAddress->m_hProcessHandle == m_pRemoteDestinationAddress->m_hProcessHandle)
@@ -23,12 +18,6 @@ void ProcessHooking::MakeProcessCALL(ProcessMemory* m_pRemoteSourceAddress, Proc
 		m_pRemoteSourceAddress->ProcessSet<BYTE>(0xE8);
 		m_pRemoteSourceAddress->ProcessSet<uint32_t>(GetRelativeProcessAddress(m_pRemoteSourceAddress, m_pRemoteDestinationAddress - 5));
 	}
-}
-
-void ProcessHooking::MakeProcessCALL(ProcessMemory* m_pRemoteSourceAddress, void* m_pRemoteDestinationAddress)
-{
-	m_pRemoteSourceAddress->ProcessSet<BYTE>(0xE8);
-	m_pRemoteSourceAddress->ProcessSet<uint32_t>(GetRelativeProcessAddress(m_pRemoteSourceAddress->GetAddress(), reinterpret_cast<uint32_t>(m_pRemoteDestinationAddress) - 5));
 }
 
 void ProcessHooking::MakeProcessNOP(ProcessMemory* m_pRemoteSourceAddress, uint32_t m_nSize)

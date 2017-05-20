@@ -11,39 +11,72 @@
 	- Proper patching with restore option 
 */
 
-enum eInjectorError
-{
-	INJECTOR_ERROR_NONE = 0,
-	INJECTOR_ERROR_INVALID_MEMORY_PTR,
-	INJECTOR_ERROR_UNKNOWN
-};
-
 class MemoryInjector
 {
 public:
 	// Makes a JMP to a relative address or function
-	static uint32_t MakeJMP(Memory* mem, uint32_t dest);
-	static uint32_t MakeJMP(Memory* mem, void* dest);
-	static uint32_t MakeJMP(uint32_t mem, uint32_t dest, bool bProtect = true);
-	static uint32_t MakeJMP(uint32_t mem, void* dest, bool bProtect = true);
-	static uint32_t MakeJMP(HMODULE mem, uint32_t dest, bool bProtect = true);
-	static uint32_t MakeJMP(HMODULE mem, void* dest, bool bProtect = true);
+	static void MakeJMP(Memory* mem, uint32_t dest);
+	static void MakeJMP(Memory* mem, void* dest);
+
+	static inline void MakeJMP(uint32_t mem, uint32_t dest, bool bProtect = true)
+	{
+		WriteMemory<uint8_t>(mem, 0xE9, bProtect);
+		WriteMemory<uint32_t>(mem + 1, GetRelativeAddress(mem + 1, dest - 4), bProtect);
+	}
+
+	static inline void MakeJMP(uint32_t mem, void* dest, bool bProtect = true)
+	{
+		WriteMemory<uint8_t>(mem, 0xE9, bProtect);
+		WriteMemory<uint32_t>(mem + 1, GetRelativeAddress(mem + 1, reinterpret_cast<uint32_t>(dest) - 4), bProtect);
+	}
 
 	// Makes a CALL to a relative address or function
-	static uint32_t MakeCALL(Memory* mem, uint32_t dest);
-	static uint32_t MakeCALL(Memory* mem, void* dest);
-	static uint32_t MakeCALL(uint32_t mem, uint32_t dest, bool bProtect = true);
-	static uint32_t MakeCALL(uint32_t mem, void* dest, bool bProtect = true);
+	static void MakeCALL(Memory* mem, uint32_t dest);
+	static void MakeCALL(Memory* mem, void* dest);
 
-	// JMP functions
-	static uint32_t MakeJE(uint32_t mem, uint32_t dest, bool bProtect = true);
-	static uint32_t MakeJE(uint32_t mem, void* dest, bool bProtect = true);
-	static uint32_t MakeJE(Memory* mem, uint32_t dest);
-	static uint32_t MakeJE(Memory* mem, void* dest);
-	static uint32_t MakeJA(uint32_t mem, uint32_t dest, bool bProtect = true);
-	static uint32_t MakeJA(uint32_t mem, void* dest, bool bProtect = true);
-	static uint32_t MakeJA(Memory* mem, uint32_t dest);
-	static uint32_t MakeJA(Memory* mem, void* dest);
+	static inline void MakeCALL(uint32_t mem, uint32_t dest, bool bProtect = true)
+	{
+		WriteMemory<uint8_t>(mem, 0xE8, bProtect);
+		WriteMemory<uint32_t>(mem + 1, GetRelativeAddress(mem + 1, dest - 4), bProtect);
+	}
+
+	static inline void MakeCALL(uint32_t mem, void* dest, bool bProtect = true)
+	{
+		WriteMemory<uint8_t>(mem, 0xE8, bProtect);
+		WriteMemory<uint32_t>(mem + 1, GetRelativeAddress(mem + 1, reinterpret_cast<uint32_t>(dest) - 4), bProtect);
+	}
+
+	// Makes a JE
+	static inline void MakeJE(uint32_t mem, uint32_t dest, bool bProtect = true)
+	{
+		WriteMemory<uint16_t>(mem, 0x840F, bProtect);
+		WriteMemory<uint32_t>(mem + 2, GetRelativeAddress(mem, dest - 6), bProtect);
+	}
+
+	static inline void MakeJE(uint32_t mem, void* dest, bool bProtect = true)
+	{
+		WriteMemory<uint16_t>(mem, 0x840F, bProtect);
+		WriteMemory<uint32_t>(mem + 2, GetRelativeAddress(mem, reinterpret_cast<uint32_t>(dest) - 6), bProtect);
+	}
+
+	static void MakeJE(Memory* mem, uint32_t dest);
+	static void MakeJE(Memory* mem, void* dest);
+
+	// Makes a JA 
+	static void MakeJA(uint32_t mem, uint32_t dest, bool bProtect = true)
+	{
+		WriteMemory<uint16_t>(mem, 0x870F, bProtect);
+		WriteMemory<uint32_t>(mem + 2, GetRelativeAddress(mem, dest - 6), bProtect);
+	}
+
+	static void MakeJA(uint32_t mem, void* dest, bool bProtect = true)
+	{
+		WriteMemory<uint16_t>(mem, 0x870F, bProtect);
+		WriteMemory<uint32_t>(mem + 2, GetRelativeAddress(mem, reinterpret_cast<uint32_t>(dest) - 6), bProtect);
+	}
+
+	static void MakeJA(Memory* mem, uint32_t dest);
+	static void MakeJA(Memory* mem, void* dest);
 
 	// Injects a function patch on multiple addresses 
 	// Memory protection is applied to all addresses defined
