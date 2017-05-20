@@ -2,6 +2,7 @@
 
 #include "../Memory.h"
 
+// This is nothing more than unfinished code...
 class Detour : public Memory
 {
 private:

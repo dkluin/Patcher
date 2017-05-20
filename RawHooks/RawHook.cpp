@@ -1,3 +1,16 @@
+/*
+	RawHook.h
+
+	Nothing more than unfinished code at this point, but it is in an useable state - except that its still not fully implemented
+
+	TODO:
+	- Memory support
+	- Refactoring
+	- Wrapper functions which create a RawHook but iterate through the data and place variables where needed, see TheRawHooks::StaticRawHook
+	- Better destructors which finish the RawHook if not done so when the instance goes out of scope
+	- Improved RawHookVariable which uses templates?
+*/
+
 #include "../Shared.hpp"
 #include "RawHook.h"
 #include "TheRawHooks.h"
@@ -7,15 +20,10 @@
 
 RawHook::RawHook(uint32_t m_dwJumpFrom, uint32_t m_dwJumpTo)
 {
-	this->m_dwJumpedFromAddr = m_dwJumpFrom;
-	this->m_dwJumpOutAddr = m_dwJumpTo;
-	this->m_bFinished = false;
-	this->m_bStarted = false;
-}
-
-RawHook::~RawHook()
-{
-
+	m_dwJumpedFromAddr = m_dwJumpFrom;
+	m_dwJumpOutAddr = m_dwJumpTo;
+	m_bFinished = false;
+	m_bStarted = false;
 }
 
 void RawHook::Write(const void* m_nData, size_t m_iSize)
@@ -38,24 +46,24 @@ void RawHook::MakeRawCALL(uint32_t m_dwReturnAddr)
 
 void RawHook::Finish()
 {
-	if (this->m_bStarted && !this->m_bFinished)
+	if (m_bStarted && !m_bFinished)
 	{
-		this->MakeRawJMP(this->m_dwJumpOutAddr);
-		this->Write("\x90\x90", 2);
+		MakeRawJMP(m_dwJumpOutAddr);
+		Write("\x90\x90", 2);
 
 		// Write a JMP instruction on the specified address to the starting position
-		MemoryInjector::MakeJMP(this->m_dwJumpedFromAddr, TheRawHooks::ms_pTheRawHooks + this->m_dwPositionOnStart, true);
-		this->m_bFinished = true;
+		MemoryInjector::MakeJMP(m_dwJumpedFromAddr, TheRawHooks::ms_pTheRawHooks + m_dwPositionOnStart, true);
+		m_bFinished = true;
 	}
 }
 
 void RawHook::Start()
 {
-	if (!this->m_bStarted)
+	if (!m_bStarted)
 	{
-		this->m_dwPositionOnStart = TheRawHooks::ms_nGlobalPos + sizeof(uint16_t);
-		this->Write("\x90\x90", 2);
-		this->m_bStarted = true;
+		m_dwPositionOnStart = TheRawHooks::ms_nGlobalPos + sizeof(uint16_t);
+		Write("\x90\x90", 2);
+		m_bStarted = true;
 	}
 }
 
@@ -66,7 +74,7 @@ void RawHook::WriteIntVariable(std::string m_szVariableName)
 		if (TheRawHooks::m_vVariables[i]->GetVariableName() == m_szVariableName)
 		{
 			uint32_t value = TheRawHooks::m_vVariables[i]->GetVariableValue();
-			this->Write(static_cast<const void*>(&value), sizeof(uint32_t));
+			Write(static_cast<const void*>(&value), sizeof(uint32_t));
 		}
 	}
 }
@@ -74,5 +82,5 @@ void RawHook::WriteIntVariable(std::string m_szVariableName)
 void RawHook::WriteIntVariable(RawHookVariable* m_pVar)
 {
 	uint32_t value = m_pVar->GetVariableValue();
-	this->Write(static_cast<const void*>(&value), sizeof(uint32_t));
+	Write(static_cast<const void*>(&value), sizeof(uint32_t));
 }
