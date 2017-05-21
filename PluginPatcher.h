@@ -27,7 +27,7 @@ public:
 	static LPVOID GetPluginEntryPointA(LPCSTR m_szPluginName);
 	static LPVOID GetPluginEntryPointW(LPWSTR m_szPluginName);
 
-	// Inlined alternatives
+	// Inlined alternatives for those who whish to use std::string
 	static inline LPVOID GetPluginEntryPoint(std::string m_szPluginName)
 	{
 		return GetPluginEntryPoint(m_szPluginName.c_str());

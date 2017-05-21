@@ -118,6 +118,24 @@ public:
 
 	static void StrNCpy(Memory* m_pDest, char* src, size_t size);
 
+	// Memcmp with virtual protect
+	static inline int MemCmp(void* pBuffer1, void* pBuffer2, size_t iSize, bool bProtect = true)
+	{
+		DWORD m_OldVirtualProtect[2];
+
+		if (bProtect)
+		{
+			VirtualProtect(pBuffer1, iSize, PAGE_EXECUTE_READWRITE, &m_OldVirtualProtect[0]);
+			int result = memcmp(pBuffer1, pBuffer2, iSize);
+			VirtualProtect(pBuffer1, iSize, m_OldVirtualProtect[0], &m_OldVirtualProtect[1]);
+			return result;
+		}
+		else
+		{
+			return memcmp(pBuffer1, pBuffer2, iSize);
+		}
+	}
+
 	// Unprotect/protect functions
 	static inline DWORD MemoryProtect(uint32_t dwAddr, DWORD dwNewVirtualProtect, PDWORD dwOldVirtualProtect, size_t iSize)
 	{

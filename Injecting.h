@@ -79,7 +79,7 @@ public:
 	static void MakeJA(Memory* mem, void* dest);
 
 	// Injects a function patch on multiple addresses 
-	// Memory protection is applied to all addresses defined
+	// Memory protection is applied to all addresses defined, unless when using Memory classes
 	static void MakeMultipleCALLs(std::initializer_list<uint32_t> m_vAddresses, uint32_t m_pDest, bool bProtect = true);
 	static void MakeMultipleCALLs(std::initializer_list<uint32_t> m_vAddresses, void* m_pDest, bool bProtect = true);
 	static void MakeMultipleCALLs(std::initializer_list<Memory*> m_vAddresses, uint32_t m_pDest);

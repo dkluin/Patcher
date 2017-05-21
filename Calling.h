@@ -104,17 +104,4 @@ public:
 		auto fn = (Ret(__vectorcall*)(Args...)) m_pAddress->GetAddress();
 		return fn(std::forward<Args>(m_Args)...);
 	}
-
-	// Vtbl
-	template <size_t index>
-	struct Vtbl
-	{
-		template <class Ret, class... Args>
-		static Ret Call(Args... a)
-		{
-			auto obj = std::get<0>(std::forward_as_tuple(a...));
-			auto p = (*obj.template Get<void**>())[i];
-			return ThisCall<Ret>(p, std::forward<Args>(a)...);
-		}
-	};
 };

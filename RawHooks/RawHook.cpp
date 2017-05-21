@@ -4,7 +4,6 @@
 #include "../General.h"
 #include "../Injecting.h"
 
-
 RawHook::RawHook(uint32_t m_dwJumpFrom, uint32_t m_dwJumpTo)
 {
 	m_dwJumpedFromAddr = m_dwJumpFrom;
@@ -42,6 +41,12 @@ void RawHook::Finish()
 		MemoryInjector::MakeJMP(m_dwJumpedFromAddr, TheRawHooks::ms_pTheRawHooks + m_dwPositionOnStart, true);
 		m_bFinished = true;
 	}
+}
+
+void RawHook::MakeRawRET()
+{
+	MemoryInjector::MakeRET(reinterpret_cast<uint32_t>(TheRawHooks::ms_pTheRawHooks) + TheRawHooks::ms_nGlobalPos, true);
+	TheRawHooks::ms_nGlobalPos += 1;
 }
 
 void RawHook::Start()

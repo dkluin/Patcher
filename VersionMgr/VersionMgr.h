@@ -2,7 +2,7 @@
 
 #include "../Main.h"
 
-enum eVersions
+enum eVersions : int
 {
 	VERSION_GAME_UNKNOWN = 0,
 	VERSION_GTA_III_1_0,
@@ -23,6 +23,18 @@ enum eVersions
 	VERSION_GTA_SA_1_1_EU_DEVIANCE,
 	VERSION_GTA_SA_3_0_CRACKED_STEAM,
 	VERSION_GTA_SA_3_0_ENCRYPTED_STEAM
+};
+
+class VersionAddress
+{
+public:
+	uint32_t m_dwAddress;
+	eVersions m_eVersion;
+
+	VersionAddress(uint32_t dwAddress, eVersions eVersion = VERSION_GAME_UNKNOWN)
+	{
+
+	}
 };
 
 class VersionMgr
@@ -54,6 +66,9 @@ public:
 	// Convert address from US to EU
 	static uint32_t ConvertAddressFromUStoEU(uint32_t addr);
 	static void ConvertAddressFromUStoEU(Memory* addr);
+
+	// Accepts a range of addresses with a version identifier and returns the correct one based on the version obtained through InitializeVersionMgr
+	static uint32_t GetAddressByVersion(std::initializer_list<VersionAddress> vVersionAddresses);
 
 private:
 	// Game version

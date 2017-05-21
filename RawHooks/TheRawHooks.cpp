@@ -47,8 +47,6 @@ void TheRawHooks::StaticRawHook(uint32_t dwJumpFrom, std::string szBytes, uint32
 	// Get rid of all spaces between stuff
 	ReplaceAllInString(szBytes, " ", "");
 
-	// Scan the string for any keywords
-
 	// Scan the string for any variables
 	// TODO: make it so multiple variable keywords of the same name are found and replaced (VERY important)
 	for (uint32_t i = 0; i < m_vVariables.size(); i++)
@@ -117,10 +115,9 @@ void TheRawHooks::StaticRawHook(Memory* pJumpFrom, std::string szBytes, Memory* 
 	// Get rid of all spaces between stuff
 	ReplaceAllInString(szBytes, " ", "");
 
-	// Scan the string for any keywords
-
 	// Scan the string for any variables
 	// TODO: make it so multiple variable keywords of the same name are found and replaced (VERY important)
+	// perhaps use ReplaceAllInString
 	for (uint32_t i = 0; i < m_vVariables.size(); i++)
 	{
 		switch (m_vVariables[i]->m_eType)
@@ -178,6 +175,7 @@ void TheRawHooks::StaticRawHook(Memory* pJumpFrom, std::string szBytes, Memory* 
 	m_Hook.Finish();
 }
 
+// Shutdown TheRawHooks, this will free the heap
 bool TheRawHooks::Shutdown()
 {
 	if (ms_pTheRawHooks)

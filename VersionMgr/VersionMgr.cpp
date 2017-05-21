@@ -270,6 +270,17 @@ uint32_t VersionMgr::ConvertAddressFromEUtoUS(uint32_t addr)
 	return 0;
 }
 
+uint32_t VersionMgr::GetAddressByVersion(std::initializer_list<VersionAddress> vVersionAddresses)
+{
+	for (auto it : vVersionAddresses)
+	{
+		if (it.m_eVersion == GameVersion)
+		{
+			return it.m_dwAddress;
+		}
+	}
+}
+
 
 void VersionMgr::ConvertAddressFromEUtoUS(Memory* addr)
 {

@@ -26,6 +26,7 @@ public:
 		uint32_t m_dwValue;
 		float m_fValue;
 	};
+
 	eRawHookVariableType m_eType;
 
 	std::string m_szVariableName;
