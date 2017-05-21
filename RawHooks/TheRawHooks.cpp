@@ -176,6 +176,7 @@ void TheRawHooks::StaticRawHook(Memory* pJumpFrom, std::string szBytes, Memory* 
 }
 
 // Shutdown TheRawHooks, this will free the heap
+// TODO: when restorable patching is completed, maybe make all JMPs to this heap restorable so it can restore the original instructions before freeing the heap?
 bool TheRawHooks::Shutdown()
 {
 	if (ms_pTheRawHooks)

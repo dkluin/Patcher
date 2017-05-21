@@ -193,5 +193,180 @@ public:
 		}
 	}
 
-	// TODO: add normal operators...
+	// Normal operators
+	RawHookVariable& operator+(const RawHookVariable& pRawHookVar) const
+	{
+		if (m_eType == pRawHookVar.m_eType)
+		{
+			switch (m_eType)
+			{
+			case RAWHOOKVARIABLE_BYTE:
+				return RawHookVariable(m_szVariableName, static_cast<uint8_t>(m_bValue + pRawHookVar.m_bValue));
+			case RAWHOOKVARIABLE_WORD:
+				return RawHookVariable(m_szVariableName, static_cast<uint16_t>(m_wValue + pRawHookVar.m_wValue));
+			case RAWHOOKVARIABLE_DWORD:
+				return RawHookVariable(m_szVariableName, static_cast<uint32_t>(m_dwValue + pRawHookVar.m_dwValue));
+			case RAWHOOKVARIABLE_FLOAT:
+				return RawHookVariable(m_szVariableName, static_cast<float>(m_fValue + pRawHookVar.m_fValue));
+			}
+		}
+	}
+
+	RawHookVariable& operator-(const RawHookVariable& pRawHookVar) const
+	{
+		if (m_eType == pRawHookVar.m_eType)
+		{
+			switch (m_eType)
+			{
+			case RAWHOOKVARIABLE_BYTE:
+				return RawHookVariable(m_szVariableName, static_cast<uint8_t>(m_bValue - pRawHookVar.m_bValue));
+			case RAWHOOKVARIABLE_WORD:
+				return RawHookVariable(m_szVariableName, static_cast<uint16_t>(m_wValue - pRawHookVar.m_wValue));
+			case RAWHOOKVARIABLE_DWORD:
+				return RawHookVariable(m_szVariableName, static_cast<uint32_t>(m_dwValue - pRawHookVar.m_dwValue));
+			case RAWHOOKVARIABLE_FLOAT:
+				return RawHookVariable(m_szVariableName, static_cast<float>(m_fValue - pRawHookVar.m_fValue));
+			}
+		}
+	}
+
+	RawHookVariable& operator*(const RawHookVariable& pRawHookVar) const
+	{
+		if (m_eType == pRawHookVar.m_eType)
+		{
+			switch (m_eType)
+			{
+			case RAWHOOKVARIABLE_BYTE:
+				return RawHookVariable(m_szVariableName, static_cast<uint8_t>(m_bValue * pRawHookVar.m_bValue));
+			case RAWHOOKVARIABLE_WORD:
+				return RawHookVariable(m_szVariableName, static_cast<uint16_t>(m_wValue * pRawHookVar.m_wValue));
+			case RAWHOOKVARIABLE_DWORD:
+				return RawHookVariable(m_szVariableName, static_cast<uint32_t>(m_dwValue * pRawHookVar.m_dwValue));
+			case RAWHOOKVARIABLE_FLOAT:
+				return RawHookVariable(m_szVariableName, static_cast<float>(m_fValue * pRawHookVar.m_fValue));
+			}
+		}
+	}
+
+	RawHookVariable& operator/(const RawHookVariable& pRawHookVar) const
+	{
+		if (m_eType == pRawHookVar.m_eType)
+		{
+			switch (m_eType)
+			{
+			case RAWHOOKVARIABLE_BYTE:
+				return RawHookVariable(m_szVariableName, static_cast<uint8_t>(m_bValue / pRawHookVar.m_bValue));
+			case RAWHOOKVARIABLE_WORD:
+				return RawHookVariable(m_szVariableName, static_cast<uint16_t>(m_wValue / pRawHookVar.m_wValue));
+			case RAWHOOKVARIABLE_DWORD:
+				return RawHookVariable(m_szVariableName, static_cast<uint32_t>(m_dwValue / pRawHookVar.m_dwValue));
+			case RAWHOOKVARIABLE_FLOAT:
+				return RawHookVariable(m_szVariableName, static_cast<float>(m_fValue / pRawHookVar.m_fValue));
+			}
+		}
+	}
+
+	RawHookVariable& operator%(const RawHookVariable& pRawHookVar) const
+	{
+		if (m_eType == pRawHookVar.m_eType)
+		{
+			switch (m_eType)
+			{
+			case RAWHOOKVARIABLE_BYTE:
+				return RawHookVariable(m_szVariableName, static_cast<uint8_t>(m_bValue % pRawHookVar.m_bValue));
+			case RAWHOOKVARIABLE_WORD:
+				return RawHookVariable(m_szVariableName, static_cast<uint16_t>(m_wValue % pRawHookVar.m_wValue));
+			case RAWHOOKVARIABLE_DWORD:
+				return RawHookVariable(m_szVariableName, static_cast<uint32_t>(m_dwValue % pRawHookVar.m_dwValue));
+			}
+		}
+	}
+
+	RawHookVariable& operator+=(const RawHookVariable& pRawHookVar) const
+	{
+		if (m_eType == pRawHookVar.m_eType)
+		{
+			switch (m_eType)
+			{
+			case RAWHOOKVARIABLE_BYTE:
+				return RawHookVariable(m_szVariableName, static_cast<uint8_t>(m_bValue + pRawHookVar.m_bValue));
+			case RAWHOOKVARIABLE_WORD:
+				return RawHookVariable(m_szVariableName, static_cast<uint16_t>(m_wValue + pRawHookVar.m_wValue));
+			case RAWHOOKVARIABLE_DWORD:
+				return RawHookVariable(m_szVariableName, static_cast<uint32_t>(m_dwValue + pRawHookVar.m_dwValue));
+			case RAWHOOKVARIABLE_FLOAT:
+				return RawHookVariable(m_szVariableName, static_cast<float>(m_fValue + pRawHookVar.m_fValue));
+			}
+		}
+	}
+
+	RawHookVariable& operator-=(const RawHookVariable& pRawHookVar) const
+	{
+		if (m_eType == pRawHookVar.m_eType)
+		{
+			switch (m_eType)
+			{
+			case RAWHOOKVARIABLE_BYTE:
+				return RawHookVariable(m_szVariableName, static_cast<uint8_t>(m_bValue - pRawHookVar.m_bValue));
+			case RAWHOOKVARIABLE_WORD:
+				return RawHookVariable(m_szVariableName, static_cast<uint16_t>(m_wValue - pRawHookVar.m_wValue));
+			case RAWHOOKVARIABLE_DWORD:
+				return RawHookVariable(m_szVariableName, static_cast<uint32_t>(m_dwValue - pRawHookVar.m_dwValue));
+			case RAWHOOKVARIABLE_FLOAT:
+				return RawHookVariable(m_szVariableName, static_cast<float>(m_fValue - pRawHookVar.m_fValue));
+			}
+		}
+	}
+
+	RawHookVariable& operator*=(const RawHookVariable& pRawHookVar) const
+	{
+		if (m_eType == pRawHookVar.m_eType)
+		{
+			switch (m_eType)
+			{
+			case RAWHOOKVARIABLE_BYTE:
+				return RawHookVariable(m_szVariableName, static_cast<uint8_t>(m_bValue * pRawHookVar.m_bValue));
+			case RAWHOOKVARIABLE_WORD:
+				return RawHookVariable(m_szVariableName, static_cast<uint16_t>(m_wValue * pRawHookVar.m_wValue));
+			case RAWHOOKVARIABLE_DWORD:
+				return RawHookVariable(m_szVariableName, static_cast<uint32_t>(m_dwValue * pRawHookVar.m_dwValue));
+			case RAWHOOKVARIABLE_FLOAT:
+				return RawHookVariable(m_szVariableName, static_cast<float>(m_fValue * pRawHookVar.m_fValue));
+			}
+		}
+	}
+
+	RawHookVariable& operator/=(const RawHookVariable& pRawHookVar) const
+	{
+		if (m_eType == pRawHookVar.m_eType)
+		{
+			switch (m_eType)
+			{
+			case RAWHOOKVARIABLE_BYTE:
+				return RawHookVariable(m_szVariableName, static_cast<uint8_t>(m_bValue / pRawHookVar.m_bValue));
+			case RAWHOOKVARIABLE_WORD:
+				return RawHookVariable(m_szVariableName, static_cast<uint16_t>(m_wValue / pRawHookVar.m_wValue));
+			case RAWHOOKVARIABLE_DWORD:
+				return RawHookVariable(m_szVariableName, static_cast<uint32_t>(m_dwValue / pRawHookVar.m_dwValue));
+			case RAWHOOKVARIABLE_FLOAT:
+				return RawHookVariable(m_szVariableName, static_cast<float>(m_fValue / pRawHookVar.m_fValue));
+			}
+		}
+	}
+
+	RawHookVariable& operator%=(const RawHookVariable& pRawHookVar) const
+	{
+		if (m_eType == pRawHookVar.m_eType)
+		{
+			switch (m_eType)
+			{
+			case RAWHOOKVARIABLE_BYTE:
+				return RawHookVariable(m_szVariableName, static_cast<uint8_t>(m_bValue % pRawHookVar.m_bValue));
+			case RAWHOOKVARIABLE_WORD:
+				return RawHookVariable(m_szVariableName, static_cast<uint16_t>(m_wValue % pRawHookVar.m_wValue));
+			case RAWHOOKVARIABLE_DWORD:
+				return RawHookVariable(m_szVariableName, static_cast<uint32_t>(m_dwValue % pRawHookVar.m_dwValue));
+			}
+		}
+	}
 };

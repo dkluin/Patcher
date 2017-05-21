@@ -232,6 +232,6 @@ void MemoryInjector::MakeCALL(Memory* mem, void* dest)
 {
 	mem->Set<BYTE>(0xE8);
 	mem->ChangeAddress(mem->GetAddress() + 1);
-	mem->Set<uint32_t>(GetRelativeAddress(mem->GetAddress(), (uint32_t)dest - 4));
+	mem->Set<uint32_t>(GetRelativeAddress(mem->GetAddress(), reinterpret_cast<uint32_t>(dest) - 4));
 	mem->ChangeAddress(mem->GetAddress() - 1);
 }
