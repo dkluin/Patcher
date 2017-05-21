@@ -26,50 +26,48 @@ public:
 	// Wrappers around RawHookVariable constructor for laziness sake
 	static inline RawHookVariable* CreateVariable(std::string szVariableName, uint8_t bValue)
 	{
-		RawHookVariable m_Variable(szVariableName, bValue);
-		return &m_Variable;
+		return new RawHookVariable(szVariableName, bValue);
 	}
 
 	static inline RawHookVariable* CreateVariable(const char* szVariableName, uint8_t bValue)
 	{
-		RawHookVariable m_Variable(szVariableName, bValue);
-		return &m_Variable;
+		return new RawHookVariable(szVariableName, bValue);
 	}
 
 	static inline RawHookVariable* CreateVariable(std::string szVariableName, uint16_t wValue)
 	{
-		RawHookVariable m_Variable(szVariableName, wValue);
-		return &m_Variable;
+		return new RawHookVariable(szVariableName, wValue);
 	}
 
 	static inline RawHookVariable* CreateVariable(const char* szVariableName, uint16_t wValue)
 	{
-		RawHookVariable m_Variable(szVariableName, wValue);
-		return &m_Variable;
+		return new RawHookVariable(szVariableName, wValue);
 	}
 
 	static inline RawHookVariable* CreateVariable(std::string szVariableName, uint32_t dwValue)
 	{
-		RawHookVariable m_Variable(szVariableName, dwValue);
-		return &m_Variable;
+		return new RawHookVariable(szVariableName, dwValue);
 	}
 
 	static inline RawHookVariable* CreateVariable(const char* szVariableName, uint32_t dwValue)
 	{
-		RawHookVariable m_Variable(szVariableName, dwValue);
-		return &m_Variable;
+		return new RawHookVariable(szVariableName, dwValue);
 	}
 
 	static inline RawHookVariable* CreateVariable(std::string szVariableName, float fValue)
 	{
-		RawHookVariable m_Variable(szVariableName, fValue);
-		return &m_Variable;
+		return new RawHookVariable(szVariableName, fValue);
 	}
 
 	static inline RawHookVariable* CreateVariable(const char* szVariableName, float fValue)
 	{
-		RawHookVariable m_Variable(szVariableName, fValue);
-		return &m_Variable;
+		return new RawHookVariable(szVariableName, fValue);
+	}
+
+	// Wrapper around RawHookVariables destructor
+	static inline void DeleteVariable(RawHookVariable* pVariable)
+	{
+		delete pVariable;
 	}
 
 private:
