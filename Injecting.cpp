@@ -43,7 +43,7 @@ void MemoryInjector::MakeJE(Memory* mem, void* dest)
 {
 	mem->Set<uint16_t>(0x840F);
 	mem->ChangeAddress(mem->GetAddress() + 2);
-	mem->Set<uint32_t>(GetRelativeAddress(mem->GetAddress(), (uint32_t)dest - 6));
+	mem->Set<uint32_t>(GetRelativeAddress(mem->GetAddress(), reinterpret_cast<uint32_t>(dest) - 6));
 	mem->ChangeAddress(mem->GetAddress() - 2);
 }
 

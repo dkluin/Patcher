@@ -3,6 +3,7 @@
 #include <cstdint>
 #include <Windows.h>
 #include <vector>
+
 /////////////// New code which uses operators for comparing, setting, and even adding, multiplying, and much more 
 
 enum eRestorableType
@@ -20,28 +21,6 @@ enum eRestorableType
 	RESTORE_PLUGIN_RET
 };
 
-struct RestoreMemWrite
-{
-	size_t m_Size;
-	uint8_t* m_Data;
-};
-
-struct RestoreMakeJMP
-{
-	uint32_t m_dwOldData[5];
-};
-
-struct RestoreMakeCALL
-{
-	uint32_t m_dwOldData[5];
-};
-
-struct RestoreMakeNOP
-{
-	size_t m_Size;
-	uint8_t* m_Data;
-};
-
 class Memory
 {
 	friend class MemoryInjector;
@@ -49,18 +28,10 @@ class Memory
 protected:
 	uint32_t Address;
 
-	bool bShouldStoreOriginal : 1; // When setting memory, keep the original value. This however does not mean that you can re-apply a patch, for that use bRestoreablePatchingWithReApply
+	bool bShouldStoreOriginal : 1; // When setting memory, keep the original value.
 	bool bRequiresVirtualProtection : 1; // We need to override the current address permissions when using the operators
-	bool bRestoreablePatchingWithReApply : 1; // Not only allows you to restore patches, but you may also re-apply them. 
 
 	bool bOldVirtualProtect; // Old virtual protection setting 
-
-public:
-	// Restorable stuff		
-	std::vector<RestoreMemWrite> m_RestoreMemWrite;
-	std::vector<RestoreMakeJMP> m_RestoreMakeJMP;
-	std::vector<RestoreMakeCALL> m_RestoreMakeCALL;
-	std::vector<RestoreMakeNOP> m_RestoreMakeNOP;
 
 protected:
 	eRestorableType m_Type; // Used to tell which member of our union is active

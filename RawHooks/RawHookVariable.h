@@ -194,6 +194,7 @@ public:
 	}
 
 	// Normal operators
+	// TODO: remove duplicated variable names?
 	RawHookVariable& operator+(const RawHookVariable& pRawHookVar) const
 	{
 		if (m_eType == pRawHookVar.m_eType)

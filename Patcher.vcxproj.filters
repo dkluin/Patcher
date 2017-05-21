@@ -37,6 +37,7 @@
     <ClCompile Include="ProcessHook\ProcessHooking.cpp">
       <Filter>ProcessHook</Filter>
     </ClCompile>
+    <ClCompile Include="RestorableMemory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
@@ -79,6 +80,7 @@
     <ClInclude Include="ProcessHook\ProcessHooking.h">
       <Filter>ProcessHook</Filter>
     </ClInclude>
+    <ClInclude Include="RestorableMemory.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="VersionMgr">

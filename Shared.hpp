@@ -15,9 +15,25 @@
 #error Patcher only supports x86.
 #endif
 
-// Useful macroes
+// Pushad/popad macro (not really useful but still)
+#ifndef X86_PUSHAD
 #define X86_PUSHAD _asm pushad
+#endif
+#ifndef X86_POPAD
 #define X86_POPAD _asm popad
+#endif
+
+// Naked/nude/patch macroes
+#ifndef NAKED
+#define NAKED __declspec(naked)
+#endif
+#ifndef PATCH
+#define PATCH __declspec(naked)
+#endif
+#ifndef NUDE
+#define NUDE __declspec(naked)
+#endif
+
 
 // Prints message box (just a wrapper around MessageBoxA to make it like printf
 static void PatcherPrintMessageBox(const char* message, ...)
