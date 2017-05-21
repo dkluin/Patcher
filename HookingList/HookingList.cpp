@@ -1,28 +1,28 @@
 #include "../Shared.hpp"
 #include "HookingList.h"
 
-std::vector<std::function<void()>>* HookingList::function_list;
+// The list of hooking lists
+std::vector<std::function<void()>>* HookingList::ms_vHookingLists;
 
-
-HookingList::HookingList(std::function<void()> single_function)
+HookingList::HookingList(std::function<void()> pHookingList)
 {
-	if (!function_list)
+	if (!ms_vHookingLists)
 	{
-		function_list = new std::vector<std::function<void()>>;
+		ms_vHookingLists = new std::vector<std::function<void()>>;
 	}
-	function_list->push_back(single_function);
+	ms_vHookingLists->push_back(pHookingList);
 }
 
 void HookingList::RunAll()
 {
-	if (function_list)
+	if (ms_vHookingLists)
 	{
-		for (auto function = function_list->cbegin(); function != function_list->cend(); function++)
+		for (auto it = ms_vHookingLists->cbegin(); it != ms_vHookingLists->cend(); it++)
 		{
-			(*function)();
+			(*it)();
 		}
 
 		// Destroy the entire list because it is no longer needed
-		delete function_list;
+		delete ms_vHookingLists;
 	}
 }

@@ -6,11 +6,11 @@
 class HookingList
 {
 private:
-	static std::vector<std::function<void()>>* function_list;
+	static std::vector<std::function<void()>>* ms_vHookingLists;
 
 public:
 	// Run it all!
 	static void RunAll();
 
-	HookingList(std::function<void()> single_function);
+	HookingList(std::function<void()> pHookingList);
 };

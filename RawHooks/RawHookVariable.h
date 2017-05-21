@@ -83,4 +83,115 @@ public:
 	{
 		return m_bShouldUseVector;
 	}
+
+	// Comparison operators
+	bool operator==(const RawHookVariable& otherVar) const
+	{
+		if (m_eType == otherVar.m_eType)
+		{
+			switch (m_eType)
+			{
+			case RAWHOOKVARIABLE_BYTE:
+				return m_bValue == otherVar.m_bValue;
+			case RAWHOOKVARIABLE_WORD:
+				return m_wValue == otherVar.m_wValue;
+			case RAWHOOKVARIABLE_DWORD:
+				return m_dwValue == otherVar.m_dwValue;
+			case RAWHOOKVARIABLE_FLOAT:
+				return m_fValue == otherVar.m_fValue;
+			}
+		}
+	}
+
+	bool operator<(const RawHookVariable& otherVar) const
+	{
+		if (m_eType == otherVar.m_eType)
+		{
+			switch (m_eType)
+			{
+			case RAWHOOKVARIABLE_BYTE:
+				return m_bValue < otherVar.m_bValue;
+			case RAWHOOKVARIABLE_WORD:
+				return m_wValue < otherVar.m_wValue;
+			case RAWHOOKVARIABLE_DWORD:
+				return m_dwValue < otherVar.m_dwValue;
+			case RAWHOOKVARIABLE_FLOAT:
+				return m_fValue < otherVar.m_fValue;
+			}
+		}
+	}
+
+	bool operator>(const RawHookVariable& otherVar) const
+	{
+		if (m_eType == otherVar.m_eType)
+		{
+			switch (m_eType)
+			{
+			case RAWHOOKVARIABLE_BYTE:
+				return m_bValue > otherVar.m_bValue;
+			case RAWHOOKVARIABLE_WORD:
+				return m_wValue > otherVar.m_wValue;
+			case RAWHOOKVARIABLE_DWORD:
+				return m_dwValue > otherVar.m_dwValue;
+			case RAWHOOKVARIABLE_FLOAT:
+				return m_fValue > otherVar.m_fValue;
+			}
+		}
+	}
+
+	bool operator>=(const RawHookVariable& otherVar) const
+	{
+		if (m_eType == otherVar.m_eType)
+		{
+			switch (m_eType)
+			{
+			case RAWHOOKVARIABLE_BYTE:
+				return m_bValue >= otherVar.m_bValue;
+			case RAWHOOKVARIABLE_WORD:
+				return m_wValue >= otherVar.m_wValue;
+			case RAWHOOKVARIABLE_DWORD:
+				return m_dwValue >= otherVar.m_dwValue;
+			case RAWHOOKVARIABLE_FLOAT:
+				return m_fValue >= otherVar.m_fValue;
+			}
+		}
+	}
+
+	bool operator<=(const RawHookVariable& otherVar) const
+	{
+		if (m_eType == otherVar.m_eType)
+		{
+			switch (m_eType)
+			{
+			case RAWHOOKVARIABLE_BYTE:
+				return m_bValue <= otherVar.m_bValue;
+			case RAWHOOKVARIABLE_WORD:
+				return m_wValue <= otherVar.m_wValue;
+			case RAWHOOKVARIABLE_DWORD:
+				return m_dwValue <= otherVar.m_dwValue;
+			case RAWHOOKVARIABLE_FLOAT:
+				return m_fValue <= otherVar.m_fValue;
+			}
+		}
+	}
+
+	bool operator!=(const RawHookVariable& otherVar) const
+	{
+		if (m_eType == otherVar.m_eType)
+		{
+			switch (m_eType)
+			{
+			case RAWHOOKVARIABLE_BYTE:
+				return m_bValue != otherVar.m_bValue;
+			case RAWHOOKVARIABLE_WORD:
+				return m_wValue != otherVar.m_wValue;
+			case RAWHOOKVARIABLE_DWORD:
+				return m_dwValue != otherVar.m_dwValue;
+			case RAWHOOKVARIABLE_FLOAT:
+				return m_fValue != otherVar.m_fValue;
+			}
+		}
+	}
+
+	// TODO: add normal operators...
 };
