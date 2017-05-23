@@ -5,6 +5,8 @@
 
 /*
 	ProcessMemory, the base for patching other processes
+
+	Derives from Memory, obviously, and uses it for virtual addresses in a remote process
 */
 
 class ProcessMemory : public Memory

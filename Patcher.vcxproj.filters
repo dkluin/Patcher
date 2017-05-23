@@ -37,7 +37,9 @@
     <ClCompile Include="ProcessHook\ProcessHooking.cpp">
       <Filter>ProcessHook</Filter>
     </ClCompile>
-    <ClCompile Include="RestorableMemory.cpp" />
+    <ClCompile Include="Callbacks\Callback.cpp">
+      <Filter>Callbacks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
@@ -80,7 +82,9 @@
     <ClInclude Include="ProcessHook\ProcessHooking.h">
       <Filter>ProcessHook</Filter>
     </ClInclude>
-    <ClInclude Include="RestorableMemory.h" />
+    <ClInclude Include="Callbacks\Callback.h">
+      <Filter>Callbacks</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="VersionMgr">
@@ -100,6 +104,12 @@
     </Filter>
     <Filter Include="ProcessHook">
       <UniqueIdentifier>{b9af0aa0-47a6-4f21-8d44-73afc86fd27d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Callbacks">
+      <UniqueIdentifier>{a272d8e6-8480-47dd-8690-5c564bcdc303}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Patterns">
+      <UniqueIdentifier>{19f65db6-734c-42a5-af2b-f39a1f726d34}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
