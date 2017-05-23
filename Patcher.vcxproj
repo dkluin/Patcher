@@ -35,7 +35,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v141_xp</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -124,9 +124,6 @@
     <ClCompile Include="Assembly\Assembly.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../Shared.hpp</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="Callbacks\Callback.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../Shared.hpp</PrecompiledHeaderFile>
-    </ClCompile>
     <ClCompile Include="Calling.cpp" />
     <ClCompile Include="Detours\Detour.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../Shared.hpp</PrecompiledHeaderFile>
@@ -166,7 +163,6 @@
   <ItemGroup>
     <ClInclude Include="Assembly\Assembly.h" />
     <ClInclude Include="Assembly\Registers.h" />
-    <ClInclude Include="Callbacks\Callback.h" />
     <ClInclude Include="Calling.h" />
     <ClInclude Include="Detours\Detour.h" />
     <ClInclude Include="Detours\Detours.h" />

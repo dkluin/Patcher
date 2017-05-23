@@ -43,6 +43,9 @@ public:
 		return GetPluginEntryPointW(m_szPluginName.c_str());
 	}
 
+	// Wrapper around GetProcAddress for laziness sake
+	static inline uint32_t GetPluginProcAddress(HMODULE hModule, std::string szExported) { return reinterpret_cast<uint32_t>(GetProcAddress(hModule, szExported.c_str())); }
+
 	// Makes a JMP in a loaded module
 	static void MakePluginJMP(HMODULE m_aModule, uint32_t m_dwRelativeAddress, void* pDest, bool bVirtualProtect = true);
 	static void MakePluginJMP(HMODULE m_aModule, Memory* m_dwRelativeAddress, void* pDest);

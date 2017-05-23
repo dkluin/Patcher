@@ -37,9 +37,6 @@
     <ClCompile Include="ProcessHook\ProcessHooking.cpp">
       <Filter>ProcessHook</Filter>
     </ClCompile>
-    <ClCompile Include="Callbacks\Callback.cpp">
-      <Filter>Callbacks</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
@@ -81,9 +78,6 @@
     </ClInclude>
     <ClInclude Include="ProcessHook\ProcessHooking.h">
       <Filter>ProcessHook</Filter>
-    </ClInclude>
-    <ClInclude Include="Callbacks\Callback.h">
-      <Filter>Callbacks</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
