@@ -37,6 +37,9 @@
     <ClCompile Include="ProcessHook\ProcessHooking.cpp">
       <Filter>ProcessHook</Filter>
     </ClCompile>
+    <ClCompile Include="Utils\ScopedUnprotect.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
@@ -79,6 +82,9 @@
     <ClInclude Include="ProcessHook\ProcessHooking.h">
       <Filter>ProcessHook</Filter>
     </ClInclude>
+    <ClInclude Include="Utils\ScopedUnprotect.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="VersionMgr">
@@ -104,6 +110,9 @@
     </Filter>
     <Filter Include="Patterns">
       <UniqueIdentifier>{19f65db6-734c-42a5-af2b-f39a1f726d34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{350f0487-5908-44f2-b6d4-b580f31fe647}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

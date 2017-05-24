@@ -8,6 +8,22 @@ std::vector<RawHookVariable*> TheRawHooks::m_vVariables;
 bool TheRawHooks::Initialize()
 {
 	ms_pTheRawHooks = new uint8_t[THERAWHOOKS_SPACE];
+
+	// Check if the memory is not permitting execution of code on this heap, as code has to execute, and we may need to read or write from this heap
+	DWORD dwOldVirtualProtect;
+	MEMORY_BASIC_INFORMATION MemoryInfo;
+	VirtualQuery(reinterpret_cast<void*>(ms_pTheRawHooks), &MemoryInfo, THERAWHOOKS_SPACE);
+
+	switch (MemoryInfo.AllocationProtect)
+	{
+	case PAGE_NOACCESS:
+	case PAGE_READONLY:
+	case PAGE_READWRITE:
+	case PAGE_WRITECOPY:
+		VirtualProtect(reinterpret_cast<void*>(ms_pTheRawHooks), THERAWHOOKS_SPACE, PAGE_EXECUTE_READWRITE, &dwOldVirtualProtect);
+		break;
+	}
+
 	if (ms_pTheRawHooks)
 	{
 		ms_nGlobalPos = 0;

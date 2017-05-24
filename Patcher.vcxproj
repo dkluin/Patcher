@@ -156,6 +156,9 @@
     <ClCompile Include="RawHooks\TheRawHooks.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../Shared.hpp</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="Utils\ScopedUnprotect.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../Shared.hpp</PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="VersionMgr\VersionMgr.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../Shared.hpp</PrecompiledHeaderFile>
     </ClCompile>
@@ -178,6 +181,7 @@
     <ClInclude Include="RawHooks\RawHookVariable.h" />
     <ClInclude Include="RawHooks\TheRawHooks.h" />
     <ClInclude Include="Shared.hpp" />
+    <ClInclude Include="Utils\ScopedUnprotect.h" />
     <ClInclude Include="VersionMgr\VersionMgr.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
