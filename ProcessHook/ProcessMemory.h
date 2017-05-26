@@ -55,7 +55,7 @@ public:
 		HWND m_Hwnd;
 		HANDLE m_hLocalProcessHandle;
 
-		m_Hwnd = FindWindow(m_szClassName.c_str(), m_szWindowName.c_str());
+		m_Hwnd = FindWindowA(m_szClassName.c_str(), m_szWindowName.c_str());
 
 		if (m_Hwnd)
 		{
@@ -77,7 +77,7 @@ public:
 		HWND m_Hwnd;
 		HANDLE m_hLocalProcessHandle;
 
-		m_Hwnd = FindWindow(m_szClassName, m_szWindowName);
+		m_Hwnd = FindWindowA(m_szClassName, m_szWindowName);
 
 		if (m_Hwnd)
 		{
@@ -100,7 +100,7 @@ public:
 		HWND m_Hwnd;
 		HANDLE m_hLocalProcessHandle;
 
-		m_Hwnd = FindWindow(NULL, m_szWindowName.c_str());
+		m_Hwnd = FindWindowA(NULL, m_szWindowName.c_str());
 
 		if (m_Hwnd)
 		{
@@ -123,7 +123,7 @@ public:
 		HWND m_Hwnd;
 		HANDLE m_hLocalProcessHandle;
 
-		m_Hwnd = FindWindow(NULL, m_szWindowName);
+		m_Hwnd = FindWindowA(NULL, m_szWindowName);
 
 		if (m_Hwnd)
 		{
