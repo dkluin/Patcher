@@ -24,3 +24,8 @@ bool Main::Initialize(bool bEntryPointBasedVersionMgr)
 		return false; // aaaaaaaaaaaaa
 	}
 }
+
+void Main::Shutdown()
+{
+	TheRawHooks::Shutdown();
+}

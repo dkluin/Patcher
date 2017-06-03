@@ -21,8 +21,5 @@ void HookingList::RunAll()
 		{
 			(*it)();
 		}
-
-		// Destroy the entire list because it is no longer needed
-		delete ms_vHookingLists;
 	}
 }

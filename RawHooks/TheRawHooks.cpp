@@ -197,7 +197,7 @@ bool TheRawHooks::Shutdown()
 {
 	if (ms_pTheRawHooks)
 	{
-		delete ms_pTheRawHooks;
+		delete[] ms_pTheRawHooks;
 	}
 	return true;
 }

@@ -279,6 +279,7 @@ uint32_t VersionMgr::GetAddressByVersion(std::initializer_list<VersionAddress> v
 			return it.m_dwAddress;
 		}
 	}
+	return 0;
 }
 
 
