@@ -83,3 +83,13 @@ void PluginPatcher::MakePluginRET(HMODULE m_aModule, Memory* m_dwRelativeAddress
 	m_Module.ChangeAddress(reinterpret_cast<uint32_t>(m_aModule) + m_dwRelativeAddress->GetAddress());
 	MemoryInjector::MakeRET(&m_Module);
 }
+
+void PluginPatcher::MakePluginNOP(HMODULE aModule, uint32_t dwRelativeAddress, size_t iSize)
+{
+	MemoryInjector::MakeNOP(reinterpret_cast<uint32_t>(aModule) + dwRelativeAddress, iSize);
+}
+
+void PluginPatcher::MakePluginNOP(HMODULE aModule, Memory* dwRelativeAddress, size_t iSize)
+{
+	MemoryInjector::MakeNOP(reinterpret_cast<uint32_t>(aModule) + dwRelativeAddress->GetAddress(), iSize);
+}

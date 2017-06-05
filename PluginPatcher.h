@@ -58,6 +58,10 @@ public:
 	static void MakePluginCALL(HMODULE m_aModule, uint32_t m_dwRelativeAddress, uint32_t m_pDest, bool bProtect = true);
 	static void MakePluginCALL(HMODULE m_aModule, Memory* m_dwRelativeAddress, uint32_t m_pDest);
 
+	// Make a plugin NOP
+	static void MakePluginNOP(HMODULE aModule, uint32_t dwRelativeAddress, size_t iSize);
+	static void MakePluginNOP(HMODULE aModule, Memory* dwRelativeAddress, size_t iSize);
+
 	// Make a plugin RET
 	static void MakePluginRET(HMODULE m_aModule, uint32_t m_dwRelativeAddress, bool bVirtualProtect = true);
 	static void MakePluginRET(HMODULE m_aModule, Memory* m_dwRelativeAddress);
