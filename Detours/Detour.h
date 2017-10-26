@@ -5,6 +5,7 @@
 // This is nothing more than unfinished code...
 class Detour : public Memory
 {
+	/*
 private:
 	bool m_bApplied;
 
@@ -29,5 +30,5 @@ public:
 	void ApplyDetour();
 
 	// Undo the detour 
-	void UndoDetour();
+	void UndoDetour();*/
 };

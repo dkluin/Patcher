@@ -168,15 +168,15 @@ public:
 	bool operator!=(const Memory& m_Memory) const { return Address != m_Memory.Address; };
 
 	// Normal operators
-	Memory& operator+(const Memory& m_Memory) const { return Memory(Address + m_Memory.Address); };
-	Memory& operator-(const Memory& m_Memory) const { return Memory(Address - m_Memory.Address); };
-	Memory& operator*(const Memory& m_Memory) const { return Memory(Address * m_Memory.Address); };
-	Memory& operator/(const Memory& m_Memory) const { return Memory(Address / m_Memory.Address); };
-	Memory& operator%(const Memory& m_Memory) const { return Memory(Address % m_Memory.Address); };
+	Memory operator+(const Memory& m_Memory) const { return Memory(Address + m_Memory.Address); };
+	Memory operator-(const Memory& m_Memory) const { return Memory(Address - m_Memory.Address); };
+	Memory operator*(const Memory& m_Memory) const { return Memory(Address * m_Memory.Address); };
+	Memory operator/(const Memory& m_Memory) const { return Memory(Address / m_Memory.Address); };
+	Memory operator%(const Memory& m_Memory) const { return Memory(Address % m_Memory.Address); };
 
-	Memory& operator+=(const Memory& m_Memory) const { return Memory(Address + m_Memory.Address); };
-	Memory& operator-=(const Memory& m_Memory) const { return Memory(Address - m_Memory.Address); };
-	Memory& operator*=(const Memory& m_Memory) const { return Memory(Address * m_Memory.Address); };
-	Memory& operator/=(const Memory& m_Memory) const { return Memory(Address / m_Memory.Address); };
-	Memory& operator%=(const Memory& m_Memory) const { return Memory(Address % m_Memory.Address); };
+	Memory operator+=(const Memory& m_Memory) const { return Memory(Address + m_Memory.Address); };
+	Memory operator-=(const Memory& m_Memory) const { return Memory(Address - m_Memory.Address); };
+	Memory operator*=(const Memory& m_Memory) const { return Memory(Address * m_Memory.Address); };
+	Memory operator/=(const Memory& m_Memory) const { return Memory(Address / m_Memory.Address); };
+	Memory operator%=(const Memory& m_Memory) const { return Memory(Address % m_Memory.Address); };
 };

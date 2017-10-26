@@ -93,3 +93,8 @@ void PluginPatcher::MakePluginNOP(HMODULE aModule, Memory* dwRelativeAddress, si
 {
 	MemoryInjector::MakeNOP(reinterpret_cast<uint32_t>(aModule) + dwRelativeAddress->GetAddress(), iSize);
 }
+
+uint32_t PluginPatcher::GetModuleDynamicAddress(HMODULE hModule, uint32_t dwRelativeAddress)
+{
+	return reinterpret_cast<uint32_t>(hModule) + dwRelativeAddress;
+}

@@ -65,4 +65,14 @@ public:
 	// Make a plugin RET
 	static void MakePluginRET(HMODULE m_aModule, uint32_t m_dwRelativeAddress, bool bVirtualProtect = true);
 	static void MakePluginRET(HMODULE m_aModule, Memory* m_dwRelativeAddress);
+
+	// Gets a dynamic address from a static offset and a module handle
+	static uint32_t GetModuleDynamicAddress(HMODULE hModule, uint32_t dwRelativeAddress);
+
+	// Gets the dynamic address as a pointer to an user-defined type
+	template <typename T>
+	static T* GetModuleDynamicAddress(HMODULE hModule, uint32_t dwRelativeAddress)
+	{
+		return reinterpret_cast<T*>(reinterpret_cast<uint32_t>(hModule) + dwRelativeAddress);
+	}
 };

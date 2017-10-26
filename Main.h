@@ -12,6 +12,8 @@ public:
 	// Standard initializer
 	static bool Initialize(bool bEntryPointBasedVersionMgr);
 
+
+
 	// Shutdown
 	static void Shutdown();
 };

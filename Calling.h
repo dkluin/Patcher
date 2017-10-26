@@ -104,4 +104,5 @@ public:
 		auto fn = (Ret(__vectorcall*)(Args...)) m_pAddress->GetAddress();
 		return fn(std::forward<Args>(m_Args)...);
 	}
+
 };

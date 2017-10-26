@@ -30,6 +30,21 @@ public:
 		WriteMemory<uint32_t>(mem + 1, GetRelativeAddress(mem + 1, reinterpret_cast<uint32_t>(dest) - 4), bProtect);
 	}
 
+	template <typename Address, typename Destination>
+	static inline void MakeJmpEx(Address mem, Destination dest, bool bProtect = true)
+	{
+		WriteMemory<uint8_t>(mem, 0xE9, bProtect);
+
+		uint32_t dwHook;
+		_asm
+		{
+			mov		eax, dest
+			mov		dwHook, eax
+		}
+
+		WriteMemory<ptrdiff_t>(mem + 1, GetRelativeAddress((uint32_t)mem + 1, (uint32_t)dwHook - 4), bProtect);
+	}
+
 	// Makes a CALL to a relative address or function
 	static void MakeCALL(Memory* mem, uint32_t dest);
 	static void MakeCALL(Memory* mem, void* dest);

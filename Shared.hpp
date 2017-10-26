@@ -29,6 +29,22 @@
 #define NUDE __declspec(naked)
 #endif
 
+//
+//	ASM EPILOG and ASM PROLOG macros
+//
+#define ASM_PROLOG() _asm					\
+	{										\
+		_asm push	ebp						\
+		_asm mov	ebp, esp				\
+		_asm sub	esp, __LOCAL_SIZE		\
+	}
+
+#define ASM_EPILOG() _asm					\
+	{										\
+		_asm mov	esp, ebp				\
+		_asm pop	ebp						\
+	}
+
 // Prints message box (just a wrapper around MessageBoxA to make it like printf
 static void PatcherPrintMessageBox(const char* message, ...)
 {

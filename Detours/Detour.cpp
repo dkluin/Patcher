@@ -2,6 +2,7 @@
 #include "Detour.h"
 #include "../Injecting.h"
 
+/*
 Detour::Detour(void* m_pOriginal, void* m_pDetoured)
 {
 	m_pOriginalFunction = m_pOriginal;
@@ -43,4 +44,4 @@ void Detour::UndoDetour()
 	{
 		m_bApplied = false;
 	}
-}
+}*/
