@@ -75,4 +75,11 @@ public:
 	{
 		return reinterpret_cast<T*>(reinterpret_cast<uint32_t>(hModule) + dwRelativeAddress);
 	}
+
+	// Writes to plugin memory
+	template <typename T>
+	static void WritePluginMemory(HMODULE hModule, uint32_t dwRelativeAddress, T value)
+	{
+		MemoryInjector::WriteMemory<T>(reinterpret_cast<uint32_t>(hModule) + dwRelativeAddress, value);
+	}
 };
