@@ -28,9 +28,6 @@
     <ClCompile Include="Detours\Detours.cpp">
       <Filter>Detours</Filter>
     </ClCompile>
-    <ClCompile Include="Detours\Detour.cpp">
-      <Filter>Detours</Filter>
-    </ClCompile>
     <ClCompile Include="ProcessHook\ProcessMemory.cpp">
       <Filter>ProcessHook</Filter>
     </ClCompile>
@@ -71,9 +68,6 @@
       <Filter>Assembly</Filter>
     </ClInclude>
     <ClInclude Include="Detours\Detours.h">
-      <Filter>Detours</Filter>
-    </ClInclude>
-    <ClInclude Include="Detours\Detour.h">
       <Filter>Detours</Filter>
     </ClInclude>
     <ClInclude Include="ProcessHook\ProcessMemory.h">
