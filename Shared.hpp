@@ -2,6 +2,7 @@
 
 #include <Windows.h>
 #include <stdio.h>
+#include <stdint.h>
 
 #define PATCHER_VERSION 20
 #define PATCHER_VERSION_STRING "2.0"
@@ -28,6 +29,9 @@
 #ifndef NUDE
 #define NUDE __declspec(naked)
 #endif
+
+// Typedefs
+typedef const uint32_t retaddr_t;
 
 //
 //	ASM EPILOG and ASM PROLOG macros
