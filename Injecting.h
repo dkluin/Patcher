@@ -49,6 +49,21 @@ public:
 	static void MakeCALL(Memory* mem, uint32_t dest);
 	static void MakeCALL(Memory* mem, void* dest);
 
+	template <typename Address, typename Destination>
+	static inline void MakeCallEx(Address mem, Destination dest, bool bProtect = true)
+	{
+		WriteMemory<uint8_t>(mem, 0xE8, bProtect);
+
+		uint32_t dwHook;
+		_asm
+		{
+			mov		eax, dest
+			mov		dwHook, eax
+		}
+
+		WriteMemory<ptrdiff_t>(mem + 1, GetRelativeAddress((uint32_t)mem + 1, (uint32_t)dwHook - 4), bProtect);
+	}
+
 	static inline void MakeCALL(uint32_t mem, uint32_t dest, bool bProtect = true)
 	{
 		WriteMemory<uint8_t>(mem, 0xE8, bProtect);
