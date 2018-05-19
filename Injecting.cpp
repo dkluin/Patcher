@@ -235,3 +235,8 @@ void MemoryInjector::MakeCALL(Memory* mem, void* dest)
 	mem->Set<uint32_t>(GetRelativeAddress(mem->GetAddress(), reinterpret_cast<uint32_t>(dest) - 4));
 	mem->ChangeAddress(mem->GetAddress() - 1);
 }
+
+uint32_t MemoryInjector::ResolveRelativeAddress(uint32_t src)
+{
+	return (ReadMemory<uint32_t>(src + 1) + 5) + src;
+}

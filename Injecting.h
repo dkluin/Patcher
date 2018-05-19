@@ -211,4 +211,6 @@ public:
 	// Gets a relative address
 	static uint32_t GetRelativeAddress(uint32_t src, uint32_t dest);
 	static uint32_t GetRelativeAddress(uint32_t src, void* dest);
+
+	static uint32_t ResolveRelativeAddress(uint32_t src);
 };
