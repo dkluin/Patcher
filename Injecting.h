@@ -2,6 +2,7 @@
 
 #include "Main.h"
 #include "Memory.h"
+#include "Reversed.h"
 #include <initializer_list>
 
 /*
@@ -20,12 +21,20 @@ public:
 
 	static inline void MakeJMP(uint32_t mem, uint32_t dest, bool bProtect = true)
 	{
+#ifdef PATCHER_DEVELOPMENT_BUILD
+		Reversed::CheckIfAddressIsInRange(mem);
+#endif
+
 		WriteMemory<uint8_t>(mem, 0xE9, bProtect);
 		WriteMemory<uint32_t>(mem + 1, GetRelativeAddress(mem + 1, dest - 4), bProtect);
 	}
 
 	static inline void MakeJMP(uint32_t mem, void* dest, bool bProtect = true)
 	{
+#ifdef PATCHER_DEVELOPMENT_BUILD
+		Reversed::CheckIfAddressIsInRange(mem);
+#endif
+
 		WriteMemory<uint8_t>(mem, 0xE9, bProtect);
 		WriteMemory<uint32_t>(mem + 1, GetRelativeAddress(mem + 1, reinterpret_cast<uint32_t>(dest) - 4), bProtect);
 	}
@@ -33,6 +42,10 @@ public:
 	template <typename Address, typename Destination>
 	static inline void MakeJmpEx(Address mem, Destination dest, bool bProtect = true)
 	{
+#ifdef PATCHER_DEVELOPMENT_BUILD
+		Reversed::CheckIfAddressIsInRange(mem);
+#endif
+
 		WriteMemory<uint8_t>(mem, 0xE9, bProtect);
 
 		uint32_t dwHook;
@@ -52,6 +65,10 @@ public:
 	template <typename Address, typename Destination>
 	static inline void MakeCallEx(Address mem, Destination dest, bool bProtect = true)
 	{
+#ifdef PATCHER_DEVELOPMENT_BUILD
+		Reversed::CheckIfAddressIsInRange(mem);
+#endif
+
 		WriteMemory<uint8_t>(mem, 0xE8, bProtect);
 
 		uint32_t dwHook;
@@ -66,12 +83,20 @@ public:
 
 	static inline void MakeCALL(uint32_t mem, uint32_t dest, bool bProtect = true)
 	{
+#ifdef PATCHER_DEVELOPMENT_BUILD
+		Reversed::CheckIfAddressIsInRange(mem);
+#endif
+
 		WriteMemory<uint8_t>(mem, 0xE8, bProtect);
 		WriteMemory<uint32_t>(mem + 1, GetRelativeAddress(mem + 1, dest - 4), bProtect);
 	}
 
 	static inline void MakeCALL(uint32_t mem, void* dest, bool bProtect = true)
 	{
+#ifdef PATCHER_DEVELOPMENT_BUILD
+		Reversed::CheckIfAddressIsInRange(mem);
+#endif
+
 		WriteMemory<uint8_t>(mem, 0xE8, bProtect);
 		WriteMemory<uint32_t>(mem + 1, GetRelativeAddress(mem + 1, reinterpret_cast<uint32_t>(dest) - 4), bProtect);
 	}
@@ -79,12 +104,20 @@ public:
 	// Makes a JE
 	static inline void MakeJE(uint32_t mem, uint32_t dest, bool bProtect = true)
 	{
+#ifdef PATCHER_DEVELOPMENT_BUILD
+		Reversed::CheckIfAddressIsInRange(mem);
+#endif
+
 		WriteMemory<uint16_t>(mem, 0x840F, bProtect);
 		WriteMemory<uint32_t>(mem + 2, GetRelativeAddress(mem, dest - 6), bProtect);
 	}
 
 	static inline void MakeJE(uint32_t mem, void* dest, bool bProtect = true)
 	{
+#ifdef PATCHER_DEVELOPMENT_BUILD
+		Reversed::CheckIfAddressIsInRange(mem);
+#endif
+
 		WriteMemory<uint16_t>(mem, 0x840F, bProtect);
 		WriteMemory<uint32_t>(mem + 2, GetRelativeAddress(mem, reinterpret_cast<uint32_t>(dest) - 6), bProtect);
 	}
@@ -95,12 +128,20 @@ public:
 	// Makes a JA 
 	static inline void MakeJA(uint32_t mem, uint32_t dest, bool bProtect = true)
 	{
+#ifdef PATCHER_DEVELOPMENT_BUILD
+		Reversed::CheckIfAddressIsInRange(mem);
+#endif
+
 		WriteMemory<uint16_t>(mem, 0x870F, bProtect);
 		WriteMemory<uint32_t>(mem + 2, GetRelativeAddress(mem, dest - 6), bProtect);
 	}
 
 	static inline void MakeJA(uint32_t mem, void* dest, bool bProtect = true)
 	{
+#ifdef PATCHER_DEVELOPMENT_BUILD
+		Reversed::CheckIfAddressIsInRange(mem);
+#endif
+
 		WriteMemory<uint16_t>(mem, 0x870F, bProtect);
 		WriteMemory<uint32_t>(mem + 2, GetRelativeAddress(mem, reinterpret_cast<uint32_t>(dest) - 6), bProtect);
 	}
@@ -166,6 +207,11 @@ public:
 	inline static void WriteMemory(uint32_t address, T value, bool bProtect = true)
 	{
 		DWORD m_OldVirtualProtect[2];
+
+#ifdef PATCHER_DEVELOPMENT_BUILD
+		// Results in double error reporting
+		Reversed::CheckIfAddressIsInRange(address);
+#endif
 
 		if (bProtect)
 		{

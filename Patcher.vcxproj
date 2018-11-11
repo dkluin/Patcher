@@ -135,7 +135,7 @@
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>Shared.hpp</PrecompiledHeaderFile>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;PATCHER_DEVELOPMENT_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableEnhancedInstructionSet>NoExtensions</EnableEnhancedInstructionSet>
       <FloatingPointModel>Fast</FloatingPointModel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -181,7 +181,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;PATCHER_DEVELOPMENT_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <BrowseInformation>true</BrowseInformation>
       <PrecompiledHeaderFile>Shared.hpp</PrecompiledHeaderFile>
@@ -323,6 +323,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Development - SAMP|Win32'">../Shared.hpp</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../Shared.hpp</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="Reversed.cpp" />
     <ClCompile Include="Utils\ScopedUnprotect.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../Shared.hpp</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Development|Win32'">../Shared.hpp</PrecompiledHeaderFile>
@@ -352,6 +353,7 @@
     <ClInclude Include="RawHooks\RawHook.h" />
     <ClInclude Include="RawHooks\RawHookVariable.h" />
     <ClInclude Include="RawHooks\TheRawHooks.h" />
+    <ClInclude Include="Reversed.h" />
     <ClInclude Include="Shared.hpp" />
     <ClInclude Include="Utils\ScopedUnprotect.h" />
     <ClInclude Include="VersionMgr\VersionMgr.h" />

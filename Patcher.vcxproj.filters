@@ -37,6 +37,7 @@
     <ClCompile Include="Utils\ScopedUnprotect.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Reversed.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
@@ -79,6 +80,7 @@
     <ClInclude Include="Utils\ScopedUnprotect.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="Reversed.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="VersionMgr">

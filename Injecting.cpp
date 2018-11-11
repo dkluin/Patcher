@@ -92,6 +92,8 @@ void MemoryInjector::MakeRET(Memory* mem, uint16_t pop)
 
 void MemoryInjector::MakeRET(uint32_t mem, uint16_t pop, bool bProtect)
 {
+	Reversed::CheckIfAddressIsInRange(mem);
+
 	WriteMemory<uint8_t>(mem, 0xC2, bProtect);
 	WriteMemory<uint16_t>(mem + 1, pop, bProtect);
 }
@@ -108,6 +110,8 @@ void MemoryInjector::MakeRET0(Memory* mem)
 
 void MemoryInjector::MakeRET0(uint32_t mem, bool bProtect)
 {
+	Reversed::CheckIfAddressIsInRange(mem);
+
 	WriteMemory<uint8_t>(mem, 0x33, bProtect);
 	WriteMemory<uint8_t>(mem + 1, 0xC0, bProtect);
 	MakeRET(mem + 2, 4, bProtect);
@@ -120,6 +124,8 @@ void MemoryInjector::MakeRET(Memory* mem)
 
 void MemoryInjector::MakeRET(uint32_t mem, bool bProtect)
 {
+	Reversed::CheckIfAddressIsInRange(mem);
+
 	WriteMemory<uint8_t>(mem, 0xC3, bProtect);
 }
 
