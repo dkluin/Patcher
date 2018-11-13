@@ -42,7 +42,7 @@ void Reversed::StopLogging()
 		fclose(ms_pFile);
 		ms_bLoggingOverlappingPatches = false;
 
-		PatcherPrintMessageBox("Stopped detecting overlapping patches - %d matches found and saved to overlapping_patches.log", ms_nDetectedMatches);
+		//PatcherPrintMessageBox("Stopped detecting overlapping patches - %d matches found and saved to overlapping_patches.log", ms_nDetectedMatches);
 
 		ms_nDetectedMatches = 0;
 	}
