@@ -65,6 +65,25 @@ public:
 		WriteMemory<ptrdiff_t>(mem + 1, GetRelativeAddress((uint32_t)mem + 1, (uint32_t)dwHook - 4), bProtect);
 	}
 
+	template <typename Address, typename Destination>
+	static inline void MakeCallEx(std::initializer_list<Address> aAddresses, Destination dest, bool bProtect = true)
+	{
+		for (auto dwAddress : aAddresses)
+		{
+			WriteMemory<uint8_t>(dwAddress, 0xE8, bProtect);
+
+			uint32_t dwHook;
+
+			_asm
+			{
+				mov		eax, dest
+				mov		dwHook, eax
+			}
+
+			WriteMemory<ptrdiff_t>(dwAddress + 1, GetRelativeAddress((uint32_t)dwAddress + 1, (uint32_t)dwHook - 4), bProtect);
+		}
+	}
+
 	static inline void MakeCALL(uint32_t mem, uint32_t dest, bool bProtect = true)
 	{
 		WriteMemory<uint8_t>(mem, 0xE8, bProtect);

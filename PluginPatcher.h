@@ -65,6 +65,13 @@ public:
 		MemoryInjector::MakeJmpEx(reinterpret_cast<uint32_t>(hModule) + mem, dest, bProtect);
 	}
 
+	// Makes a CALL in a loaded module, extended variant
+	template <typename Address, typename Destination>
+	static inline void MakePluginCallEx(HMODULE hModule, Address mem, Destination dest, bool bProtect = true)
+	{
+		MemoryInjector::MakeCallEx(reinterpret_cast<uint32_t>(hModule) + mem, dest, bProtect);
+	}
+
 	// Make a plugin NOP
 	static void MakePluginNOP(HMODULE aModule, uint32_t dwRelativeAddress, size_t iSize);
 	static void MakePluginNOP(HMODULE aModule, Memory* dwRelativeAddress, size_t iSize);
