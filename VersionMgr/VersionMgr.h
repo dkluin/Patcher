@@ -70,13 +70,10 @@ public:
 	// Accepts a range of addresses with a version identifier and returns the correct one based on the version obtained through InitializeVersionMgr
 	static uint32_t GetAddressByVersion(std::initializer_list<VersionAddress> vVersionAddresses);
 
-private:
-	// Game version
-	static int GameVersion;
-
 	// Gets entry point
 	static uint32_t GetEntryPoint();
 
-	// Is file size based?
-	static bool ms_bIsFileSizeBased;
+private:
+	// Game version
+	static int GameVersion;
 };

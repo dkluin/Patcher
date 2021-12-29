@@ -3,8 +3,6 @@
 #include "../Main.h"
 #include <Psapi.h>
 
-bool VersionMgr::ms_bIsFileSizeBased = false;
-
 // Game version
 int VersionMgr::GameVersion = VERSION_GAME_UNKNOWN;
 
@@ -122,8 +120,6 @@ bool VersionMgr::InitializeVersionMgrStatic(uint32_t m_dwEntryPoint)
 // Initializes version manager
 bool VersionMgr::InitializeVersionMgr(bool bEntryPointBasedVersionMgr)
 {
-	ms_bIsFileSizeBased = bEntryPointBasedVersionMgr; // TODO: make an alternative system?
-
 	// Credits: https://github.com/thelink2012/injector/blob/master/include/injector/injector.hpp for entry point addresses
 	switch (GetEntryPoint())
 	{
@@ -241,6 +237,7 @@ bool VersionMgr::ShutdownVersionMgr()
 uint32_t VersionMgr::GetEntryPoint()
 {
 	MODULEINFO info;
+
 	GetModuleInformation(GetCurrentProcess(), GetModuleHandle(NULL), &info, sizeof(MODULEINFO));
 
 	return (uint32_t)info.EntryPoint;
